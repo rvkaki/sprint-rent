@@ -64,21 +64,20 @@ const Datepicker = props => {
     return day + '/' + month + '/' + year;
   }
 
-  function handleOutsideClick(event) {
-    if (
-      state.focusedInput &&
-      ref.current &&
-      !ref.current.contains(event.target)
-    )
-      setState({ ...state, focusedInput: null });
-  }
-
   useEffect(() => {
+    function handleOutsideClick(event) {
+      if (
+        state.focusedInput &&
+        ref.current &&
+        !ref.current.contains(event.target)
+      )
+        setState({ ...state, focusedInput: null });
+    }
     document.addEventListener('click', handleOutsideClick, true);
     return () => {
       document.removeEventListener('click', handleOutsideClick, true);
     };
-  }, []);
+  }, [state]);
 
   return (
     <DatepickerContext.Provider

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Checkbox,
-  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -16,16 +15,18 @@ const MainSearch = () => {
   return (
     <>
       <Stack
-        direction={['column', 'row']}
+        position="absolute"
+        top="87%"
+        direction={{ base: 'column', md: 'row' }}
         spacing={3}
-        display="flex"
-        alignItems="flex-start"
         w="80%"
+        display="flex"
+        alignItems={{ base: 'center', md: 'flex-start' }}
         bg="black"
         p="16px"
         borderRadius="lg"
       >
-        <Stack flex={3} spacing={1}>
+        <Stack flex={3} w="100%" spacing={1}>
           <Text color="white" fontWeight="medium">
             Local de Levantamento
           </Text>
@@ -47,7 +48,7 @@ const MainSearch = () => {
             </Text>
           </Checkbox>
         </Stack>
-        <Stack flex={1} spacing={1} position="relative">
+        <Stack flex={1} w="100%" spacing={1} position="relative">
           <Text color="white" fontWeight="medium">
             Data
           </Text>
