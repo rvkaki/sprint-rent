@@ -1,7 +1,15 @@
-import React from 'react';
-import { Flex, Image, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Flex, IconButton, Image, Text } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import CustomDrawer from './CustomDrawer';
+
+const HeaderLink = props => {
+  return <Text fontSize={{ base: 'md', lg: 'lg' }}>{props.text}</Text>;
+};
 
 const Header = props => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Flex
       dir="row"
@@ -12,20 +20,43 @@ const Header = props => {
       boxShadow="md"
       zIndex="sticky"
     >
-      <Image maxH="80%" objectFit="contain" src="assets/images/logo.png" alt="Logo" />
-      <Flex w="60%" dir="row" justify="space-between">
-        <Text>O Grupo</Text>
-        <Text>Frota Nacional</Text>
-        <Text>Frota Internacional</Text>
-        <Text>Contactos</Text>
+      <Image
+        maxH={{ base: '60%', lg: '80%' }}
+        objectFit="contain"
+        src="assets/images/logo.png"
+        alt="Logo"
+      />
+      <IconButton
+        display={{ base: 'inherit', md: 'none' }}
+        icon={<FontAwesomeIcon icon={faBars} />}
+        onClick={() => setIsOpen(true)}
+        variant="ghost"
+        color="black"
+        size="xl"
+        fontSize="xl"
+        _hover={{}}
+        _focus={{}}
+      />
+      <Flex
+        flex={1}
+        display={{ base: 'none', md: 'inherit' }}
+        justify="space-between"
+      >
+        <Flex w="100%" dir="row" justify="space-evenly">
+          <HeaderLink text="O Grupo" />
+          <HeaderLink text="Frota Nacional" />
+          <HeaderLink text="Frota Internacional" />
+          <HeaderLink text="Contactos" />
+        </Flex>
+        <Flex dir="row" justify="flex-end">
+          <Text mr="4px" fontWeight="semibold">
+            PT
+          </Text>
+          <Text>|</Text>
+          <Text ml="4px">EN</Text>
+        </Flex>
       </Flex>
-      <Flex dir="row" justify="flex-end">
-        <Text mr="4px" fontWeight="semibold">
-          PT
-        </Text>
-        <Text>|</Text>
-        <Text ml="4px">EN</Text>
-      </Flex>
+      <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </Flex>
   );
 };
