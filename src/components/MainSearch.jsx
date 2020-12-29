@@ -7,9 +7,6 @@ const MainSearch = () => {
   const [checked, setChecked] = useState(true);
   return (
     <Stack
-      w="80%"
-      position="absolute"
-      top="87%"
       bg="black"
       p="16px"
       borderRadius="lg"

@@ -3,6 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Carousel from '../components/Carousel';
 import MainSearch from '../components/MainSearch';
+import Offers from '../components/Offers';
 
 const images = [
   { src: 'assets/images/class_A/white_0.webp', model: 'Classe A' },
@@ -15,10 +16,33 @@ const Home = props => {
   return (
     <Box>
       <Header />
-      <Carousel images={images} />
-      <Flex justify="center">
+      <Box
+        w="80%"
+        zIndex="sticky"
+        left="10%"
+        top={{ base: '30vh', md: '55vh' }}
+        position="absolute"
+      >
         <MainSearch />
+      </Box>
+      <Flex
+        w="100%"
+        h={{ base: '90vh', md: 'auto' }}
+        direction="column"
+        justify="center"
+        align="center"
+      >
+        <Carousel images={images} />
+        <Box
+          as="img"
+          h={{ base: '100%', md: 'auto' }}
+          w={{ base: 'auto', md: '100%' }}
+          objectFit={{ base: 'cover', md: 'contain' }}
+          src="assets/images/background.jpg"
+          alt="background"
+        />
       </Flex>
+      <Offers />
     </Box>
   );
 };
