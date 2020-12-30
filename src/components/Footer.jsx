@@ -14,20 +14,20 @@ import {
 const Footer = props => {
   return (
     <Flex
-      direction={{ base: 'column', md: 'row' }}
+      direction={{ base: 'column', lg: 'row' }}
       bg="gray.800"
       py={4}
-      px={{ base: 4, md: 16 }}
+      px={{ base: 4, lg: 16 }}
       justify="space-between"
     >
-      <Stack spacing={2} mb={{ base: 4, md: 0 }}>
+      <Stack spacing={2} mb={{ base: 4, lg: 0 }}>
         <Box>
           <Text fontSize="lg" fontWeight="semibold" color="white">
             Informações Úteis
           </Text>
           <Box
             borderBottom="2px solid white"
-            display={{ base: 'auto', md: 'none' }}
+            display={{ base: 'auto', lg: 'none' }}
           />
         </Box>
         <Text fontSize="md" color="white">
@@ -43,14 +43,14 @@ const Footer = props => {
           Termos e condições de aluguer
         </Text>
       </Stack>
-      <Stack spacing={2} mb={{ base: 4, md: 0 }}>
+      <Stack spacing={2} mb={{ base: 4, lg: 0 }}>
         <Box>
           <Text fontSize="lg" fontWeight="semibold" color="white">
             Contactos
           </Text>
           <Box
             borderBottom="2px solid white"
-            display={{ base: 'auto', md: 'none' }}
+            display={{ base: 'auto', lg: 'none' }}
           />
         </Box>
         <Flex dir="row" align="center">
@@ -78,14 +78,14 @@ const Footer = props => {
           </Text>
         </Flex>
       </Stack>
-      <Stack spacing={2} mb={{ base: 4, md: 0 }}>
+      <Stack spacing={2} mb={{ base: 4, lg: 0 }}>
         <Box>
           <Text fontSize="lg" fontWeight="semibold" color="white">
             Visite-nos
           </Text>
           <Box
             borderBottom="2px solid white"
-            display={{ base: 'auto', md: 'none' }}
+            display={{ base: 'auto', lg: 'none' }}
           />
         </Box>
         <HStack spacing={4}>

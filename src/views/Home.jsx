@@ -37,6 +37,7 @@ const Home = props => {
         <Carousel images={images} />
         <Box
           as="img"
+          display={{base: 'inherit', md: 'none'}}
           h={{ base: '100%', md: 'auto' }}
           w={{ base: 'auto', md: '100%' }}
           objectFit={{ base: 'cover', md: 'contain' }}

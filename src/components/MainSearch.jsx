@@ -7,7 +7,7 @@ const MainSearch = () => {
   const [checked, setChecked] = useState(true);
   return (
     <Stack
-      bg="black"
+      bg={{ base: 'rgba(0,0,0,0.85)', md: 'black' }}
       p="16px"
       borderRadius="lg"
       spacing={4}
