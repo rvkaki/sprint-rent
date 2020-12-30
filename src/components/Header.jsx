@@ -3,9 +3,14 @@ import { Flex, IconButton, Image, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import CustomDrawer from './CustomDrawer';
+import { Link } from 'react-router-dom';
 
 const HeaderLink = props => {
-  return <Text fontSize={{ base: 'md', lg: 'lg' }}>{props.text}</Text>;
+  return (
+    <Link to={props.to}>
+      <Text fontSize={{ base: 'md', lg: 'lg' }}>{props.text}</Text>
+    </Link>
+  );
 };
 
 const Header = props => {
@@ -44,7 +49,7 @@ const Header = props => {
       >
         <Flex w="100%" dir="row" justify="space-evenly">
           <HeaderLink text="O Grupo" />
-          <HeaderLink text="Frota Nacional" />
+          <HeaderLink to="/frota" text="Frota Nacional" />
           <HeaderLink text="Frota Internacional" />
           <HeaderLink text="Contactos" />
         </Flex>

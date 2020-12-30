@@ -55,7 +55,7 @@ const Carousel = props => {
   if (!images) return <Spinner size="xl" />;
 
   return (
-    <Box pos="relative" w="100%" mt="-5%">
+    <Box pos="relative" w="100%">
       <Box pos="absolute" bottom={0} w="100%" bg="#333" h="45%" />
       <Flex
         dir="row"

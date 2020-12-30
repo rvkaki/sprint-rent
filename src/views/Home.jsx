@@ -22,7 +22,7 @@ const Home = props => {
         w="80%"
         zIndex="sticky"
         left="10%"
-        top={{ base: '30vh', md: '55vh' }}
+        top={{ base: '30vh', md: '65vh' }}
         position="absolute"
       >
         <MainSearch />

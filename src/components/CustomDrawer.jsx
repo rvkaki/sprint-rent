@@ -11,6 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CustomDrawer = props => {
   return (
@@ -41,7 +42,7 @@ const CustomDrawer = props => {
                   Frota
                 </Text>
                 <Stack ml={3} spacing={1}>
-                  <Text>Nacional</Text>
+                  <Link to="/frota">Nacional</Link>
                   <Text>Internacional</Text>
                 </Stack>
               </Box>
