@@ -140,6 +140,7 @@ const Locations = props => {
           <iframe
             src="https://www.google.com/maps/d/u/0/embed?mid=1mzAherBj40eWR_2WH_NUinqNw_JcYcwF"
             alt="map"
+            title="Sprint Rent-a-Car locations"
             width="100%"
             height="100%"
           />

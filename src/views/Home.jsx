@@ -5,6 +5,7 @@ import Carousel from '../components/Carousel';
 import MainSearch from '../components/MainSearch';
 import Offers from '../components/Offers';
 import Locations from '../components/Locations';
+import Footer from '../components/Footer';
 
 const images = [
   { src: 'assets/images/class_A/white_0.webp', model: 'Classe A' },
@@ -45,6 +46,7 @@ const Home = props => {
       </Flex>
       <Offers />
       <Locations />
+      <Footer />
     </Box>
   );
 };

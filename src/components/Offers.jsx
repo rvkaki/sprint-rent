@@ -2,7 +2,6 @@ import { AspectRatio, Box, IconButton, Stack, Text } from '@chakra-ui/react';
 import {
   faChevronDown,
   faChevronUp,
-  faCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
@@ -65,9 +64,9 @@ const OfferButtons = props => {
         onClick={props.previous}
       />
       <Stack alignItems="center" spacing={1}>
-        <RoundButton current={props.current == 0} onClick={props.onClick[0]} />
-        <RoundButton current={props.current == 1} onClick={props.onClick[1]} />
-        <RoundButton current={props.current == 2} onClick={props.onClick[2]} />
+        <RoundButton current={props.current === 0} onClick={props.onClick[0]} />
+        <RoundButton current={props.current === 1} onClick={props.onClick[1]} />
+        <RoundButton current={props.current === 2} onClick={props.onClick[2]} />
       </Stack>
       <CleanButton
         icon={<FontAwesomeIcon icon={faChevronDown} size="lg" />}
