@@ -3,7 +3,7 @@ import { Flex, IconButton, Image, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import CustomDrawer from './CustomDrawer';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const HeaderLink = props => {
   return (
@@ -15,6 +15,7 @@ const HeaderLink = props => {
 
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
   return (
     <Flex
       dir="row"
@@ -27,6 +28,10 @@ const Header = props => {
     >
       <Image
         maxH={{ base: '60%', lg: '80%' }}
+        onClick={() => history.replace('/')}
+        _hover={{
+          cursor: 'pointer',
+        }}
         objectFit="contain"
         src="assets/images/logo.png"
         alt="Logo"

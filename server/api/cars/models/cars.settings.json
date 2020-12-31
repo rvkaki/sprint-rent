@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cars",
+  "info": {
+    "name": "Cars",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "brand": {
+      "type": "string",
+      "required": true
+    },
+    "model": {
+      "type": "string",
+      "required": true
+    },
+    "seats": {
+      "type": "integer",
+      "required": true
+    },
+    "mode": {
+      "type": "enumeration",
+      "enum": [
+        "manual",
+        "auto"
+      ],
+      "required": true
+    },
+    "gas": {
+      "type": "enumeration",
+      "enum": [
+        "diesel",
+        "gasolina"
+      ]
+    },
+    "doors": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "ligeiro",
+        "comercial"
+      ],
+      "required": true
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}
