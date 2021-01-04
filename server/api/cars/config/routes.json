@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/cars/params",
+      "handler": "cars.getParams",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/cars/count",
       "handler": "cars.count",
       "config": {

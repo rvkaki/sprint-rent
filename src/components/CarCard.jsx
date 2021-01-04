@@ -1,22 +1,62 @@
-import { Box, Flex, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const serverURL = 'http://localhost:1337';
 
 const CarCard = props => {
+  const history = useHistory();
+  const imgSrc = serverURL + props.images.find(x => x.name === '0.png').url;
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Flex w="800px" shadow="xl" direction="row">
+    <Flex
+      w="800px"
+      shadow="lg"
+      border="1px solid"
+      borderColor="gray.200"
+      direction="row"
+      transition="transform linear 0.2s"
+      _hover={{
+        transform: 'scale(1.01)',
+        shadow: 'xl',
+      }}
+    >
       {props.images.length > 0 ? (
         <Box
-          as="img"
           h="100%"
-          w="30%"
-          src={serverURL + props.images[0].url}
-          alt={props.images[0].url}
-          objectFit="contain"
-        />
+          w="40%"
+          position="relative"
+          onMouseOver={onOpen}
+          onMouseOut={onClose}
+        >
+          <Box
+            position="absolute"
+            h="100%"
+            w="100%"
+            as="img"
+            src={imgSrc}
+            alt={props.images[0].url}
+            objectFit="cover"
+          />
+          <Box
+            as="button"
+            position="absolute"
+            w="100%"
+            h="100%"
+            display={isOpen ? 'flex' : 'none'}
+            bg="gray.800"
+            opacity={0.8}
+            alignItems="center"
+            justifyContent="center"
+            onClick={() => history.push(`/frota/${props.id}`)}
+          >
+            <Text color="white" fontSize="2xl">
+              Learn More
+            </Text>
+          </Box>
+        </Box>
       ) : null}
       <Flex w="100%" bg="gray.200" dir="row" p={4} justify="space-between">
         <Box>

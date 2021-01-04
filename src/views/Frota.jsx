@@ -1,6 +1,7 @@
 import { Box, Flex, Stack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import CarCard from '../components/CarCard';
+import Filters from '../components/Filters';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -28,7 +29,7 @@ const Frota = props => {
       <Box bg="gray.700" w="100%" h="100px" />
       <Flex w="100%" dir="row" p={16} justify="space-between">
         {/* Filtros */}
-        <Box w="30%" bg="gray.400" />
+        <Filters w="30%" />
         <Stack spacing={5}>
           {cars.map(car => (
             <CarCard key={car.id} {...car} />
