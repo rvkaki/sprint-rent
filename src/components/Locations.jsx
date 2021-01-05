@@ -128,8 +128,8 @@ const Locations = props => {
       </Text>
       <Flex direction={{ base: 'column', md: 'row' }} w="90%" my={8}>
         <Stack spacing={4} flex={{ base: 'auto', md: 3 }}>
-          {locations.map(l => (
-            <LocationInfo {...l} />
+          {locations.map((l, idx) => (
+            <LocationInfo key={idx} {...l} />
           ))}
         </Stack>
         <Box

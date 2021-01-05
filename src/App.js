@@ -1,4 +1,4 @@
-import React, { Component, useContext, useState } from 'react';
+import React, { Component } from 'react';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import Root from './routes/Root';
 import FilterContext from './context/FilterContext';

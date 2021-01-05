@@ -5,7 +5,7 @@ import {
   faGasPump,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterContext from '../context/FilterContext';
 
 const getParams = async param => {
