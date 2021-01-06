@@ -2,6 +2,8 @@ import { Box, Checkbox, Flex, Stack, Text } from '@chakra-ui/react';
 import {
   faCarAlt,
   faCheckCircle,
+  faChevronDown,
+  faChevronUp,
   faGasPump,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,7 +31,12 @@ const FilterGroup = props => {
             ) : (
               <FontAwesomeIcon icon={props.iconName} size="lg" color="black" />
             )}
-            <Text ml={2} fontSize="2xl" color="black" fontWeight="semibold">
+            <Text
+              ml={2}
+              fontSize={{ base: 'inherit', lg: '2xl' }}
+              color="black"
+              fontWeight="semibold"
+            >
               {props.label}
             </Text>
           </Flex>
@@ -43,7 +50,11 @@ const FilterGroup = props => {
                 colorScheme="gray"
                 iconColor="black"
               >
-                <Text textTransform="capitalize" fontSize="xl" color="black">
+                <Text
+                  textTransform="capitalize"
+                  fontSize={{ base: 'inherit', lg: 'xl' }}
+                  color="black"
+                >
                   {g}
                 </Text>
               </Checkbox>
@@ -69,7 +80,7 @@ const Filters = props => {
   }, []);
 
   return (
-    <Stack {...props} spacing={3}>
+    <Stack spacing={3}>
       <FilterGroup
         label="Combustivel"
         iconName={faGasPump}
@@ -106,4 +117,50 @@ const Filters = props => {
   );
 };
 
-export default Filters;
+const FiltersContainer = props => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <Box>
+      <Box
+        w="90%"
+        mx="auto"
+        display={{ base: 'inherit', lg: 'none' }}
+        my={4}
+        shadow="md"
+      >
+        <Flex
+          px={4}
+          py={1}
+          bg="gray.800"
+          borderRadius="md"
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <Text color="white" fontSize="lg" fontWeight="medium">
+            Filtros
+          </Text>
+          <FontAwesomeIcon
+            icon={isOpen ? faChevronUp : faChevronDown}
+            color="white"
+            size="lg"
+          />
+        </Flex>
+        <Box
+          display={isOpen ? 'inherit' : 'none'}
+          bg="gray.300"
+          p={4}
+          borderRadius="md"
+        >
+          <Filters />
+        </Box>
+      </Box>
+      <Box display={{ base: 'none', lg: 'inherit' }}>
+        <Filters />
+      </Box>
+    </Box>
+  );
+};
+
+export default FiltersContainer;

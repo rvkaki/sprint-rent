@@ -12,11 +12,12 @@ const CarCard = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
-      w="800px"
+      w="100%"
+      h={props.grid ? '50vh' : 'auto'}
       shadow="lg"
       border="1px solid"
       borderColor="gray.200"
-      direction="row"
+      direction={props.grid ? 'column' : 'row'}
       transition="transform linear 0.2s"
       _hover={{
         transform: 'scale(1.01)',
@@ -25,8 +26,8 @@ const CarCard = props => {
     >
       {props.images.length > 0 ? (
         <Box
-          h="100%"
-          w="40%"
+          h={props.grid ? '50%' : '100%'}
+          w={props.grid ? '100%' : '40%'}
           position="relative"
           onMouseOver={onOpen}
           onMouseOut={onClose}
@@ -58,7 +59,14 @@ const CarCard = props => {
           </Box>
         </Box>
       ) : null}
-      <Flex w="100%" bg="gray.200" dir="row" p={4} justify="space-between">
+      <Flex
+        w="100%"
+        h={props.grid ? '50%' : '100%'}
+        bg="gray.200"
+        dir="row"
+        p={4}
+        justify="space-between"
+      >
         <Box>
           <Text fontSize="xl" fontWeight="semibold" color="black">
             {props.brand + ' ' + props.model}

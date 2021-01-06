@@ -1,9 +1,10 @@
-import { Box, Flex, Stack } from '@chakra-ui/react';
+import { Box, Flex, Grid, Stack } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
 import CarCard from '../components/CarCard';
 import Filters from '../components/Filters';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import ViewToggle from '../components/ViewToggle';
 import FilterContext from '../context/FilterContext';
 
 const getCars = async filters => {
@@ -29,6 +30,7 @@ const getCars = async filters => {
 
 const Frota = props => {
   const [cars, setCars] = useState([]);
+  const [grid, setGrid] = useState(false);
   const { filters } = useContext(FilterContext);
 
   useEffect(() => {
@@ -36,21 +38,56 @@ const Frota = props => {
   }, [filters]);
 
   return (
-    <Box>
+    <Flex direction="column">
       <Header />
       {/* Progresso da reserva */}
       <Box bg="gray.700" w="100%" h="100px" />
-      <Flex w="100%" dir="row" p={16} justify="space-between">
-        {/* Filtros */}
-        <Filters flex={1} />
-        <Stack flex={4} align="center" spacing={5}>
-          {cars.map(car => (
-            <CarCard key={car.id} {...car} />
-          ))}
-        </Stack>
+      <ViewToggle grid={grid} setGrid={setGrid} />
+      <Flex
+        w="100%"
+        direction={{ base: 'column', lg: 'row' }}
+        px={{ base: 0, lg: '5%', xl: '8%' }}
+        pb={16}
+        justify="space-between"
+      >
+        <Filters />
+
+        {/* Renders on <= medium-sized screens */}
+        <Box justifyContent="center" display={{ base: 'inherit', lg: 'none' }}>
+          <Grid
+            templateColumns={{ base: '1fr', md: '1fr 1fr' }}
+            gap={6}
+            w="90%"
+          >
+            {cars.map(car => (
+              <CarCard grid key={car.id} {...car} />
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Renders on > medium-sized screens */}
+        <Box
+          display={{ base: 'none', lg: 'inherit' }}
+          flex={1}
+          justifyContent="flex-end"
+        >
+          {grid ? (
+            <Grid templateColumns="repeat(2, 1fr)" gap={6} w="80%">
+              {cars.map(car => (
+                <CarCard grid key={car.id} {...car} />
+              ))}
+            </Grid>
+          ) : (
+            <Stack align="center" spacing={5} w="80%">
+              {cars.map(car => (
+                <CarCard key={car.id} {...car} />
+              ))}
+            </Stack>
+          )}
+        </Box>
       </Flex>
       <Footer />
-    </Box>
+    </Flex>
   );
 };
 
