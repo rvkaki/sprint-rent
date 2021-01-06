@@ -23,6 +23,7 @@ const CarCard = props => {
         transform: 'scale(1.01)',
         shadow: 'xl',
       }}
+      onClick={() => history.push(`/frota/${props.id}`)}
     >
       {props.images.length > 0 ? (
         <Box
@@ -51,10 +52,9 @@ const CarCard = props => {
             opacity={0.8}
             alignItems="center"
             justifyContent="center"
-            onClick={() => history.push(`/frota/${props.id}`)}
           >
             <Text color="white" fontSize="2xl">
-              Learn More
+              Saber Mais
             </Text>
           </Box>
         </Box>
@@ -68,32 +68,44 @@ const CarCard = props => {
         justify="space-between"
       >
         <Box>
-          <Text fontSize="xl" fontWeight="semibold" color="black">
+          <Text
+            fontSize={{ base: 'lg', md: 'xl' }}
+            fontWeight="semibold"
+            color="black"
+          >
             {props.brand + ' ' + props.model}
           </Text>
           <Stack spacing={1} mt={2}>
             <Flex dir="row">
-              <FontAwesomeIcon icon={faUserFriends} size="lg" color="black" />
+              <Flex w="30px" justify="center" align="center">
+                <FontAwesomeIcon icon={faUserFriends} size="lg" color="black" />
+              </Flex>
               <Text>{props.seats} lugares</Text>
             </Flex>
             <Flex dir="row">
-              <Box
-                as="img"
-                w="28px"
-                src="https://img.icons8.com/pastel-glyph/64/000000/gearbox-selector.png"
-              />
+              <Flex w="30px" justify="center" align="center">
+                <Box
+                  as="img"
+                  w="28px"
+                  src="https://img.icons8.com/pastel-glyph/64/000000/gearbox-selector.png"
+                />
+              </Flex>
               <Text textTransform="capitalize">{props.mode}</Text>
             </Flex>
             <Flex dir="row">
-              <FontAwesomeIcon icon={faGasPump} size="lg" color="black" />
+              <Flex w="30px" justify="center" align="center">
+                <FontAwesomeIcon icon={faGasPump} size="lg" color="black" />
+              </Flex>
               <Text textTransform="capitalize">{props.gas}</Text>
             </Flex>
             <Flex dir="row">
-              <Box
-                as="img"
-                w="24px"
-                src="https://img.icons8.com/material/24/000000/car-door--v2.png"
-              />
+              <Flex w="30px" justify="center" align="center">
+                <Box
+                  as="img"
+                  w="24px"
+                  src="https://img.icons8.com/material/24/000000/car-door--v2.png"
+                />
+              </Flex>
               <Text textTransform="capitalize">{props.doors} portas</Text>
             </Flex>
           </Stack>
@@ -108,6 +120,10 @@ const CarCard = props => {
             py={1}
             fontSize="lg"
             color="gray.600"
+            onClick={e => {
+              e.stopPropagation();
+              console.log(props.id);
+            }}
           >
             Selecionar
           </Box>
