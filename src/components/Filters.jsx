@@ -12,7 +12,7 @@ import FilterContext from '../context/FilterContext';
 
 const getParams = async param => {
   try {
-    const res = await fetch(`http://localhost:1337/cars/params?t=${param}`);
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/cars/params?t=${param}`);
     const data = await res.json();
     return data;
   } catch (error) {

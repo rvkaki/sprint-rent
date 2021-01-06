@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { Box } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
-
-const getCar = async id => {
-  try {
-    const res = await fetch(`http://localhost:1337/cars/${id}`);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+import React from 'react';
+import { Box, Flex } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
 
 const Carro = props => {
-  const { id } = useParams();
-  useEffect(() => {
-    getCar(id).then(res => setData(res));
-  }, [id]);
+  const history = useHistory();
+  const car = history.location.state;
+  console.log(car);
 
-  const [data, setData] = useState(null);
-  console.log(data);
-  return <Box>{id}</Box>;
+  return (
+    <Box>
+      <Header />
+      <Flex dir="row" h="100vh" w="100%">
+        <Box
+          as="img"
+          w="60%"
+          h="100%"
+          objectFit="contain"
+          src={`${process.env.REACT_APP_SERVER_URL}${
+            car.images.find(x => x.name === '0.png').url
+          }`}
+        />
+        <Box w="40%" h="100%" bg="gray.400"></Box>
+      </Flex>
+    </Box>
+  );
 };
 
 export default Carro;

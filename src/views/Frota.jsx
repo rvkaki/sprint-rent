@@ -19,7 +19,7 @@ const getCars = async filters => {
       }
     }
     query = query.slice(0, -1);
-    const res = await fetch('http://localhost:1337/cars' + query);
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/cars` + query);
     const data = await res.json();
     console.log(data);
     return data;

@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const serverURL = 'http://localhost:1337';
-
 const CarCard = props => {
   const history = useHistory();
-  const imgSrc = serverURL + props.images.find(x => x.name === '0.png').url;
+  const imgSrc = process.env.REACT_APP_SERVER_URL + props.images.find(x => x.name === '0.png').url;
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
@@ -23,7 +21,7 @@ const CarCard = props => {
         transform: 'scale(1.01)',
         shadow: 'xl',
       }}
-      onClick={() => history.push(`/frota/${props.id}`)}
+      onClick={() => history.push(`/frota/${props.id}`, { ...props })}
     >
       {props.images.length > 0 ? (
         <Box

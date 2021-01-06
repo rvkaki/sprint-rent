@@ -27,14 +27,14 @@ const Header = props => {
       zIndex="sticky"
     >
       <Image
+        src="/assets/images/logo.png"
+        alt="Logo"
         maxH={{ base: '60%', lg: '80%' }}
         onClick={() => history.replace('/')}
         _hover={{
           cursor: 'pointer',
         }}
         objectFit="contain"
-        src="assets/images/logo.png"
-        alt="Logo"
       />
       <IconButton
         display={{ base: 'inherit', md: 'none' }}
