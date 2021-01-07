@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Box, Flex, Grid, Spinner, Stack, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Box, Flex, Spinner, Stack, Text } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { loadImages } from '../util/preloader';
-import _ from 'lodash';
+import { debounce } from 'lodash';
 
 const Carro = props => {
   const history = useHistory();
@@ -15,8 +15,6 @@ const Carro = props => {
 
   const [pressed, setPressed] = useState(false);
   const [prevX, setPrevX] = useState();
-  const [lastMove, setLastMove] = useState(new Date().getTime());
-  const interval = 100;
 
   useEffect(() => {
     loadImages(
@@ -34,23 +32,17 @@ const Carro = props => {
   }, [car.images]);
 
   const handleMove = e => {
-    const newTime = new Date().getTime();
-    if (newTime - lastMove > interval) {
-      if (e.screenX > prevX) setIdx((idx + 1) % images.length);
-      else if (e.screenX < prevX)
-        setIdx((idx - 1 + images.length) % images.length);
-      setPrevX(e.screenX);
-      setLastMove(newTime);
-    }
+    if (e.screenX > prevX + 5) setIdx((idx + 1) % images.length);
+    else if (e.screenX < prevX - 5)
+      setIdx((idx - 1 + images.length) % images.length);
   };
 
-  // const onMouseMove = useMemo(() => {
-  //   const _throttled = _.throttle(handleMove, 1000);
-  //   return e => {
-  //     e.persist();
-  //     return _throttled(e);
-  //   };
-  // });
+  const debouncedMove = debounce(handleMove, 50);
+
+  const onMouseMove = e => {
+    setPrevX(e.screenX);
+    debouncedMove(e);
+  };
 
   return (
     <Box>
@@ -66,11 +58,14 @@ const Carro = props => {
               setPressed(true);
             }}
             onMouseUp={() => setPressed(false)}
-            onMouseMove={pressed ? handleMove : () => {}}
+            onMouseMove={pressed ? onMouseMove : () => {}}
             zIndex={2}
             w="60%"
             objectFit="contain"
             src={`${process.env.REACT_APP_SERVER_URL}${images[idx].url}`}
+            _hover={{
+              cursor: pressed ? 'grabbing' : 'grab',
+            }}
           />
         ) : (
           <Spinner size="xl" />
