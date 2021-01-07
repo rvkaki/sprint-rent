@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Spinner, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Spinner } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { loadImages } from '../util/preloader';
 import { debounce } from 'lodash';
+import InfoCard from '../components/InfoCard';
 
 const Carro = props => {
   const history = useHistory();
@@ -44,113 +43,90 @@ const Carro = props => {
     debouncedMove(e);
   };
 
+  const onTouchMove = e => {
+    setPrevX(e.touches[0].screenX);
+    handleMove(e.touches[0]);
+  };
+
   return (
-    <Box>
+    <Flex direction="column" h="100vh">
       <Header />
-      <Flex dir="row" h="100vh" w="100%" position="relative">
-        <Box pos="absolute" bottom={0} w="100%" bg="#333" h="45%" />
-        {images ? (
-          <Box
-            as="img"
-            draggable={false}
-            onMouseDown={e => {
-              setPrevX(e.screenX);
-              setPressed(true);
-            }}
-            onMouseUp={() => setPressed(false)}
-            onMouseMove={pressed ? onMouseMove : () => {}}
-            zIndex={2}
-            w="60%"
-            objectFit="contain"
-            src={`${process.env.REACT_APP_SERVER_URL}${images[idx].url}`}
-            _hover={{
-              cursor: pressed ? 'grabbing' : 'grab',
-            }}
-          />
-        ) : (
-          <Spinner size="xl" />
-        )}
+      <Flex
+        direction={{ base: 'column', lg: 'row' }}
+        flex={1}
+        position="relative"
+      >
+        <Box
+          pos="absolute"
+          bottom={0}
+          w="100%"
+          bg="#333"
+          h={{ base: '80%', md: '70%', lg: '45%' }}
+        />
         <Flex
+          w={{ base: '100%', lg: '60%' }}
           direction="column"
-          w="25%"
-          h="70%"
-          m="auto"
-          p={4}
-          bg="white"
-          shadow="dark-lg"
           zIndex={2}
-          justify="space-between"
+          align="center"
+          justify="center"
+          m="auto"
+          draggable={false}
+          onMouseDown={e => {
+            setPrevX(e.screenX);
+            setPressed(true);
+          }}
+          onMouseUp={() => setPressed(false)}
+          onMouseLeave={() => setPressed(false)}
+          onMouseMove={pressed ? onMouseMove : () => {}}
+          onTouchStart={e => setPrevX(e.touches[0].screenX)}
+          onTouchMove={onTouchMove}
+          _hover={{
+            cursor: pressed ? 'grabbing' : 'grab',
+          }}
         >
-          <Text
-            fontSize="2xl"
-            textAlign="center"
-            fontWeight="semibold"
-            color="black"
-          >
-            {car.brand + ' ' + car.model}
-          </Text>
-          <Stack spacing={3}>
-            <Flex dir="row" align="center">
-              <Flex w="50px" justify="center" align="center">
-                <FontAwesomeIcon icon={faUserFriends} size="2x" color="black" />
-              </Flex>
-              <Text fontSize="lg">{car.seats} lugares</Text>
-            </Flex>
-            <Flex dir="row" align="center">
-              <Flex w="50px" justify="center" align="center">
-                <Box
-                  as="img"
-                  src="https://img.icons8.com/pastel-glyph/48/000000/gearbox-selector.png"
-                />
-              </Flex>
-              <Text textTransform="capitalize" fontSize="lg">
-                {car.mode}
-              </Text>
-            </Flex>
-            <Flex dir="row" align="center">
-              <Flex w="50px" justify="center" align="center">
-                <FontAwesomeIcon icon={faGasPump} size="2x" color="black" />
-              </Flex>
-              <Text textTransform="capitalize" fontSize="lg">
-                {car.gas}
-              </Text>
-            </Flex>
-            <Flex dir="row" align="center">
-              <Flex w="50px" justify="center" align="center">
-                <Box
-                  as="img"
-                  src="https://img.icons8.com/material/48/000000/car-door--v2.png"
-                />
-              </Flex>
-              <Text fontSize="lg">{car.doors} portas</Text>
-            </Flex>
-          </Stack>
-          <Flex justify="space-between">
-            <Flex align="baseline">
-              <Text fontSize="5xl" fontWeight="bold" color="black">
-                {car.price}€
-              </Text>
-              <Text fontSize="lg">/dia</Text>
-            </Flex>
+          {images ? (
             <Box
-              as="button"
-              borderRadius="4px"
-              p={2}
-              my="auto"
-              fontSize="lg"
-              color="white"
-              bg="gray.800"
-              onClick={e => {
-                e.stopPropagation();
-                console.log(props.id);
-              }}
-            >
-              Selecionar
-            </Box>
-          </Flex>
+              mt={{ base: '-5%', lg: '-15%' }}
+              as="img"
+              draggable={false}
+              objectFit="contain"
+              src={`${process.env.REACT_APP_SERVER_URL}${images[idx].url}`}
+              _selection={{}}
+            />
+          ) : (
+            <Spinner size="xl" />
+          )}
+          <Box position="relative" w="100%" mt="-25%">
+            <Box
+              draggable={false}
+              mx="auto"
+              as="img"
+              src="/assets/360line.svg"
+              w="90%"
+            />
+            <Box
+              as="img"
+              draggable={false}
+              src="/assets/360number.svg"
+              pos="absolute"
+              w="32px"
+              left={0}
+              right={0}
+              bottom={-2}
+              mx="auto"
+            />
+          </Box>
         </Flex>
+        <Box
+          w={{ base: '80%', lg: '25%' }}
+          h={{ base: '45%', md: '50%', lg: '75%' }}
+          m="auto"
+          zIndex={2}
+        >
+          <InfoCard {...car} />
+        </Box>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
