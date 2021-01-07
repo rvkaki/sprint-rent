@@ -31,25 +31,53 @@ const CustomDrawer = props => {
             <Stack spacing={5}>
               <Box>
                 <Text fontSize="xl" fontWeight="semibold">
-                  O Grupo
+                  {t('drawer.group.title')}
                 </Text>
                 <Stack ml={3} spacing={1}>
-                  <Text>Sprint Viagens</Text>
-                  <Text>Sprint Travel Shop</Text>
-                  <Text>Sprint Informática</Text>
+                  <Text
+                    as="a"
+                    href="https://www.sprinttravelviagens.com/"
+                    target="_blank"
+                    fontSize="md"
+                  >
+                    {t('drawer.group.travel')}
+                  </Text>
+                  <Text
+                    as="a"
+                    href="https://www.sprinttravelshop.pt/"
+                    target="_blank"
+                    fontSize="md"
+                  >
+                    {t('drawer.group.shop')}
+                  </Text>
+                  <Text
+                    as="a"
+                    href="https://www.sprintsolucoesinformaticas.com/"
+                    target="_blank"
+                    fontSize="md"
+                  >
+                    {t('drawer.group.tech')}
+                  </Text>
                 </Stack>
               </Box>
               <Box>
                 <Text fontSize="xl" fontWeight="semibold">
-                  Frota
+                  {t('drawer.fleet.title')}
                 </Text>
                 <Stack ml={3} spacing={1}>
-                  <Link to="/frota">Nacional</Link>
-                  <Text>Internacional</Text>
+                  <Link to="/frota">{t('drawer.fleet.national')}</Link>
+                  <Text
+                    as="a"
+                    href="https://www.rentalcars.com/Home.do?affiliateCode=sprinttra667"
+                    target="_blank"
+                    fontSize="md"
+                  >
+                    {t('drawer.fleet.international')}
+                  </Text>
                 </Stack>
               </Box>
               <Text fontSize="xl" fontWeight="semibold">
-                Contactos
+                {t('drawer.contacts')}
               </Text>
             </Stack>
           </DrawerBody>

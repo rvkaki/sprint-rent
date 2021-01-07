@@ -6,5 +6,19 @@
       "international": "Frota Internacional"
     },
     "contacts": "Contactos"
+  },
+  "drawer": {
+    "group": {
+      "title": "Grupo",
+      "travel": "Sprint Viagens",
+      "shop": "Sprint Travel Shop",
+      "tech": "Sprint Informática"
+    },
+    "fleet": {
+      "title": "Frota",
+      "national": "Nacional",
+      "international": "Internacional"
+    },
+    "contacts": "Contactos"
   }
 }

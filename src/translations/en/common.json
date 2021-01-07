@@ -6,5 +6,19 @@
       "international": "International Cars"
     },
     "contacts": "Contacts"
+  },
+  "drawer": {
+    "group": {
+      "title": "The Group",
+      "travel": "Sprint Travels",
+      "shop": "Sprint Travel Shop",
+      "tech": "Sprint IT"
+    },
+    "fleet": {
+      "title": "Cars",
+      "national": "Portugal",
+      "international": "International"
+    },
+    "contacts": "Contacts"
   }
 }
