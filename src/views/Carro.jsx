@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Flex, Spinner } from '@chakra-ui/react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { loadImages } from '../util/preloader';
 import { debounce } from 'lodash';
 import InfoCard from '../components/InfoCard';
+import { getCar } from '../util/apiCalls';
 
 const Carro = props => {
   const history = useHistory();
-  const car = history.location.state;
+  const { carID } = useParams();
+  const [car, setCar] = useState({});
   const [images, setImages] = useState();
   const [idx, setIdx] = useState(0);
 
@@ -16,19 +18,27 @@ const Carro = props => {
   const [prevX, setPrevX] = useState();
 
   useEffect(() => {
-    loadImages(
-      car.images.map(i => process.env.REACT_APP_SERVER_URL + i.url)
-    ).then(() => {
-      const newImages = car.images.sort((a, b) => {
-        const aName = parseInt(a.name.split('.')[0]);
-        const bName = parseInt(b.name.split('.')[0]);
-        if (aName < bName) return -1;
-        else if (aName > bName) return 1;
-        return 0;
+    if (history.location.state) setCar(history.location.state);
+    else getCar(carID).then(data => setCar(data));
+  }, [carID, history.location.state]);
+
+  useEffect(() => {
+    if (car.images)
+      loadImages(
+        car.images.map(i => process.env.REACT_APP_SERVER_URL + i.url)
+      ).then(() => {
+        const newImages = car.images.sort((a, b) => {
+          const aName = parseInt(a.name.split('.')[0]);
+          const bName = parseInt(b.name.split('.')[0]);
+          if (aName < bName) return -1;
+          else if (aName > bName) return 1;
+          return 0;
+        });
+        setImages(newImages);
       });
-      setImages(newImages);
-    });
   }, [car.images]);
+
+  if (!car) return <Spinner />;
 
   const handleMove = e => {
     if (e.screenX > prevX + 5) setIdx((idx + 1) % images.length);

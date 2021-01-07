@@ -9,16 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import FilterContext from '../context/FilterContext';
-
-const getParams = async param => {
-  try {
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/cars/params?t=${param}`);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { getFilterParams } from '../util/apiCalls';
 
 const FilterGroup = props => {
   return (
@@ -73,10 +64,10 @@ const Filters = props => {
   const [types, setTypes] = useState([]);
 
   useEffect(() => {
-    getParams('gas').then(data => setGas(data));
-    getParams('model').then(data => setModels(data));
-    getParams('mode').then(data => setModes(data));
-    getParams('type').then(data => setTypes(data));
+    getFilterParams('gas').then(data => setGas(data));
+    getFilterParams('model').then(data => setModels(data));
+    getFilterParams('mode').then(data => setModes(data));
+    getFilterParams('type').then(data => setTypes(data));
   }, []);
 
   return (

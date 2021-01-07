@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Stack } from '@chakra-ui/react';
+import { Box, Flex, Grid, Spinner, Stack, Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
 import CarCard from '../components/CarCard';
 import Filters from '../components/Filters';
@@ -6,9 +6,14 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ViewToggle from '../components/ViewToggle';
 import FilterContext from '../context/FilterContext';
+import { getCars } from '../util/apiCalls';
 
-const getCars = async filters => {
-  try {
+const Frota = props => {
+  const [cars, setCars] = useState();
+  const [grid, setGrid] = useState(false);
+  const { filters } = useContext(FilterContext);
+
+  useEffect(() => {
     let query = '?';
     for (const key in filters) {
       const elem = filters[key];
@@ -19,22 +24,7 @@ const getCars = async filters => {
       }
     }
     query = query.slice(0, -1);
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/cars` + query);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const Frota = props => {
-  const [cars, setCars] = useState([]);
-  const [grid, setGrid] = useState(false);
-  const { filters } = useContext(FilterContext);
-
-  useEffect(() => {
-    getCars(filters).then(data => setCars(data));
+    getCars(query).then(data => setCars(data));
   }, [filters]);
 
   return (
@@ -52,39 +42,58 @@ const Frota = props => {
       >
         <Filters />
 
-        {/* Renders on <= medium-sized screens */}
-        <Box justifyContent="center" display={{ base: 'inherit', lg: 'none' }}>
-          <Grid
-            templateColumns={{ base: '1fr', md: '1fr 1fr' }}
-            gap={6}
-            w="90%"
-          >
-            {cars.map(car => (
-              <CarCard grid key={car.id} {...car} />
-            ))}
-          </Grid>
-        </Box>
-
-        {/* Renders on > medium-sized screens */}
-        <Box
-          display={{ base: 'none', lg: 'inherit' }}
-          flex={1}
-          justifyContent="flex-end"
-        >
-          {grid ? (
-            <Grid templateColumns="repeat(2, 1fr)" gap={6} w="80%">
-              {cars.map(car => (
-                <CarCard grid key={car.id} {...car} />
-              ))}
-            </Grid>
+        {cars ? (
+          cars.length === 0 ? (
+            <Box m="auto">
+              <Text fontSize="2xl" color="black">
+                Sem Resultados
+              </Text>
+            </Box>
           ) : (
-            <Stack align="center" spacing={5} w="80%">
-              {cars.map(car => (
-                <CarCard key={car.id} {...car} />
-              ))}
-            </Stack>
-          )}
-        </Box>
+            <>
+              {/* Renders on <= medium-sized screens */}
+              <Box
+                justifyContent="center"
+                display={{ base: 'inherit', lg: 'none' }}
+              >
+                <Grid
+                  templateColumns={{ base: '1fr', md: '1fr 1fr' }}
+                  gap={6}
+                  w="90%"
+                >
+                  {cars.map(car => (
+                    <CarCard grid key={car.id} {...car} />
+                  ))}
+                </Grid>
+              </Box>
+
+              {/* Renders on > medium-sized screens */}
+              <Box
+                display={{ base: 'none', lg: 'inherit' }}
+                flex={1}
+                justifyContent="flex-end"
+              >
+                {grid ? (
+                  <Grid templateColumns="repeat(2, 1fr)" gap={6} w="80%">
+                    {cars.map(car => (
+                      <CarCard grid key={car.id} {...car} />
+                    ))}
+                  </Grid>
+                ) : (
+                  <Stack align="center" spacing={5} w="80%">
+                    {cars.map(car => (
+                      <CarCard key={car.id} {...car} />
+                    ))}
+                  </Stack>
+                )}
+              </Box>
+            </>
+          )
+        ) : (
+          <Box m="auto">
+            <Spinner />
+          </Box>
+        )}
       </Flex>
       <Footer />
     </Flex>
