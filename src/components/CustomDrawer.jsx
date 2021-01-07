@@ -11,9 +11,11 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 const CustomDrawer = props => {
+  const [t, i18n] = useTranslation('common');
   return (
     <Drawer
       isOpen={props.isOpen}
@@ -25,7 +27,7 @@ const CustomDrawer = props => {
       <DrawerOverlay>
         <DrawerContent py="20%">
           <DrawerCloseButton _focus={{}} _active={{}} _hover={{}} />
-          <DrawerBody display="flex" >
+          <DrawerBody display="flex">
             <Stack spacing={5}>
               <Box>
                 <Text fontSize="xl" fontWeight="semibold">
@@ -53,11 +55,23 @@ const CustomDrawer = props => {
           </DrawerBody>
           <DrawerFooter>
             <Flex dir="row" justify="flex-end">
-              <Text mr="4px" fontWeight="semibold">
+              <Text
+                as="button"
+                mr="4px"
+                fontWeight={i18n.language === 'pt' ? 'semibold' : 'normal'}
+                onClick={() => i18n.changeLanguage('pt')}
+              >
                 PT
               </Text>
               <Text>|</Text>
-              <Text ml="4px">EN</Text>
+              <Text
+                as="button"
+                ml="4px"
+                fontWeight={i18n.language === 'en' ? 'semibold' : 'normal'}
+                onClick={() => i18n.changeLanguage('en')}
+              >
+                EN
+              </Text>
             </Flex>
           </DrawerFooter>
         </DrawerContent>

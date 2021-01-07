@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import CustomDrawer from './CustomDrawer';
 import { Link, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const HeaderLink = props => {
   return (
@@ -15,6 +16,7 @@ const HeaderLink = props => {
 
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
+  const [t, i18n] = useTranslation('common');
   const history = useHistory();
   return (
     <Flex
@@ -53,17 +55,29 @@ const Header = props => {
         justify="space-between"
       >
         <Flex w="100%" dir="row" justify="space-evenly">
-          <HeaderLink text="O Grupo" />
-          <HeaderLink to="/frota" text="Frota Nacional" />
-          <HeaderLink text="Frota Internacional" />
-          <HeaderLink text="Contactos" />
+          <HeaderLink text={t('header.group')} />
+          <HeaderLink to="/frota" text={t('header.fleet.national')} />
+          <HeaderLink text={t('header.fleet.international')} />
+          <HeaderLink text={t('header.contacts')} />
         </Flex>
         <Flex dir="row" justify="flex-end">
-          <Text mr="4px" fontWeight="semibold">
+          <Text
+            as="button"
+            mr="4px"
+            fontWeight={i18n.language === 'pt' ? 'semibold' : 'normal'}
+            onClick={() => i18n.changeLanguage('pt')}
+          >
             PT
           </Text>
           <Text>|</Text>
-          <Text ml="4px">EN</Text>
+          <Text
+            as="button"
+            ml="4px"
+            fontWeight={i18n.language === 'en' ? 'semibold' : 'normal'}
+            onClick={() => i18n.changeLanguage('en')}
+          >
+            EN
+          </Text>
         </Flex>
       </Flex>
       <CustomDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />

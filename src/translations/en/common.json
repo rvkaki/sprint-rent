@@ -1,0 +1,10 @@
+{
+  "header": {
+    "group": "The Group",
+    "fleet": {
+      "national": "Portugal Cars",
+      "international": "International Cars"
+    },
+    "contacts": "Contacts"
+  }
+}

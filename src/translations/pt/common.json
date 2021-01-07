@@ -1,0 +1,10 @@
+{
+  "header": {
+    "group": "O Grupo",
+    "fleet": {
+      "national": "Frota Nacional",
+      "international": "Frota Internacional"
+    },
+    "contacts": "Contactos"
+  }
+}
