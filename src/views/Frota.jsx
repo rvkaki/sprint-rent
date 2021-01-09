@@ -1,5 +1,6 @@
 import { Box, Flex, Grid, Spinner, Stack, Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import CarCard from '../components/CarCard';
 import Filters from '../components/Filters';
 import Footer from '../components/Footer';
@@ -12,6 +13,7 @@ const Frota = props => {
   const [cars, setCars] = useState();
   const [grid, setGrid] = useState(false);
   const { filters } = useContext(AppContext);
+  const history = useHistory();
 
   useEffect(() => {
     let query = '?';

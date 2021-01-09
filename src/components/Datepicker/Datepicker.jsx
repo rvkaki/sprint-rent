@@ -42,9 +42,8 @@ const Datepicker = props => {
   });
 
   function handleDateChange(data) {
+    props.onDateChange(data);
     setState({ ...state, ...data });
-    props.setStartDate(data.startDate);
-    props.setEndDate(data.endDate);
   }
 
   function isBefore(date, month) {
