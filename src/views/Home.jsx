@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Carousel from '../components/Carousel';
@@ -6,6 +6,7 @@ import MainSearch from '../components/MainSearch';
 import Offers from '../components/Offers';
 import Locations from '../components/Locations';
 import Footer from '../components/Footer';
+import { getLocations } from '../util/apiCalls';
 
 const images = [
   { src: 'assets/images/class_A/white_0.webp', model: 'Classe A' },
@@ -15,6 +16,11 @@ const images = [
 ];
 
 const Home = props => {
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    getLocations().then(data => setLocations(data));
+  }, []);
   return (
     <Box>
       <Header />
@@ -25,7 +31,11 @@ const Home = props => {
         top={{ base: '30vh', md: '65vh' }}
         position="absolute"
       >
-        <MainSearch />
+        <MainSearch
+          options={locations.map(l => {
+            return { name: l.title, value: l.id };
+          })}
+        />
       </Box>
       <Flex
         w="100%"
@@ -37,7 +47,7 @@ const Home = props => {
         <Carousel images={images} />
         <Box
           as="img"
-          display={{base: 'inherit', md: 'none'}}
+          display={{ base: 'inherit', md: 'none' }}
           h={{ base: '100%', md: 'auto' }}
           w={{ base: 'auto', md: '100%' }}
           objectFit={{ base: 'cover', md: 'contain' }}
@@ -46,7 +56,7 @@ const Home = props => {
         />
       </Flex>
       <Offers />
-      <Locations />
+      <Locations locations={locations} />
       <Footer />
     </Box>
   );

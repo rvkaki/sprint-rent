@@ -5,8 +5,7 @@ import {
   faPhoneAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import { getLocations } from '../util/apiCalls';
+import React from 'react';
 
 const LocationInfo = props => {
   return (
@@ -46,12 +45,6 @@ const LocationInfo = props => {
 };
 
 const Locations = props => {
-  const [locations, setLocations] = useState([]);
-
-  useEffect(() => {
-    getLocations().then(data => setLocations(data));
-  }, []);
-
   return (
     <Flex direction="column" align="center">
       <Text
@@ -63,7 +56,7 @@ const Locations = props => {
       </Text>
       <Flex direction={{ base: 'column', md: 'row' }} w="90%" my={8}>
         <Stack spacing={4} flex={{ base: 'auto', md: 3 }}>
-          {locations.map((l, idx) => (
+          {props.locations.map((l, idx) => (
             <LocationInfo key={idx} {...l} />
           ))}
         </Stack>

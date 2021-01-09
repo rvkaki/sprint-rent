@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Stack, Text } from '@chakra-ui/react';
+import SelectSearch from 'react-select-search';
+import './SearchBar.css';
 
 const SearchBar = props => {
   return (
@@ -15,14 +9,13 @@ const SearchBar = props => {
       <Text color="white" fontWeight="medium">
         {props.label}
       </Text>
-      <InputGroup>
-        <InputLeftElement
-          children={
-            <FontAwesomeIcon size="lg" icon={faMapMarkerAlt} color="gray.400" />
-          }
-        />
-        <Input bg="white" placeholder="Cidade, código postal, etc." />
-      </InputGroup>
+      <SelectSearch
+        options={props.options}
+        value={props.value}
+        onChange={props.onChange}
+        search
+        placeholder="Selecionar Data"
+      />
     </Stack>
   );
 };

@@ -11,8 +11,8 @@ import DateInput from './DateInput';
 const Datepicker = props => {
   const [state, setState] = useState({
     minBookingDate: new Date(),
-    startDate: null,
-    endDate: null,
+    startDate: props.startDate,
+    endDate: props.endDate,
     focusedInput: null,
   });
 
@@ -43,6 +43,8 @@ const Datepicker = props => {
 
   function handleDateChange(data) {
     setState({ ...state, ...data });
+    props.setStartDate(data.startDate);
+    props.setEndDate(data.endDate);
   }
 
   function isBefore(date, month) {

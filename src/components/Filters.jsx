@@ -8,12 +8,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import FilterContext from '../context/FilterContext';
+import AppContext from '../context/AppContext';
 import { getFilterParams } from '../util/apiCalls';
 
 const FilterGroup = props => {
   return (
-    <FilterContext.Consumer>
+    <AppContext.Consumer>
       {({ filters, toggleFilters }) => (
         <Box>
           <Flex dir="row" align="center">
@@ -53,7 +53,7 @@ const FilterGroup = props => {
           </Flex>
         </Box>
       )}
-    </FilterContext.Consumer>
+    </AppContext.Consumer>
   );
 };
 

@@ -3,7 +3,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
 import Root from './routes/Root';
-import FilterContext from './context/FilterContext';
+import AppContext from './context/AppContext';
 
 import common_en from './translations/en/common.json';
 import common_pt from './translations/pt/common.json';
@@ -61,7 +61,31 @@ class App extends Component {
       this.setState({ filters: newFilters });
     };
 
+    this.setStartDate = date => {
+      this.setState({ startDate: date });
+    };
+
+    this.setEndDate = date => {
+      this.setState({ endDate: date });
+    };
+
+    this.setStartLocation = location => {
+      this.setState({ startLocation: location });
+    };
+
+    this.setEndLocation = location => {
+      this.setState({ endLocation: location });
+    };
+
     this.state = {
+      startDate: null,
+      endDate: null,
+      startLocation: null,
+      endLocation: null,
+      setStartDate: this.setStartDate,
+      setEndDate: this.setEndDate,
+      setStartLocation: this.setStartLocation,
+      setEndLocation: this.setEndLocation,
       filters: { gas: [], model: [], mode: [], type: [] },
       toggleFilters: this.toggleFilters,
     };
@@ -71,9 +95,9 @@ class App extends Component {
     return (
       <ChakraProvider theme={theme}>
         <I18nextProvider i18n={i18next}>
-          <FilterContext.Provider value={this.state}>
+          <AppContext.Provider value={this.state}>
             <Root />
-          </FilterContext.Provider>
+          </AppContext.Provider>
         </I18nextProvider>
       </ChakraProvider>
     );

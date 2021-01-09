@@ -5,13 +5,13 @@ import Filters from '../components/Filters';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ViewToggle from '../components/ViewToggle';
-import FilterContext from '../context/FilterContext';
+import AppContext from '../context/AppContext';
 import { getCars } from '../util/apiCalls';
 
 const Frota = props => {
   const [cars, setCars] = useState();
   const [grid, setGrid] = useState(false);
-  const { filters } = useContext(FilterContext);
+  const { filters } = useContext(AppContext);
 
   useEffect(() => {
     let query = '?';
