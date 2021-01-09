@@ -5,6 +5,7 @@ import CarCard from '../components/CarCard';
 import Filters from '../components/Filters';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Progress from '../components/Progress';
 import ViewToggle from '../components/ViewToggle';
 import AppContext from '../context/AppContext';
 import { getCars } from '../util/apiCalls';
@@ -33,7 +34,7 @@ const Frota = props => {
     <Flex direction="column">
       <Header />
       {/* Progresso da reserva */}
-      <Box bg="gray.700" w="100%" h="100px" />
+      {history.location.search === '?state' ? <Progress /> : null}
       <ViewToggle grid={grid} setGrid={setGrid} />
       <Flex
         w="100%"
