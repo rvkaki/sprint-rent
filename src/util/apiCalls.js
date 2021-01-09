@@ -29,3 +29,13 @@ export const getCar = async id => {
     console.log(error);
   }
 };
+
+export const getLocations = async () => {
+  try {
+    const res = await fetch(`${serverURL}/locations`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

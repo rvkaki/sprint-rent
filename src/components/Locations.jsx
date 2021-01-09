@@ -1,114 +1,43 @@
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 import {
-  faAt,
-  faCarAlt,
   faEnvelope,
   faMapMarkerAlt,
   faPhoneAlt,
-  faPlaneDeparture,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-
-const locations = [
-  {
-    primary: true,
-    name: 'Braga (Sede)',
-    address: 'Rua Cidade do Porto nº45, 4705-086 Braga',
-    phone: '(+351) 253 043 471',
-    cellphone: '(+351) 963 720 279',
-    mail: {
-      main: 'geral@sprinttravelviagens.com',
-      travel: 'braga1@sprinttravelviagens.com',
-      rent: 'reservas@sprinttravelrentacar.com',
-      franchise: 'franchising@sprinttravelviagens.com',
-    },
-  },
-  {
-    name: 'Aeroporto do Porto',
-    address: 'Aeroporto Francisco Sá Carneiro, 4470-558 Maia',
-  },
-  {
-    name: 'Aeroporto de Lisboa',
-    address: 'Alameda das Comunidades Portuguesas, 1700-111 Lisboa',
-  },
-  {
-    name: 'Porto',
-    address: 'Estrada da Circunvalação 11124, 4460-282 Sra. da Hora',
-  },
-  {
-    name: 'Aeroporto de Faro',
-    address: 'Aeroporto de Faro, 8006-901 Faro',
-  },
-  {
-    name: 'Lisboa',
-    address:
-      ' Av. D. João II - Estação do Oriente Loja G204- Lote 1.07.15, 1990-233 Lisboa',
-  },
-  {
-    primary: true,
-    name: 'Montijo',
-    address: 'Av. Infante D.Henrique 875 R/C Esqº, 2870-157 Montijo',
-    phone: '(+351) 212 431 805',
-    cellphone: '(+351) 933 935 360',
-    mail: {
-      main: 'montijo@ sprinttravelrentacar.com ',
-    },
-  },
-];
+import React, { useEffect, useState } from 'react';
+import { getLocations } from '../util/apiCalls';
 
 const LocationInfo = props => {
   return (
     <Box w="90%">
       <Text fontSize="2xl" fontWeight="medium" color="black">
-        {props.name}
+        {props.title}
       </Text>
       <Box borderBottom="2px solid black" mb={2} />
-      <Stack spacing={5}>
+      <Stack spacing={4}>
         <Flex dir="row" align="center">
           <FontAwesomeIcon icon={faMapMarkerAlt} size="lg" color="black" />
           <Text ml={2}>{props.address}</Text>
         </Flex>
-        {props.primary ? (
+        {props.numbers ? (
           <Stack>
-            <Flex dir="row" align="center">
-              <FontAwesomeIcon icon={faPhoneAlt} size="lg" color="black" />
-              <Text ml={2}>{props.phone}</Text>
-            </Flex>
-            <Flex dir="row" align="center">
-              <FontAwesomeIcon icon={faPhoneAlt} size="lg" color="black" />
-              <Text ml={2}>{props.cellphone}</Text>
-            </Flex>
+            {props.numbers.map(n => (
+              <Flex key={n.id} dir="row" align="center">
+                <FontAwesomeIcon icon={faPhoneAlt} size="lg" color="black" />
+                <Text ml={2}>{n.number}</Text>
+              </Flex>
+            ))}
           </Stack>
         ) : null}
-        {props.primary ? (
+        {props.emails ? (
           <Stack>
-            <Flex dir="row" align="center">
-              <FontAwesomeIcon icon={faEnvelope} size="lg" color="black" />
-              <Text ml={2}>{props.mail.main}</Text>
-            </Flex>
-            {props.mail.travel ? (
-              <Flex dir="row" align="center">
-                <FontAwesomeIcon
-                  icon={faPlaneDeparture}
-                  size="lg"
-                  color="black"
-                />
-                <Text ml={2}>{props.mail.travel}</Text>
+            {props.emails.map(e => (
+              <Flex key={e.id} dir="row" align="center">
+                <FontAwesomeIcon icon={faEnvelope} size="lg" color="black" />
+                <Text ml={2}>{e.email}</Text>
               </Flex>
-            ) : null}
-            {props.mail.rent ? (
-              <Flex dir="row" align="center">
-                <FontAwesomeIcon icon={faCarAlt} size="lg" color="black" />
-                <Text ml={2}>{props.mail.rent}</Text>
-              </Flex>
-            ) : null}
-            {props.mail.franchise ? (
-              <Flex dir="row" align="center">
-                <FontAwesomeIcon icon={faAt} size="lg" color="black" />
-                <Text ml={2}>{props.mail.franchise}</Text>
-              </Flex>
-            ) : null}
+            ))}
           </Stack>
         ) : null}
       </Stack>
@@ -117,6 +46,12 @@ const LocationInfo = props => {
 };
 
 const Locations = props => {
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    getLocations().then(data => setLocations(data));
+  }, []);
+
   return (
     <Flex direction="column" align="center">
       <Text
