@@ -34,7 +34,7 @@ const MainSearch = props => {
       setStartLocation(state.startLocation);
       if (checked) setEndLocation(state.startLocation);
       else setEndLocation(state.endLocation);
-      history.push('/frota?state');
+      history.push('/frota');
     } else {
       alert('Por favor preencha todos os campos');
     }

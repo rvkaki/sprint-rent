@@ -1,4 +1,16 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Text,
+} from '@chakra-ui/react';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 
@@ -17,7 +29,11 @@ const Shape = props => {
     >
       <Flex direction="column" h="100%" ml="80px" mb="16px" justify="center">
         <Text fontSize="sm">{props.title}</Text>
-        <Text fontSize="lg" fontWeight="semibold" overflowWrap="break-word">
+        <Text
+          fontSize={{ lg: 'md', xl: 'lg' }}
+          fontWeight="semibold"
+          overflowWrap="break-word"
+        >
           {props.info}
         </Text>
       </Flex>
@@ -41,13 +57,31 @@ const Shape = props => {
   );
 };
 
-const Progress = props => {
-  const { startDate, endDate, startLocation, endLocation } = useContext(
-    AppContext
+const Item = props => {
+  return (
+    <MenuItem _focus={{}} _active={{}}>
+      <Box px={8} color="black">
+        <Text fontSize="lg" fontWeight="semibold">
+          {props.title}
+        </Text>
+        <Text fontSize="lg">{props.location}</Text>
+        <Text fontSize="lg">{props.date}</Text>
+      </Box>
+    </MenuItem>
   );
+};
+
+const Progress = props => {
+  const { startDate, endDate, startLocation, endLocation } = props.state;
   return (
     <Box w="100%">
-      <Flex dir="row" w="100%" bg="gray.400">
+      {/* Renders on large screens */}
+      <Flex
+        display={{ base: 'none', lg: 'flex' }}
+        dir="row"
+        w="100%"
+        bg="gray.400"
+      >
         <Shape
           w="23vw"
           h="100px"
@@ -90,6 +124,47 @@ const Progress = props => {
           h="100%"
           bg="green.400"
         />
+      </Box>
+
+      {/* Renders on lg < screens */}
+      <Box display={{ base: 'inherit', lg: 'none' }}>
+        <Menu matchWidth closeOnSelect={false}>
+          {({ isOpen }) => (
+            <>
+              <MenuButton w="100%" bg="gray.500">
+                <Flex
+                  dir="row"
+                  justify="space-between"
+                  align="center"
+                  px={8}
+                  py={1}
+                >
+                  <Text fontSize="lg" color="white" fontWeight="medium">
+                    Alterar a reserva
+                  </Text>
+                  <FontAwesomeIcon
+                    icon={isOpen ? faChevronUp : faChevronDown}
+                    color="white"
+                    size="lg"
+                  />
+                </Flex>
+              </MenuButton>
+              <MenuList bg="gray.300" mx={4} borderRadius={0} shadow="lg">
+                <Item
+                  title="Data de Levantamento"
+                  location={startLocation + ','}
+                  date={startDate.toLocaleDateString()}
+                />
+                <MenuDivider borderColor="black" />
+                <Item
+                  title="Data de Entrega"
+                  location={endLocation + ','}
+                  date={endDate.toLocaleDateString()}
+                />
+              </MenuList>
+            </>
+          )}
+        </Menu>
       </Box>
     </Box>
   );

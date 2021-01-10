@@ -1,6 +1,5 @@
 import { Box, Flex, Grid, Spinner, Stack, Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import CarCard from '../components/CarCard';
 import Filters from '../components/Filters';
 import Footer from '../components/Footer';
@@ -13,13 +12,12 @@ import { getCars } from '../util/apiCalls';
 const Frota = props => {
   const [cars, setCars] = useState();
   const [grid, setGrid] = useState(false);
-  const { filters } = useContext(AppContext);
-  const history = useHistory();
+  const appState = useContext(AppContext);
 
   useEffect(() => {
     let query = '?';
-    for (const key in filters) {
-      const elem = filters[key];
+    for (const key in appState.filters) {
+      const elem = appState.filters[key];
       let elemQuery = '';
       if (elem.length > 0) {
         elem.forEach(x => (elemQuery += `${key}_in=${x}&`));
@@ -28,13 +26,13 @@ const Frota = props => {
     }
     query = query.slice(0, -1);
     getCars(query).then(data => setCars(data));
-  }, [filters]);
+  }, [appState.filters]);
 
   return (
     <Flex direction="column">
       <Header />
       {/* Progresso da reserva */}
-      {history.location.search === '?state' ? <Progress /> : null}
+      {appState.startLocation ? <Progress state={appState} /> : null}
       <ViewToggle grid={grid} setGrid={setGrid} />
       <Flex
         w="100%"
