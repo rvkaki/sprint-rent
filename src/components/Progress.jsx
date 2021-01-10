@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Flex,
   Menu,
   MenuButton,
@@ -11,8 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react';
-import AppContext from '../context/AppContext';
+import React from 'react';
 
 const Shape = props => {
   const parentH = parseInt(props.h.slice(0, -2));
