@@ -10,8 +10,11 @@ import {
   faFacebookSquare,
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 const Footer = props => {
+  const [t] = useTranslation('common');
+
   return (
     <Flex
       direction={{ base: 'column', lg: 'row' }}
@@ -23,7 +26,7 @@ const Footer = props => {
       <Stack spacing={2} mb={{ base: 4, lg: 0 }}>
         <Box>
           <Text fontSize="lg" fontWeight="semibold" color="white">
-            Informações Úteis
+            {t('footer.info.title')}
           </Text>
           <Box
             borderBottom="2px solid white"
@@ -31,22 +34,19 @@ const Footer = props => {
           />
         </Box>
         <Text fontSize="md" color="white">
-          Política de privacidade
+          {t('footer.info.privacy')}
         </Text>
         <Text fontSize="md" color="white">
-          Condições gerais de venda
+          {t('footer.info.terms')}
         </Text>
         <Text fontSize="md" color="white">
-          Livro de reclamações online
-        </Text>
-        <Text fontSize="md" color="white">
-          Termos e condições de aluguer
+          {t('footer.info.complaints')}
         </Text>
       </Stack>
       <Stack spacing={2} mb={{ base: 4, lg: 0 }}>
         <Box>
           <Text fontSize="lg" fontWeight="semibold" color="white">
-            Contactos
+            {t('footer.contacts')}
           </Text>
           <Box
             borderBottom="2px solid white"
@@ -81,7 +81,7 @@ const Footer = props => {
       <Stack spacing={2} mb={{ base: 4, lg: 0 }}>
         <Box>
           <Text fontSize="lg" fontWeight="semibold" color="white">
-            Visite-nos
+            {t('footer.visit')}
           </Text>
           <Box
             borderBottom="2px solid white"
@@ -89,8 +89,20 @@ const Footer = props => {
           />
         </Box>
         <HStack spacing={4}>
-          <FontAwesomeIcon icon={faFacebookSquare} size="3x" color="white" />
-          <FontAwesomeIcon icon={faInstagram} size="3x" color="white" />
+          <Box
+            as="a"
+            href="https://www.facebook.com/sprinttravelviagens"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faFacebookSquare} size="3x" color="white" />
+          </Box>
+          <Box
+            as="a"
+            href="https://www.instagram.com/sprinttravelviagens/"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faInstagram} size="3x" color="white" />
+          </Box>
         </HStack>
         <Stack spacing={-1}>
           <Text fontSize="md" color="white">

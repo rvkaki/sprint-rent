@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AppContext from '../context/AppContext';
 import { getFilterParams } from '../util/apiCalls';
 
@@ -63,6 +64,8 @@ const Filters = props => {
   const [modes, setModes] = useState([]);
   const [types, setTypes] = useState([]);
 
+  const t = props.t;
+
   useEffect(() => {
     getFilterParams('gas').then(data => setGas(data));
     getFilterParams('model').then(data => setModels(data));
@@ -73,19 +76,19 @@ const Filters = props => {
   return (
     <Stack spacing={3}>
       <FilterGroup
-        label="Combustivel"
+        label={(t('filters.gas'))}
         iconName={faGasPump}
         filters={gas}
         group="gas"
       />
       <FilterGroup
-        label="Modelo"
+        label={t('filters.model')}
         iconName={faCarAlt}
         filters={models}
         group="model"
       />
       <FilterGroup
-        label="Transmissao"
+        label={t('filters.mode')}
         icon={
           <Box
             as="img"
@@ -99,7 +102,7 @@ const Filters = props => {
         group="mode"
       />
       <FilterGroup
-        label="Tipo"
+        label={t('filters.type')}
         iconName={faCheckCircle}
         filters={types}
         group="type"
@@ -110,6 +113,7 @@ const Filters = props => {
 
 const FiltersContainer = props => {
   const [isOpen, setIsOpen] = useState(false);
+  const [t] = useTranslation('common');
   return (
     <Box>
       <Box
@@ -130,7 +134,7 @@ const FiltersContainer = props => {
           onClick={() => setIsOpen(!isOpen)}
         >
           <Text color="white" fontSize="lg" fontWeight="medium">
-            Filtros
+            {t('filters.title')}
           </Text>
           <FontAwesomeIcon
             icon={isOpen ? faChevronUp : faChevronDown}
@@ -144,11 +148,11 @@ const FiltersContainer = props => {
           p={4}
           borderRadius="md"
         >
-          <Filters />
+          <Filters t={t} />
         </Box>
       </Box>
       <Box display={{ base: 'none', lg: 'inherit' }}>
-        <Filters />
+        <Filters t={t} />
       </Box>
     </Box>
   );

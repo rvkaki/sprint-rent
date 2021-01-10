@@ -5,6 +5,7 @@ import SearchBar from './SearchBar.jsx';
 import AppContext from '../context/AppContext.jsx';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const MainSearch = props => {
   const [checked, setChecked] = useState(true);
@@ -22,6 +23,8 @@ const MainSearch = props => {
     setEndLocation,
   } = useContext(AppContext);
 
+  const [t] = useTranslation('common');
+
   const handleClick = () => {
     if (
       state.startDate &&
@@ -36,7 +39,7 @@ const MainSearch = props => {
       else setEndLocation(state.endLocation);
       history.push('/frota');
     } else {
-      alert('Por favor preencha todos os campos');
+      alert(t('alerts.fill'));
     }
   };
 
@@ -57,20 +60,20 @@ const MainSearch = props => {
             options={props.options}
             value={state.startLocation}
             onChange={e => setState({ ...state, startLocation: e })}
-            label="Local de Levantamento"
+            label={t('pickup')}
           />
           {!checked ? (
             <SearchBar
               options={props.options}
               value={state.endLocation}
               onChange={e => setState({ ...state, endLocation: e })}
-              label="Local de Entrega"
+              label={t('delivery')}
             />
           ) : null}
         </Stack>
         <Stack flex={1} w="100%" spacing={1} position="relative">
           <Text color="white" fontWeight="medium">
-            Data
+            {t('date')}
           </Text>
           <Datepicker
             startDate={state.startDate}
@@ -93,7 +96,7 @@ const MainSearch = props => {
           iconColor="black"
         >
           <Text color="white" fontSize="sm">
-            Entrega no local de levantamento
+            {t('search.checkbox')}
           </Text>
         </Checkbox>
         <Box
@@ -106,7 +109,7 @@ const MainSearch = props => {
           color="black"
           onClick={handleClick}
         >
-          Pesquisar
+          {t('search.button')}
         </Box>
       </Flex>
     </Stack>

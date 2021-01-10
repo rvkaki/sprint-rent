@@ -2,8 +2,10 @@ import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
 import { faList, faThLarge } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ViewToggle = props => {
+  const [t] = useTranslation('common');
   return (
     <Box
       alignSelf="flex-end"
@@ -14,7 +16,7 @@ const ViewToggle = props => {
     >
       <Flex dir="row" alignItems="center">
         <Text fontSize="xl" color="gray.500" mr={2}>
-          Vista:
+          {t('view')}:
         </Text>
         <IconButton
           icon={<FontAwesomeIcon icon={faThLarge} size="lg" />}

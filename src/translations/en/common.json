@@ -20,5 +20,45 @@
       "international": "International"
     },
     "contacts": "Contacts"
+  },
+  "alerts": {
+    "fill": "Please fill all fields"
+  },
+  "search": {
+    "checkbox": "Deliver in the pickup location",
+    "placeholder": "Select Location",
+    "button": "Search"
+  },
+  "datepicker": {
+    "placeholder": "Select Date",
+    "redo": "Redo"
+  },
+  "pickup": "Pickup Location",
+  "delivery": "Delivery Location",
+  "date": "Date",
+  "filters": {
+    "title": "Filters",
+    "gas": "Fuel",
+    "model": "Model",
+    "mode": "Gear",
+    "type": "Type"
+  },
+  "day": "day",
+  "select": "Select",
+  "car": {
+    "seats": "seats",
+    "doors": "doors",
+    "more": "Find out more"
+  },
+  "view": "View",
+  "footer": {
+    "info": {
+      "title": "Informations",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "complaints": "Online Complaints Book"
+    },
+    "contacts": "Contacts",
+    "visit": "Visit us"
   }
 }

@@ -2,8 +2,10 @@ import React from 'react';
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 const InfoCard = props => {
+  const [t] = useTranslation('common');
   return (
     <Flex
       direction="column"
@@ -43,7 +45,7 @@ const InfoCard = props => {
             <FontAwesomeIcon icon={faUserFriends} size="lg" color="black" />
           </Flex>
 
-          <Text fontSize="lg">{props.seats} lugares</Text>
+          <Text fontSize="lg">{props.seats} {t('car.seats')}</Text>
         </Flex>
 
         <Flex dir="row" align="center">
@@ -97,7 +99,7 @@ const InfoCard = props => {
               src="https://img.icons8.com/material/48/000000/car-door--v2.png"
             />
           </Flex>
-          <Text fontSize="lg">{props.doors} portas</Text>
+          <Text fontSize="lg">{props.doors} {t('car.doors')}</Text>
         </Flex>
       </Stack>
       <Flex justify="space-between">
@@ -109,7 +111,7 @@ const InfoCard = props => {
           >
             {props.price}€
           </Text>
-          <Text fontSize={{ base: 'md', md: 'lg' }}>/dia</Text>
+          <Text fontSize={{ base: 'md', md: 'lg' }}>/{t('day')}</Text>
         </Flex>
         <Box
           as="button"
@@ -124,7 +126,7 @@ const InfoCard = props => {
             console.log(props.id);
           }}
         >
-          Selecionar
+          {t('select')}
         </Box>
       </Flex>
     </Flex>

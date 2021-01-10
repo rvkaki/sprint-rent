@@ -2,12 +2,14 @@ import { Box, Flex, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 const CarCard = props => {
   const history = useHistory();
   const imgSrc = process.env.REACT_APP_SERVER_URL + props.images.find(x => x.name === '0.png').url;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [t] = useTranslation('common');
   return (
     <Flex
       w="100%"
@@ -52,7 +54,7 @@ const CarCard = props => {
             justifyContent="center"
           >
             <Text color="white" fontSize="2xl">
-              Saber Mais
+              {t('car.more')}
             </Text>
           </Box>
         </Box>
@@ -78,7 +80,7 @@ const CarCard = props => {
               <Flex w="30px" justify="center" align="center">
                 <FontAwesomeIcon icon={faUserFriends} size="lg" color="black" />
               </Flex>
-              <Text>{props.seats} lugares</Text>
+              <Text>{props.seats} {t('car.seats')}</Text>
             </Flex>
             <Flex dir="row">
               <Flex w="30px" justify="center" align="center">
@@ -104,7 +106,7 @@ const CarCard = props => {
                   src="https://img.icons8.com/material/24/000000/car-door--v2.png"
                 />
               </Flex>
-              <Text textTransform="capitalize">{props.doors} portas</Text>
+              <Text textTransform="capitalize">{props.doors} {t('car.doors')}</Text>
             </Flex>
           </Stack>
         </Box>
@@ -123,13 +125,13 @@ const CarCard = props => {
               console.log(props.id);
             }}
           >
-            Selecionar
+            {t('select')}
           </Box>
           <Flex dir="row" align="baseline">
             <Text fontSize="4xl" fontWeight="bold" color="black">
               {props.price}€
             </Text>
-            <Text>/dia</Text>
+            <Text>/{t('day')}</Text>
           </Flex>
         </Flex>
       </Flex>

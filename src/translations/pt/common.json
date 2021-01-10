@@ -20,5 +20,45 @@
       "international": "Internacional"
     },
     "contacts": "Contactos"
+  },
+  "alerts": {
+    "fill": "Por favor preencha todos os campos"
+  },
+  "search": {
+    "checkbox": "Entrega no local de levantamento",
+    "placeholder": "Selecionar Local",
+    "button": "Pesquisar"
+  },
+  "datepicker": {
+    "placeholder": "Selecionar Data",
+    "redo": "Refazer"
+  },
+  "pickup": "Local de Levantamento",
+  "delivery": "Local de Entrega",
+  "date": "Data",
+  "filters": {
+    "title": "Filtros",
+    "gas": "Combustivel",
+    "model": "Modelo",
+    "mode": "Transmissao",
+    "type": "Tipo"
+  },
+  "day": "dia",
+  "select": "Selecionar",
+  "car": {
+    "seats": "lugares",
+    "doors": "portas",
+    "more": "Saber Mais"
+  },
+  "view": "Vista",
+  "footer": {
+    "info": {
+      "title": "Informações Úteis",
+      "privacy": "Política de privacidade",
+      "terms": "Termos e Condições",
+      "complaints": "Livro de reclamações online"
+    },
+    "contacts": "Contactos",
+    "visit": "Visite-nos"
   }
 }

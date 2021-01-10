@@ -7,6 +7,7 @@ import NavButton from './NavButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedoAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import DateInput from './DateInput';
+import { useTranslation } from 'react-i18next';
 
 const Datepicker = props => {
   const [state, setState] = useState({
@@ -17,6 +18,8 @@ const Datepicker = props => {
   });
 
   const ref = useRef(null);
+  
+  const [t] = useTranslation('common');
 
   const {
     firstDayOfWeek,
@@ -137,7 +140,7 @@ const Datepicker = props => {
                 _focus={{}}
                 _active={{}}
               >
-                Refazer
+                {t('datepicker.redo')}
               </Button>
               <IconButton
                 icon={

@@ -2,9 +2,23 @@ import React from 'react';
 import { useMonth } from '@datepicker-react/hooks';
 import Day from './Day';
 import { Box, Flex, Grid, Text } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 const ptWeekDayLabels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
-const ptMonthLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const ptMonthLabels = [
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
+];
 
 function Month({ year, month, firstDayOfWeek, left, right }) {
   const { days, weekdayLabels, monthLabel } = useMonth({
@@ -13,10 +27,12 @@ function Month({ year, month, firstDayOfWeek, left, right }) {
     firstDayOfWeek,
   });
 
-  // Check page language
-  let weekLabels = ptWeekDayLabels;
-  let mLabel = ptMonthLabels[month] + ' ' + year;
+  const [t, i18n] = useTranslation('common');
 
+  // Check page language
+  let weekLabels = i18n.language === 'pt' ? ptWeekDayLabels : weekdayLabels;
+  let mLabel =
+    i18n.language === 'pt' ? ptMonthLabels[month] + ' ' + year : monthLabel;
 
   return (
     <Box>

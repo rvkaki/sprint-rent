@@ -2,8 +2,10 @@ import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const DateInput = props => {
+  const [t] = useTranslation('common');
   return (
     <InputGroup>
       <InputLeftElement
@@ -13,7 +15,7 @@ const DateInput = props => {
       />
       <Input
         bg="white"
-        placeholder="Selecionar Data"
+        placeholder={t('datepicker.placeholder')}
         isReadOnly
         value={props.value}
         onClick={props.onClick}
