@@ -1,18 +1,61 @@
-import { Box, Flex, Grid, Spinner, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Grid,
+  Spinner,
+  Stack,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import CarCard from '../components/CarCard';
+import DataPopUp from '../components/DataPopUp';
 import Filters from '../components/Filters';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Progress from '../components/Progress';
 import ViewToggle from '../components/ViewToggle';
 import AppContext from '../context/AppContext';
-import { getCars } from '../util/apiCalls';
+import { getCars, getLocations } from '../util/apiCalls';
 
 const Frota = props => {
   const [cars, setCars] = useState();
+  const [locations, setLocations] = useState([]);
   const [grid, setGrid] = useState(false);
   const appState = useContext(AppContext);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    const setStateFromQuery = async () => {
+      const [pickup, delivery, date] = history.location.search
+        .slice(1)
+        .split('&');
+      appState.setStartLocation(pickup.split('=')[1]);
+      appState.setEndLocation(delivery.split('=')[1]);
+      const [startDate, endDate] = date.split('=')[1].split('-');
+      // convert from DD/MM/YYYY to MM/DD/YYYY to create date
+      appState.setStartDate(
+        new Date(
+          `${startDate.split('/')[1]}/${startDate.split('/')[0]}/${
+            startDate.split('/')[2]
+          }`
+        )
+      );
+      appState.setEndDate(
+        new Date(
+          `${endDate.split('/')[1]}/${endDate.split('/')[0]}/${
+            endDate.split('/')[2]
+          }`
+        )
+      );
+    };
+    if (!appState.startLocation && history.location.search !== '')
+      setStateFromQuery();
+  }, [history.location.search]);
 
   useEffect(() => {
     let query = '?';
@@ -28,11 +71,22 @@ const Frota = props => {
     getCars(query).then(data => setCars(data));
   }, [appState.filters]);
 
+  useEffect(() => {
+    getLocations().then(data => setLocations(data));
+  }, []);
+
+  const selectCar = id => {
+    if (appState.startLocation) history.push('/checkout');
+    else onOpen();
+  };
+
   return (
     <Flex direction="column">
       <Header />
       {/* Progresso da reserva */}
-      {appState.startLocation ? <Progress state={appState} /> : null}
+      {appState.startLocation && locations.length > 0 ? (
+        <Progress locations={locations} state={appState} />
+      ) : null}
       <ViewToggle grid={grid} setGrid={setGrid} />
       <Flex
         w="100%"
@@ -63,7 +117,7 @@ const Frota = props => {
                   w="90%"
                 >
                   {cars.map(car => (
-                    <CarCard grid key={car.id} {...car} />
+                    <CarCard grid key={car.id} car={car} select={selectCar} />
                   ))}
                 </Grid>
               </Box>
@@ -77,13 +131,13 @@ const Frota = props => {
                 {grid ? (
                   <Grid templateColumns="repeat(2, 1fr)" gap={6} w="80%">
                     {cars.map(car => (
-                      <CarCard grid key={car.id} {...car} />
+                      <CarCard grid key={car.id} car={car} select={selectCar} />
                     ))}
                   </Grid>
                 ) : (
                   <Stack align="center" spacing={5} w="80%">
                     {cars.map(car => (
-                      <CarCard key={car.id} {...car} />
+                      <CarCard key={car.id} car={car} select={selectCar} />
                     ))}
                   </Stack>
                 )}
@@ -96,6 +150,15 @@ const Frota = props => {
           </Box>
         )}
       </Flex>
+
+      <DataPopUp
+        options={locations.map(l => {
+          return { name: l.title, value: l.id };
+        })}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
+
       <Footer />
     </Flex>
   );

@@ -45,7 +45,9 @@ const InfoCard = props => {
             <FontAwesomeIcon icon={faUserFriends} size="lg" color="black" />
           </Flex>
 
-          <Text fontSize="lg">{props.seats} {t('car.seats')}</Text>
+          <Text fontSize="lg">
+            {props.seats} {t('car.seats')}
+          </Text>
         </Flex>
 
         <Flex dir="row" align="center">
@@ -99,7 +101,9 @@ const InfoCard = props => {
               src="https://img.icons8.com/material/48/000000/car-door--v2.png"
             />
           </Flex>
-          <Text fontSize="lg">{props.doors} {t('car.doors')}</Text>
+          <Text fontSize="lg">
+            {props.doors} {t('car.doors')}
+          </Text>
         </Flex>
       </Stack>
       <Flex justify="space-between">
@@ -123,7 +127,7 @@ const InfoCard = props => {
           bg="gray.800"
           onClick={e => {
             e.stopPropagation();
-            console.log(props.id);
+            props.select(props.id);
           }}
         >
           {t('select')}

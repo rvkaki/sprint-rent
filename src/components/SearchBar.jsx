@@ -8,7 +8,7 @@ const SearchBar = props => {
   const [t] = useTranslation('common');
   return (
     <Stack spacing={1}>
-      <Text color="white" fontWeight="medium">
+      <Text color={props.color} fontWeight="medium">
         {props.label}
       </Text>
       <SelectSearch

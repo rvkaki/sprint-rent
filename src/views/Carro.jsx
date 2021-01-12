@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Flex, Spinner } from '@chakra-ui/react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Box, Flex, Spinner, useDisclosure } from '@chakra-ui/react';
 import { useHistory, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { loadImages } from '../util/preloader';
 import { debounce } from 'lodash';
 import InfoCard from '../components/InfoCard';
-import { getCar } from '../util/apiCalls';
+import { getCar, getLocations } from '../util/apiCalls';
+import DataPopUp from '../components/DataPopUp';
+import AppContext from '../context/AppContext';
 
 const Carro = props => {
   const history = useHistory();
@@ -14,8 +16,21 @@ const Carro = props => {
   const [images, setImages] = useState();
   const [idx, setIdx] = useState(0);
 
+  const [locations, setLocations] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const appState = useContext(AppContext);
+
   const [pressed, setPressed] = useState(false);
   const [prevX, setPrevX] = useState();
+
+  useEffect(() => {
+    getLocations().then(data => setLocations(data));
+  }, []);
+
+  const onSelect = id => {
+    if (appState.startLocation) history.push('/checkout');
+    else onOpen();
+  };
 
   useEffect(() => {
     if (history.location.state) setCar(history.location.state);
@@ -133,9 +148,16 @@ const Carro = props => {
           m="auto"
           zIndex={2}
         >
-          <InfoCard {...car} />
+          <InfoCard {...car} select={onSelect} />
         </Box>
       </Flex>
+      <DataPopUp
+        options={locations.map(l => {
+          return { name: l.title, value: l.id };
+        })}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </Flex>
   );
 };

@@ -71,6 +71,9 @@ const Item = props => {
 
 const Progress = props => {
   const { startDate, endDate, startLocation, endLocation } = props.state;
+  const startLocationName = props.locations.find(l => l.id === startLocation)
+    .title;
+  const endLocationName = props.locations.find(l => l.id === endLocation).title;
   return (
     <Box w="100%">
       {/* Renders on large screens */}
@@ -86,7 +89,7 @@ const Progress = props => {
           color="gray.800"
           zIndex={5}
           title="Levantamento"
-          info={startLocation + ', ' + startDate.toLocaleDateString()}
+          info={startLocationName + ', ' + startDate.toLocaleDateString()}
         />
         <Shape
           w="23vw"
@@ -94,7 +97,7 @@ const Progress = props => {
           color="gray.700"
           zIndex={4}
           title="Entrega"
-          info={endLocation + ', ' + endDate.toLocaleDateString()}
+          info={endLocationName + ', ' + endDate.toLocaleDateString()}
         />
         <Shape
           w="23vw"
@@ -150,13 +153,13 @@ const Progress = props => {
               <MenuList bg="gray.300" mx={4} borderRadius={0} shadow="lg">
                 <Item
                   title="Data de Levantamento"
-                  location={startLocation + ','}
+                  location={startLocationName + ','}
                   date={startDate.toLocaleDateString()}
                 />
                 <MenuDivider borderColor="black" />
                 <Item
                   title="Data de Entrega"
-                  location={endLocation + ','}
+                  location={endLocationName + ','}
                   date={endDate.toLocaleDateString()}
                 />
               </MenuList>

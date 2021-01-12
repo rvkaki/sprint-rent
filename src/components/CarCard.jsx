@@ -7,9 +7,17 @@ import { useHistory } from 'react-router-dom';
 
 const CarCard = props => {
   const history = useHistory();
-  const imgSrc = process.env.REACT_APP_SERVER_URL + props.images.find(x => x.name === '0.png').url;
+  const imgSrc =
+    process.env.REACT_APP_SERVER_URL +
+    props.car.images.find(x => x.name === '0.png').url;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [t] = useTranslation('common');
+
+  const handleSelect = e => {
+    e.stopPropagation();
+    props.select(props.car.id);
+  };
+
   return (
     <Flex
       w="100%"
@@ -23,9 +31,9 @@ const CarCard = props => {
         transform: 'scale(1.01)',
         shadow: 'xl',
       }}
-      onClick={() => history.push(`/frota/${props.id}`, { ...props })}
+      onClick={() => history.push(`/frota/${props.car.id}`, props.car)}
     >
-      {props.images.length > 0 ? (
+      {props.car.images.length > 0 ? (
         <Box
           h={props.grid ? '50%' : '100%'}
           w={props.grid ? '100%' : '40%'}
@@ -39,7 +47,7 @@ const CarCard = props => {
             w="100%"
             as="img"
             src={imgSrc}
-            alt={props.images[0].url}
+            alt={props.car.images[0].url}
             objectFit="cover"
           />
           <Box
@@ -73,14 +81,16 @@ const CarCard = props => {
             fontWeight="semibold"
             color="black"
           >
-            {props.brand + ' ' + props.model}
+            {props.car.brand + ' ' + props.car.model}
           </Text>
           <Stack spacing={1} mt={2}>
             <Flex dir="row">
               <Flex w="30px" justify="center" align="center">
                 <FontAwesomeIcon icon={faUserFriends} size="lg" color="black" />
               </Flex>
-              <Text>{props.seats} {t('car.seats')}</Text>
+              <Text>
+                {props.car.seats} {t('car.seats')}
+              </Text>
             </Flex>
             <Flex dir="row">
               <Flex w="30px" justify="center" align="center">
@@ -90,13 +100,13 @@ const CarCard = props => {
                   src="https://img.icons8.com/pastel-glyph/64/000000/gearbox-selector.png"
                 />
               </Flex>
-              <Text textTransform="capitalize">{props.mode}</Text>
+              <Text textTransform="capitalize">{props.car.mode}</Text>
             </Flex>
             <Flex dir="row">
               <Flex w="30px" justify="center" align="center">
                 <FontAwesomeIcon icon={faGasPump} size="lg" color="black" />
               </Flex>
-              <Text textTransform="capitalize">{props.gas}</Text>
+              <Text textTransform="capitalize">{props.car.gas}</Text>
             </Flex>
             <Flex dir="row">
               <Flex w="30px" justify="center" align="center">
@@ -106,7 +116,9 @@ const CarCard = props => {
                   src="https://img.icons8.com/material/24/000000/car-door--v2.png"
                 />
               </Flex>
-              <Text textTransform="capitalize">{props.doors} {t('car.doors')}</Text>
+              <Text textTransform="capitalize">
+                {props.car.doors} {t('car.doors')}
+              </Text>
             </Flex>
           </Stack>
         </Box>
@@ -120,16 +132,13 @@ const CarCard = props => {
             py={1}
             fontSize="lg"
             color="gray.600"
-            onClick={e => {
-              e.stopPropagation();
-              history.push('/checkout');
-            }}
+            onClick={handleSelect}
           >
             {t('select')}
           </Box>
           <Flex dir="row" align="baseline">
             <Text fontSize="4xl" fontWeight="bold" color="black">
-              {props.price}€
+              {props.car.price}€
             </Text>
             <Text>/{t('day')}</Text>
           </Flex>

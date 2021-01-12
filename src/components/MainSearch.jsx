@@ -37,7 +37,11 @@ const MainSearch = props => {
       setStartLocation(state.startLocation);
       if (checked) setEndLocation(state.startLocation);
       else setEndLocation(state.endLocation);
-      history.push('/frota');
+      history.push(
+        `/frota?pickup=${state.startLocation}&delivery=${
+          state.endLocation || state.startLocation
+        }&date=${state.startDate.toLocaleDateString()}-${state.endDate.toLocaleDateString()}`
+      );
     } else {
       alert(t('alerts.fill'));
     }
@@ -61,6 +65,7 @@ const MainSearch = props => {
             value={state.startLocation}
             onChange={e => setState({ ...state, startLocation: e })}
             label={t('pickup')}
+            color="white"
           />
           {!checked ? (
             <SearchBar
@@ -68,6 +73,7 @@ const MainSearch = props => {
               value={state.endLocation}
               onChange={e => setState({ ...state, endLocation: e })}
               label={t('delivery')}
+              color="white"
             />
           ) : null}
         </Stack>

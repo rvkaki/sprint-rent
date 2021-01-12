@@ -32,7 +32,7 @@ const Home = props => {
       >
         <MainSearch
           options={locations.map(l => {
-            return { name: l.title, value: l.title };
+            return { name: l.title, value: l.id };
           })}
         />
       </Box>
