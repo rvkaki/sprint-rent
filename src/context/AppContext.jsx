@@ -5,10 +5,12 @@ const AppContext = React.createContext({
   endDate: null,
   startLocation: null,
   endLocation: null,
+  car: null,
   setStartDate: () => {},
   setEndDate: () => {},
   setStartLocation: () => {},
   setEndLocation: () => {},
+  setCar: () => {},
   filters: [],
   toggleFilters: () => {},
 });

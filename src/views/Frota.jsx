@@ -76,8 +76,10 @@ const Frota = props => {
   }, []);
 
   const selectCar = id => {
-    if (appState.startLocation) history.push('/checkout');
-    else onOpen();
+    appState.setCar(id);
+    if (appState.startLocation) {
+      history.push('/checkout');
+    } else onOpen();
   };
 
   return (

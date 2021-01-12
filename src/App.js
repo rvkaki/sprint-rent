@@ -77,15 +77,21 @@ class App extends Component {
       this.setState({ endLocation: location });
     };
 
+    this.setCar = id => {
+      this.setState({ car: id });
+    };
+
     this.state = {
       startDate: null,
       endDate: null,
       startLocation: null,
       endLocation: null,
+      car: null,
       setStartDate: this.setStartDate,
       setEndDate: this.setEndDate,
       setStartLocation: this.setStartLocation,
       setEndLocation: this.setEndLocation,
+      setCar: this.setCar,
       filters: { gas: [], model: [], mode: [], type: [] },
       toggleFilters: this.toggleFilters,
     };

@@ -28,8 +28,10 @@ const Carro = props => {
   }, []);
 
   const onSelect = id => {
-    if (appState.startLocation) history.push('/checkout');
-    else onOpen();
+    appState.setCar(id);
+    if (appState.startLocation) {
+      history.push('/checkout');
+    } else onOpen();
   };
 
   useEffect(() => {

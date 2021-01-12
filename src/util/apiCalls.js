@@ -39,3 +39,13 @@ export const getLocations = async () => {
     console.log(error);
   }
 };
+
+export const getLocation = async (id) => {
+  try {
+    const res = await fetch(`${serverURL}/locations/${id}`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
