@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 const emailRegex =
   "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
@@ -18,6 +19,8 @@ const UserForm = props => {
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState();
   const [checked, setChecked] = useState(false);
+
+  const [t] = useTranslation('common');
 
   const isFormValid = () => {
     return name && email.match(emailRegex) && contact && checked;
@@ -32,32 +35,32 @@ const UserForm = props => {
   return (
     <Stack spacing={6}>
       <FormControl id="name" isRequired>
-        <FormLabel>Nome</FormLabel>
+        <FormLabel>{t('checkout.info.name')}</FormLabel>
         <Input
           borderColor="gray.300"
           shadow="md"
-          placeholder="Nome"
+          placeholder={t('checkout.info.name')}
           value={name}
           onChange={e => setName(e.target.value)}
         />
       </FormControl>
       <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
+        <FormLabel>{t('checkout.info.email')}</FormLabel>
         <Input
           shadow="md"
           type="email"
           isInvalid={!(email === '' || email.match(emailRegex))}
-          placeholder="Email"
+          placeholder={t('checkout.info.email')}
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
       </FormControl>
       <FormControl id="contact" isRequired>
-        <FormLabel>Contacto</FormLabel>
+        <FormLabel>{t('checkout.info.contact')}</FormLabel>
         <Input
           borderColor="gray.300"
           shadow="md"
-          placeholder="Contacto"
+          placeholder={t('checkout.info.contact')}
           value={contact}
           onChange={e => setContact(e.target.value)}
         />
@@ -71,9 +74,9 @@ const UserForm = props => {
         iconColor="white"
       >
         <Flex dir="row" color="black">
-          <Text fontSize="lg">Aceito os</Text>
+          <Text fontSize="lg">{t('checkout.info.accept')}</Text>
           <Text ml={1} fontWeight="semibold">
-            Termos e Condições
+            {t('checkout.info.terms')}
           </Text>
         </Flex>
       </Checkbox>
@@ -94,7 +97,7 @@ const UserForm = props => {
         }}
         onClick={handleClick}
       >
-        Fazer pedido
+        {t('checkout.info.request')}
       </Box>
     </Stack>
   );

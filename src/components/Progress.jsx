@@ -11,6 +11,7 @@ import {
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Shape = props => {
   const parentH = parseInt(props.h.slice(0, -2));
@@ -74,6 +75,9 @@ const Progress = props => {
   const startLocationName = props.locations.find(l => l.id === startLocation)
     .title;
   const endLocationName = props.locations.find(l => l.id === endLocation).title;
+
+  const [t] = useTranslation('common');
+
   return (
     <Box w="100%">
       {/* Renders on large screens */}
@@ -84,36 +88,28 @@ const Progress = props => {
         bg="gray.400"
       >
         <Shape
-          w="23vw"
+          w="32vw"
           h="100px"
           color="gray.800"
           zIndex={5}
-          title="Levantamento"
+          title={t('progress.pickup')}
           info={startLocationName + ', ' + startDate.toLocaleDateString()}
         />
         <Shape
-          w="23vw"
+          w="32vw"
           h="100px"
           color="gray.700"
           zIndex={4}
-          title="Entrega"
+          title={t('progress.delivery')}
           info={endLocationName + ', ' + endDate.toLocaleDateString()}
         />
         <Shape
-          w="23vw"
+          w="32vw"
           h="100px"
           color="gray.600"
           zIndex={3}
-          title="Veiculo"
-          info="Escolha o carro"
-        />
-        <Shape
-          w="23vw"
-          h="100px"
-          color="gray.500"
-          zIndex={2}
-          title="Extras"
-          info="Escolha os extras"
+          title={t('progress.car')}
+          info={t('progress.choose')}
         />
       </Flex>
       <Box position="relative" bg="gray.200" w="100%" h="10px">
@@ -121,7 +117,7 @@ const Progress = props => {
           position="absolute"
           left={0}
           zIndex={1}
-          w="46vw"
+          w="64vw"
           h="100%"
           bg="green.400"
         />
@@ -141,7 +137,7 @@ const Progress = props => {
                   py={1}
                 >
                   <Text fontSize="lg" color="white" fontWeight="medium">
-                    Alterar a reserva
+                    {t('progress.label')}
                   </Text>
                   <FontAwesomeIcon
                     icon={isOpen ? faChevronUp : faChevronDown}
@@ -152,13 +148,13 @@ const Progress = props => {
               </MenuButton>
               <MenuList bg="gray.300" mx={4} borderRadius={0} shadow="lg">
                 <Item
-                  title="Data de Levantamento"
+                  title={t('progress.pickup')}
                   location={startLocationName + ','}
                   date={startDate.toLocaleDateString()}
                 />
                 <MenuDivider borderColor="black" />
                 <Item
-                  title="Data de Entrega"
+                  title={t('progress.delivery')}
                   location={endLocationName + ','}
                   date={endDate.toLocaleDateString()}
                 />

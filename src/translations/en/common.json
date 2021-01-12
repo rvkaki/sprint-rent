@@ -60,5 +60,31 @@
     },
     "contacts": "Contacts",
     "visit": "Visit us"
+  },
+  "progress": {
+    "pickup": "Pickup",
+    "delivery": "Delivery",
+    "car": "Car",
+    "choose": "Choose your car",
+    "label": "Your reservation"
+  },
+  "checkout": {
+    "info": {
+      "label": "Identification",
+      "name": "Name",
+      "email": "Email",
+      "contact": "Contact",
+      "accept": "I accept the",
+      "terms": "Terms & Conditions",
+      "request": "Request"
+    },
+    "order": {
+      "label": "Your order",
+      "price": "Price"
+    }
+  },
+  "popup": {
+    "label": "Fill to continue",
+    "continue": "Continue"
   }
 }

@@ -56,7 +56,7 @@ const DataPopUp = props => {
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Preencha para continuar</ModalHeader>
+        <ModalHeader>{t('popup.label')}</ModalHeader>
         <ModalCloseButton _hover={{}} _focus={{}} _active={{}} />
         <ModalBody>
           <Stack spacing={2}>
@@ -106,7 +106,7 @@ const DataPopUp = props => {
             borderRadius="md"
             onClick={handleClick}
           >
-            Continuar
+            {t('popup.continue')}
           </Box>
         </ModalFooter>
       </ModalContent>

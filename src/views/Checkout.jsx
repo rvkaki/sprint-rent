@@ -6,11 +6,14 @@ import Header from '../components/Header';
 import { getCar, getLocation } from '../util/apiCalls';
 import Order from '../components/Order';
 import UserForm from '../components/UserForm';
+import { useTranslation } from 'react-i18next';
 
 const Checkout = props => {
   const [carInfo, setCarInfo] = useState();
   const [pickup, setPickup] = useState({});
   const [delivery, setDelivery] = useState({});
+
+  const [t] = useTranslation('common');
 
   const { startLocation, endLocation, startDate, endDate, car } = useContext(
     AppContext
@@ -51,7 +54,7 @@ const Checkout = props => {
       >
         <Box flex={2} py={8} px={{ base: 4, md: 8 }} w="100%">
           <Text fontSize="2xl" color="black" fontWeight="semibold">
-            Identificação
+            {t('checkout.info.label')}
           </Text>
           <UserForm submit={submit} />
         </Box>
@@ -62,7 +65,7 @@ const Checkout = props => {
             color="black"
             fontWeight="semibold"
           >
-            A sua reserva
+            {t('checkout.order.label')}
           </Text>
           {carInfo ? (
             <Order

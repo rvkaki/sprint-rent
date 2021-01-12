@@ -60,5 +60,31 @@
     },
     "contacts": "Contactos",
     "visit": "Visite-nos"
+  },
+  "progress": {
+    "pickup": "Levantamento",
+    "delivery": "Entrega",
+    "car": "Veículo",
+    "choose": "Escolha o carro",
+    "label": "A sua reserva"
+  },
+  "checkout": {
+    "info": {
+      "label": "Informação",
+      "name": "Nome",
+      "email": "Email",
+      "contact": "Contacto",
+      "accept": "Aceito os",
+      "terms": "Termos e Condições",
+      "request": "Fazer o pedido"
+    },
+    "order": {
+      "label": "A sua reserva",
+      "price": "Preço"
+    }
+  },
+  "popup": {
+    "label": "Preencha para continuar",
+    "continue": "Continuar"
   }
 }

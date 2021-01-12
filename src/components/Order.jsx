@@ -111,7 +111,7 @@ const Order = props => {
           </Box>
           <Box>
             <Text fontSize="lg" fontWeight="semibold">
-              Preço
+              {t('checkout.order.price')}
             </Text>
             <Flex mx={4} dir="row" justify="space-between">
               <Text>Base:</Text>
