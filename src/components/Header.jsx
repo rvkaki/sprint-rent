@@ -6,14 +6,6 @@ import CustomDrawer from './CustomDrawer';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const HeaderLink = props => {
-  return (
-    <Link to={props.to}>
-      <Text fontSize="lg">{props.text}</Text>
-    </Link>
-  );
-};
-
 const Menu = props => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
@@ -166,9 +158,9 @@ const Header = props => {
           >
             {t('header.fleet.international')}
           </Text>
-          <Text as="button" fontSize="lg" onClick={() => {}}>
+          {/* <Text as="button" fontSize="lg" onClick={() => {}}>
             {t('header.contacts')}
-          </Text>
+          </Text> */}
         </Flex>
         <Flex dir="row" justify="flex-end">
           <Text

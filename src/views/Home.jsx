@@ -3,7 +3,6 @@ import { Box, Flex } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Carousel from '../components/Carousel';
 import MainSearch from '../components/MainSearch';
-import Offers from '../components/Offers';
 import Locations from '../components/Locations';
 import Footer from '../components/Footer';
 import { getLocations } from '../util/apiCalls';
@@ -28,7 +27,7 @@ const Home = props => {
         w="80%"
         zIndex="sticky"
         left="10%"
-        top={{ base: '30vh', md: '65vh' }}
+        top={{ base: '45vh', md: '55vh', lg: '65vh' }}
         position="absolute"
       >
         <MainSearch
@@ -47,15 +46,13 @@ const Home = props => {
         <Carousel images={images} />
         <Box
           as="img"
-          display={{ base: 'inherit', md: 'none' }}
-          h={{ base: '100%', md: 'auto' }}
-          w={{ base: 'auto', md: '100%' }}
+          h="100%"
+          w="100%"
           objectFit={{ base: 'cover', md: 'contain' }}
           src="assets/images/background.jpg"
           alt="background"
         />
       </Flex>
-      <Offers />
       <Locations locations={locations} />
       <Footer />
     </Box>

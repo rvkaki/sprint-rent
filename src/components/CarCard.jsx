@@ -122,7 +122,7 @@ const CarCard = props => {
             color="gray.600"
             onClick={e => {
               e.stopPropagation();
-              console.log(props.id);
+              history.push('/checkout');
             }}
           >
             {t('select')}
