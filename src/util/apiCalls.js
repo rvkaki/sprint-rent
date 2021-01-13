@@ -59,3 +59,23 @@ export const getSlides = async () => {
     console.log(error);
   }
 };
+
+export const getPrivacyPolicy = async () => {
+  try {
+    const res = await fetch(`${serverURL}/privacy`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getTermsAndConditions = async () => {
+  try {
+    const res = await fetch(`${serverURL}/terms`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

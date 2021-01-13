@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -11,9 +11,19 @@ import {
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { getPrivacyPolicy, getTermsAndConditions } from '../util/apiCalls';
 
 const Footer = props => {
+  const [privacy, setPrivacy] = useState('');
+  const [terms, setTerms] = useState('');
   const [t] = useTranslation('common');
+
+  const modal = global['modal'];
+
+  useEffect(() => {
+    getPrivacyPolicy().then(data => setPrivacy(data.text));
+    getTermsAndConditions().then(data => setTerms(data.text));
+  }, []);
 
   return (
     <Flex
@@ -33,13 +43,33 @@ const Footer = props => {
             display={{ base: 'auto', lg: 'none' }}
           />
         </Box>
-        <Text fontSize="md" color="white">
+        <Text
+          fontSize="md"
+          color="white"
+          onClick={() => modal.open(t('footer.info.privacy'), privacy)}
+          _hover={{
+            cursor: 'pointer',
+          }}
+        >
           {t('footer.info.privacy')}
         </Text>
-        <Text fontSize="md" color="white">
+        <Text
+          fontSize="md"
+          color="white"
+          onClick={() => modal.open(t('footer.info.terms'), terms)}
+          _hover={{
+            cursor: 'pointer',
+          }}
+        >
           {t('footer.info.terms')}
         </Text>
-        <Text fontSize="md" color="white">
+        <Text
+          as="a"
+          href="https://www.livroreclamacoes.pt"
+          target="_blank"
+          fontSize="md"
+          color="white"
+        >
           {t('footer.info.complaints')}
         </Text>
       </Stack>

@@ -7,6 +7,7 @@ import AppContext from './context/AppContext';
 
 import common_en from './translations/en/common.json';
 import common_pt from './translations/pt/common.json';
+import GlobalModal from './components/GlobalModal';
 
 const theme = extendTheme({
   fonts: {
@@ -103,6 +104,7 @@ class App extends Component {
         <I18nextProvider i18n={i18next}>
           <AppContext.Provider value={this.state}>
             <Root />
+            <GlobalModal ref={ref => (global['modal'] = ref)} />
           </AppContext.Provider>
         </I18nextProvider>
       </ChakraProvider>
