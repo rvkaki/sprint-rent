@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "3d-react-carousal": "^3.1.0",
     "@chakra-ui/react": "^1.0.3",
     "@datepicker-react/hooks": "^2.7.0",
     "@datepicker-react/styled": "^2.7.0",

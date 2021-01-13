@@ -40,9 +40,19 @@ export const getLocations = async () => {
   }
 };
 
-export const getLocation = async (id) => {
+export const getLocation = async id => {
   try {
     const res = await fetch(`${serverURL}/locations/${id}`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSlides = async () => {
+  try {
+    const res = await fetch(`${serverURL}/carousel`);
     const data = await res.json();
     return data;
   } catch (error) {
