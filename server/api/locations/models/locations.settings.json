@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "locations",
   "info": {
-    "name": "Locations",
+    "name": "Localizações",
     "description": ""
   },
   "options": {

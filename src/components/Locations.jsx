@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const LocationInfo = props => {
   return (
@@ -45,6 +46,7 @@ const LocationInfo = props => {
 };
 
 const Locations = props => {
+  const [t] = useTranslation('common');
   return (
     <Flex direction="column" align="center">
       <Text
@@ -52,7 +54,7 @@ const Locations = props => {
         color="black"
         fontWeight="semibold"
       >
-        Onde estamos
+        {t('locations')}
       </Text>
       <Flex direction={{ base: 'column', md: 'row' }} w="90%" my={8}>
         <Stack spacing={4} flex={{ base: 'auto', md: 3 }}>

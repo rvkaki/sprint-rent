@@ -87,5 +87,6 @@
   "popup": {
     "label": "Preencha para continuar",
     "continue": "Continuar"
-  }
+  },
+  "locations": "Onde estamos"
 }

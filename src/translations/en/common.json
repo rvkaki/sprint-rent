@@ -87,5 +87,6 @@
   "popup": {
     "label": "Fill to continue",
     "continue": "Continue"
-  }
+  },
+  "locations": "Find Us"
 }

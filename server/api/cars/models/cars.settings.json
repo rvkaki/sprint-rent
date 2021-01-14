@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "cars",
   "info": {
-    "name": "Cars",
+    "name": "Carros",
     "description": ""
   },
   "options": {
