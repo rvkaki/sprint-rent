@@ -5,7 +5,8 @@
       "national": "Portugal Cars",
       "international": "International Cars"
     },
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "login": "Agent Login"
   },
   "drawer": {
     "group": {

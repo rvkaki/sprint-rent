@@ -5,7 +5,8 @@
       "national": "Frota Nacional",
       "international": "Frota Internacional"
     },
-    "contacts": "Contactos"
+    "contacts": "Contactos",
+    "login": "Login Agentes"
   },
   "drawer": {
     "group": {
