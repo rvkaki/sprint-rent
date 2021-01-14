@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   settings: {
     defaultFrom: 'main@ricardovieira.me',
