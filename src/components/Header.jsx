@@ -158,9 +158,9 @@ const Header = props => {
           >
             {t('header.fleet.international')}
           </Text>
-          <Text as="a" href="" fontSize="md">
-            {t('header.franchise')}
-          </Text>
+          <Link to="/franchising">
+            <Text fontSize="md">{t('header.franchise')}</Text>
+          </Link>
           <Link to="/sale">
             <Text fontSize="md">{t('header.sale')}</Text>
           </Link>

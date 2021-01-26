@@ -96,5 +96,17 @@
   "locations": "Find Us",
   "sale": {
     "unavailable": "This page is currently unavailable"
+  },
+  "franchise": {
+    "info": {
+      "label": "Contact us",
+      "name": "Name",
+      "email": "Email",
+      "contact": "Contact",
+      "area": "Desired zone",
+      "subject": "Subject",
+      "message": "Message",
+      "request": "Submit"
+    }
   }
 }

@@ -76,12 +76,16 @@ const CustomDrawer = props => {
                   </Text>
                 </Stack>
               </Box>
-              <Text as="a" href="" fontSize="xl" fontWeight="semibold">
-                {t('drawer.franchise')}
-              </Text>
-              <Text as="a" href="" fontSize="xl" fontWeight="semibold">
-                {t('drawer.sale')}
-              </Text>
+              <Link to="/franchising">
+                <Text fontSize="xl" fontWeight="semibold">
+                  {t('drawer.franchise')}
+                </Text>
+              </Link>
+              <Link to="/sale">
+                <Text fontSize="xl" fontWeight="semibold">
+                  {t('drawer.sale')}
+                </Text>
+              </Link>
               <Text
                 fontSize="xl"
                 fontWeight="semibold"

@@ -96,5 +96,17 @@
   "locations": "Onde estamos",
   "sale": {
     "unavailable": "Esta página ainda não está disponível"
+  },
+  "franchise": {
+    "info": {
+      "label": "Entre em contacto",
+      "name": "Nome",
+      "email": "Email",
+      "contact": "Contacto",
+      "area": "Zona pretendida",
+      "subject": "Assunto",
+      "message": "Mensagem",
+      "request": "Submeter"
+    }
   }
 }
