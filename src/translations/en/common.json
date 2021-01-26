@@ -6,6 +6,8 @@
       "international": "International Cars"
     },
     "contacts": "Contacts",
+    "franchise": "Franchising",
+    "sale": "Semi-New Vehicle Sales",
     "login": "Agent Login"
   },
   "drawer": {
@@ -20,7 +22,10 @@
       "national": "Portugal",
       "international": "International"
     },
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "franchise": "Franchising",
+    "sale": "Semi-New Vehicle Sales",
+    "login": "Agent Login"
   },
   "alerts": {
     "fill": "Please fill all fields"
@@ -88,5 +93,8 @@
     "label": "Fill to continue",
     "continue": "Continue"
   },
-  "locations": "Find Us"
+  "locations": "Find Us",
+  "sale": {
+    "unavailable": "This page is currently unavailable"
+  }
 }

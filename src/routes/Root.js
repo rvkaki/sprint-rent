@@ -4,6 +4,7 @@ import Carro from '../views/Carro';
 import Checkout from '../views/Checkout';
 import Frota from '../views/Frota';
 import Home from '../views/Home';
+import Sale from '../views/Sale';
 
 const Root = () => {
   return (
@@ -20,6 +21,9 @@ const Root = () => {
         </Route>
         <Route exact path="/checkout">
           <Checkout />
+        </Route>
+        <Route exact path="/sale">
+          <Sale />
         </Route>
       </Switch>
     </Router>

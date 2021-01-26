@@ -6,6 +6,8 @@
       "international": "Frota Internacional"
     },
     "contacts": "Contactos",
+    "franchise": "Franchising",
+    "sale": "Vendas Semi-Novos",
     "login": "Login Agentes"
   },
   "drawer": {
@@ -20,7 +22,10 @@
       "national": "Nacional",
       "international": "Internacional"
     },
-    "contacts": "Contactos"
+    "contacts": "Contactos",
+    "franchise": "Franchising",
+    "sale": "Vendas Semi-Novos",
+    "login": "Login Agentes"
   },
   "alerts": {
     "fill": "Por favor preencha todos os campos"
@@ -88,5 +93,8 @@
     "label": "Preencha para continuar",
     "continue": "Continuar"
   },
-  "locations": "Onde estamos"
+  "locations": "Onde estamos",
+  "sale": {
+    "unavailable": "Esta página ainda não está disponível"
+  }
 }

@@ -89,7 +89,7 @@ const Header = props => {
         <Flex w="100%" dir="row" justify="space-evenly">
           <Menu
             label={
-              <Text as="button" fontSize="lg">
+              <Text as="button" fontSize="md">
                 {t('header.group')}
               </Text>
             }
@@ -148,17 +148,23 @@ const Header = props => {
             }
           />
           <Link to="/frota">
-            <Text fontSize="lg">{t('header.fleet.national')}</Text>
+            <Text fontSize="md">{t('header.fleet.national')}</Text>
           </Link>
           <Text
             as="a"
             href="https://www.rentalcars.com/Home.do?affiliateCode=sprinttra667"
             target="_blank"
-            fontSize="lg"
+            fontSize="md"
           >
             {t('header.fleet.international')}
           </Text>
-          <Text as="a" href="/admin" target="_blank" fontSize="lg">
+          <Text as="a" href="" fontSize="md">
+            {t('header.franchise')}
+          </Text>
+          <Link to="/sale">
+            <Text fontSize="md">{t('header.sale')}</Text>
+          </Link>
+          <Text as="a" href="/admin" target="_blank" fontSize="md">
             {t('header.login')}
           </Text>
           {/* <Text as="button" fontSize="lg" onClick={() => {}}>
