@@ -88,7 +88,7 @@ const Footer = props => {
             <FontAwesomeIcon icon={faEnvelope} size="lg" color="white" />
           </Box>
           <Text fontSize="md" color="white" ml={2}>
-            geral@sprinttravelviagens.com
+            reservas@sprinttravelrentacar.com
           </Text>
         </Flex>
         <Flex dir="row" align="center">
