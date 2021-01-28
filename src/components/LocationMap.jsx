@@ -41,7 +41,7 @@ const LocationMap = props => {
     getURL().then(res => setMapURL(res));
   }, [props.locations]);
 
-  return <Box as="img" src={mapURL} objectFit="contain" alt="map" />;
+  return <Box {...props} as="img" src={mapURL} objectFit="cover" alt="map" />;
 };
 
 export default LocationMap;

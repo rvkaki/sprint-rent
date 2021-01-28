@@ -60,7 +60,7 @@ const Locations = props => {
       >
         {t('locations')}
       </Text>
-      <Flex direction={{ base: 'column', lg: 'row' }} w="90%" my={8}>
+      <Flex direction={{ base: 'column', lg: 'row' }} w="90%" my={12}>
         <Stack spacing={4} flex={{ base: 'auto', lg: 2 }}>
           {props.locations.map((l, idx) => (
             <LocationInfo key={idx} {...l} />
@@ -68,7 +68,6 @@ const Locations = props => {
         </Stack>
         <LocationMap
           flex={{ base: 'auto', lg: 2 }}
-          h={{ base: '80vh', lg: 'auto' }}
           mt={{ base: 8, lg: 0 }}
           locations={props.locations}
         />
