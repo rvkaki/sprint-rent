@@ -35,11 +35,15 @@ const FranchiseForm = props => {
   };
 
   return (
-    <Stack spacing={6}>
+    <Stack spacing={4}>
       <FormControl id="name" isRequired>
-        <FormLabel>{t('franchise.info.name')}</FormLabel>
+        <FormLabel color="black" fontWeight="semibold">
+          {t('franchise.info.name')}
+        </FormLabel>
         <Input
+          focusBorderColor="gray.800"
           borderColor="gray.300"
+          bgColor="white"
           shadow="md"
           placeholder={t('franchise.info.name')}
           value={name}
@@ -47,9 +51,13 @@ const FranchiseForm = props => {
         />
       </FormControl>
       <FormControl id="email" isRequired>
-        <FormLabel>{t('franchise.info.email')}</FormLabel>
+        <FormLabel color="black" fontWeight="semibold">
+          {t('franchise.info.email')}
+        </FormLabel>
         <Input
+          focusBorderColor="gray.800"
           shadow="md"
+          bgColor="white"
           type="email"
           isInvalid={!(email === '' || email.match(emailRegex))}
           placeholder={t('franchise.info.email')}
@@ -58,9 +66,13 @@ const FranchiseForm = props => {
         />
       </FormControl>
       <FormControl id="contact" isRequired>
-        <FormLabel>{t('franchise.info.contact')}</FormLabel>
+        <FormLabel color="black" fontWeight="semibold">
+          {t('franchise.info.contact')}
+        </FormLabel>
         <Input
+          focusBorderColor="gray.800"
           borderColor="gray.300"
+          bgColor="white"
           shadow="md"
           placeholder={t('franchise.info.contact')}
           value={contact}
@@ -68,9 +80,13 @@ const FranchiseForm = props => {
         />
       </FormControl>
       <FormControl id="area" isRequired>
-        <FormLabel>{t('franchise.info.area')}</FormLabel>
+        <FormLabel color="black" fontWeight="semibold">
+          {t('franchise.info.area')}
+        </FormLabel>
         <Input
+          focusBorderColor="gray.800"
           borderColor="gray.300"
+          bgColor="white"
           shadow="md"
           placeholder={t('franchise.info.area')}
           value={area}
@@ -78,9 +94,13 @@ const FranchiseForm = props => {
         />
       </FormControl>
       <FormControl id="subject" isRequired>
-        <FormLabel>{t('franchise.info.subject')}</FormLabel>
+        <FormLabel color="black" fontWeight="semibold">
+          {t('franchise.info.subject')}
+        </FormLabel>
         <Input
+          focusBorderColor="gray.800"
           borderColor="gray.300"
+          bgColor="white"
           shadow="md"
           placeholder={t('franchise.info.subject')}
           value={subject}
@@ -88,9 +108,13 @@ const FranchiseForm = props => {
         />
       </FormControl>
       <FormControl id="message" isRequired>
-        <FormLabel>{t('franchise.info.message')}</FormLabel>
+        <FormLabel color="black" fontWeight="semibold">
+          {t('franchise.info.message')}
+        </FormLabel>
         <Textarea
+          focusBorderColor="gray.800"
           borderColor="gray.300"
+          bgColor="white"
           shadow="md"
           size="lg"
           placeholder={t('franchise.info.message')}
