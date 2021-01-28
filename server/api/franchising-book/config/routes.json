@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/franchising-book",
+      "handler": "franchising-book.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/franchising-book",
+      "handler": "franchising-book.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/franchising-book",
+      "handler": "franchising-book.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

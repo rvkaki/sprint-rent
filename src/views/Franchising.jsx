@@ -1,19 +1,25 @@
 import { Box, Flex, Text, useDisclosure } from '@chakra-ui/react';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer';
 import FranchiseForm from '../components/FranchiseForm';
 import Header from '../components/Header';
+import { getFranchisingBook } from '../util/apiCalls';
 
 const Franchising = props => {
   const [t] = useTranslation('common');
+  const [book, setBook] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const submit = (name, email, contact, area, subject, message) => {
     console.log(name, email, contact, area, subject, message);
   };
+
+  useEffect(() => {
+    getFranchisingBook().then(data => setBook(data.file.url));
+  }, []);
 
   return (
     <Box minH="100vh">
@@ -85,7 +91,7 @@ const Franchising = props => {
             h={20}
             align="center"
             justify="center"
-            href="https://www.google.com"
+            href={`${process.env.REACT_APP_SERVER_URL}${book}`}
             target="_blank"
             bg="gray.800"
             borderRadius="50%"

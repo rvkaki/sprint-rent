@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "franchising_books",
+  "info": {
+    "name": "Franchising Book"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "file": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

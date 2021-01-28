@@ -79,3 +79,13 @@ export const getTermsAndConditions = async () => {
     console.log(error);
   }
 };
+
+export const getFranchisingBook = async () => {
+  try {
+    const res = await fetch(`${serverURL}/franchising-book`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
