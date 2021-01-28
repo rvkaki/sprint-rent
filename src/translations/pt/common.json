@@ -82,11 +82,18 @@
       "contact": "Contacto",
       "accept": "Aceito os",
       "terms": "Termos e Condições",
-      "request": "Fazer o pedido"
+      "request": "Fazer o pedido",
+      "confirmation": "Sujeito a confirmação"
     },
     "order": {
       "label": "A sua reserva",
-      "price": "Preço"
+      "price": "Preço",
+      "requested": "Pedido efetuado",
+      "text": "Obrigado pela sua preferência! Estamos a analisar o seu pedido, por favor aguarde o contacto dos nossos serviços.",
+      "error": {
+        "label": "Oops, ocorreu um problema",
+        "text": "Não conseguimos processar o seu pedido. Por favor tente novamente mais tarde ou contacte-nos diretamente em "
+      }
     }
   },
   "popup": {

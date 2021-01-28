@@ -35,9 +35,7 @@ class GlobalModal extends React.Component {
         <ModalContent pb={8}>
           <ModalHeader>{this.state.title}</ModalHeader>
           <ModalCloseButton _active={{}} _focus={{}} />
-          <ModalBody>
-            <div dangerouslySetInnerHTML={{ __html: this.state.body }}></div>
-          </ModalBody>
+          <ModalBody>{this.state.body}</ModalBody>
         </ModalContent>
       </Modal>
     );

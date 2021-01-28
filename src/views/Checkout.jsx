@@ -1,23 +1,62 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/AppContext';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { getCar, getLocation } from '../util/apiCalls';
+import { getCar, getLocation, getTermsAndConditions } from '../util/apiCalls';
 import Order from '../components/Order';
 import UserForm from '../components/UserForm';
 import { useTranslation } from 'react-i18next';
+
+const Loader = props => {
+  if (!props.loading) return null;
+  return (
+    <Flex
+      position="absolute"
+      top={0}
+      left={0}
+      w="100%"
+      h="100%"
+      bg="rgba(0,0,0,0.7)"
+      zIndex={9999}
+      align="center"
+      justify="center"
+    >
+      <Spinner size="xl" thickness="4px" color="white" />
+    </Flex>
+  );
+};
+
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+function dateDiffInDays(a, b) {
+  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
 
 const Checkout = props => {
   const [carInfo, setCarInfo] = useState();
   const [pickup, setPickup] = useState({});
   const [delivery, setDelivery] = useState({});
 
+  const [terms, setTerms] = useState();
+  const modal = global['modal'];
+
+  const [loading, setLoading] = useState(false);
+
   const [t] = useTranslation('common');
 
   const { startLocation, endLocation, startDate, endDate, car } = useContext(
     AppContext
   );
+
+  const numDays = dateDiffInDays(startDate, endDate) + 1;
+
+  useEffect(() => {
+    getTermsAndConditions().then(data => setTerms(data.text));
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,20 +72,45 @@ const Checkout = props => {
   }, [car, startLocation, endLocation]);
 
   const submit = (name, email, contact) => {
-    console.log('Order:');
-    console.log(`Name: ${name}`);
-    console.log(`Email: ${email}`);
-    console.log(`Contact: ${contact}`);
-    console.log(`Car: ${carInfo.brand} ${carInfo.model}`);
-    console.log(
-      `From: ${startDate.toLocaleDateString()}, To: ${endDate.toLocaleDateString()}`
-    );
-    console.log(`Pickup: ${pickup.title}, Delivery: ${delivery.title}`);
+    setLoading(true);
+    const messageBody = `Nome: ${name}
+Email: ${email}
+Contacto: ${contact}
+Carro: ${carInfo.brand} ${carInfo.model}
+Data: ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}
+Recolha: ${pickup.title}
+Entrega: ${delivery.title}
+Total: ${numDays} x ${carInfo.price}€ = ${numDays * carInfo.price}€`;
+
+    const emailTo = pickup.emails[0].email;
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/email`, {
+      method: 'POST',
+      body: JSON.stringify({
+        options: {
+          to: 'main@ricardovieira.me',
+          from: 'main@ricardovieira.me',
+          subject: 'Pedido de Reserva',
+          text: messageBody,
+        },
+      }),
+    }).then(res => {
+      console.log(res);
+      setLoading(false);
+      if (res.ok)
+        modal.open(t('checkout.order.requested'), t('checkout.order.text'));
+      else
+        modal.open(
+          t('checkout.order.error.label'),
+          t('checkout.order.error.text') + pickup.emails[0].email
+        );
+    });
   };
 
   return (
     <Flex direction="column">
       <Header />
+      <Loader loading={loading} />
       <Flex
         direction={{ base: 'column', lg: 'row' }}
         justifyContent={{ base: 'center', lg: 'space-between' }}
@@ -56,7 +120,7 @@ const Checkout = props => {
           <Text fontSize="2xl" color="black" fontWeight="semibold">
             {t('checkout.info.label')}
           </Text>
-          <UserForm submit={submit} />
+          <UserForm submit={submit} terms={terms} />
         </Box>
         <Box flex={1} py={8} px={{ base: 0, md: 8 }} w="100%">
           <Text
@@ -74,6 +138,7 @@ const Checkout = props => {
               delivery={delivery}
               startDate={startDate}
               endDate={endDate}
+              numDays={numDays}
             />
           ) : null}
         </Box>

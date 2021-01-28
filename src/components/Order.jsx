@@ -4,18 +4,8 @@ import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 
-const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-function dateDiffInDays(a, b) {
-  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-}
-
 const Order = props => {
   const image = props.car.images.find(i => i.name === '0.png');
-  const numDays = dateDiffInDays(props.startDate, props.endDate) + 1;
   const [t] = useTranslation('common');
   return (
     <Box w="100%">
@@ -116,16 +106,16 @@ const Order = props => {
             <Flex mx={4} dir="row" justify="space-between">
               <Text>Base:</Text>
               <Text>
-                {numDays} x {props.car.price}€
+                {props.numDays} x {props.car.price}€
               </Text>
-              <Text>{props.car.price * numDays}€</Text>
+              <Text>{props.car.price * props.numDays}€</Text>
             </Flex>
           </Box>
         </Stack>
         <Flex mt={16} dir="row" align="baseline">
           <Text fontSize="lg">Total:</Text>
           <Text ml={2} fontSize="3xl" fontWeight="bold">
-            {props.car.price * numDays}€
+            {props.car.price * props.numDays}€
           </Text>
         </Flex>
       </Box>

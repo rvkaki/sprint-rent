@@ -82,11 +82,18 @@
       "contact": "Contact",
       "accept": "I accept the",
       "terms": "Terms & Conditions",
-      "request": "Request"
+      "request": "Request",
+      "confirmation": "Subject to confirmation"
     },
     "order": {
       "label": "Your order",
-      "price": "Price"
+      "price": "Price",
+      "requested": "Request submitted",
+      "text": "Thank you for your preference! We are reviewing your request, please await the contact of our services.",
+      "error": {
+        "label": "Oops, something went wrong",
+        "text": "We couldn't process your order. Please try again later or contact us directly at "
+      }
     }
   },
   "popup": {

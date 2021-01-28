@@ -20,6 +20,8 @@ const UserForm = props => {
   const [contact, setContact] = useState();
   const [checked, setChecked] = useState(false);
 
+  const modal = global['modal'];
+
   const [t] = useTranslation('common');
 
   const isFormValid = () => {
@@ -75,7 +77,15 @@ const UserForm = props => {
       >
         <Flex dir="row" color="black">
           <Text fontSize="lg">{t('checkout.info.accept')}</Text>
-          <Text ml={1} fontWeight="semibold">
+          <Text
+            as="button"
+            ml={1}
+            fontWeight="semibold"
+            onClick={e => {
+              e.stopPropagation();
+              modal.open(t('footer.info.terms'), props.terms);
+            }}
+          >
             {t('checkout.info.terms')}
           </Text>
         </Flex>
@@ -97,7 +107,10 @@ const UserForm = props => {
         }}
         onClick={handleClick}
       >
-        {t('checkout.info.request')}
+        <Box>
+          <Text fontSize="xl">{t('checkout.info.request')}</Text>
+          <Text fontSize="sm">({t('checkout.info.confirmation')})</Text>
+        </Box>
       </Box>
     </Stack>
   );
