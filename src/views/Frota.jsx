@@ -30,12 +30,16 @@ const Frota = props => {
   const history = useHistory();
 
   useEffect(() => {
+    getLocations().then(data => setLocations(data));
+  }, []);
+
+  useEffect(() => {
     const setStateFromQuery = async () => {
       const [pickup, delivery, date] = history.location.search
         .slice(1)
         .split('&');
-      appState.setStartLocation(pickup.split('=')[1]);
-      appState.setEndLocation(delivery.split('=')[1]);
+      appState.setStartLocation(parseInt(pickup.split('=')[1]));
+      appState.setEndLocation(parseInt(delivery.split('=')[1]));
       const [startDate, endDate] = date.split('=')[1].split('-');
       // convert from DD/MM/YYYY to MM/DD/YYYY to create date
       appState.setStartDate(
@@ -53,8 +57,17 @@ const Frota = props => {
         )
       );
     };
-    if (!appState.startLocation && history.location.search !== '')
+
+    const clearState = async () => {
+      appState.setEndDate(null);
+      appState.setEndLocation(null);
+      appState.setStartDate(null);
+      appState.setStartLocation(null);
+    };
+
+    if (history.location.search !== '')
       setStateFromQuery();
+    else clearState();
   }, [history.location.search]);
 
   useEffect(() => {
@@ -70,10 +83,6 @@ const Frota = props => {
     query = query.slice(0, -1);
     getCars(query).then(data => setCars(data));
   }, [appState.filters]);
-
-  useEffect(() => {
-    getLocations().then(data => setLocations(data));
-  }, []);
 
   const selectCar = id => {
     appState.setCar(id);
