@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from 'react';
-import { isEndDate, isStartDate, useDay } from '@datepicker-react/hooks';
+import { useDay } from '@datepicker-react/hooks';
 import DatepickerContext from './datepickerContext';
 import { AspectRatio, Box } from '@chakra-ui/react';
 
@@ -15,8 +15,6 @@ function Day({ day, date, weekDay }) {
     onDateSelect,
     onDateFocus,
     onDateHover,
-    startDate,
-    endDate,
   } = useContext(DatepickerContext);
   const {
     tabIndex,
@@ -24,9 +22,7 @@ function Day({ day, date, weekDay }) {
     onClick,
     onMouseEnter,
     disabledDate,
-    isWithinHoverRange,
     isSelectedStartOrEnd,
-    isSelected,
   } = useDay({
     date,
     focusedDate,
@@ -48,13 +44,6 @@ function Day({ day, date, weekDay }) {
   return (
     <AspectRatio ratio={1} position="relative">
       <>
-        {isSelectedStartOrEnd ? (
-          <Box
-            borderLeftRadius={isStartDate(date, startDate) ? '50%' : 0}
-            borderRightRadius={isEndDate(date, endDate) ? '50%' : 0}
-            bg="gray.500"
-          />
-        ) : null}
         <Box
           as="button"
           onClick={onClick}
@@ -63,28 +52,10 @@ function Day({ day, date, weekDay }) {
           tabIndex={tabIndex}
           type="button"
           ref={dayRef}
-          borderLeftRadius={
-            (isSelected || isWithinHoverRange) && weekDay === 0 ? '50%' : 0
-          }
-          borderRightRadius={
-            (isSelected || isWithinHoverRange) && weekDay === 6 ? '50%' : 0
-          }
           borderRadius={isSelectedStartOrEnd ? '50%' : 'auto'}
-          background={
-            isSelectedStartOrEnd
-              ? 'gray.800'
-              : isSelected
-              ? 'gray.500'
-              : isWithinHoverRange
-              ? 'gray.500'
-              : 'white'
-          }
+          background={isSelectedStartOrEnd ? 'gray.800' : 'white'}
           color={
-            disabledDate
-              ? 'gray.500'
-              : isSelected || isSelectedStartOrEnd || isWithinHoverRange
-              ? 'white'
-              : 'black'
+            disabledDate ? 'gray.500' : isSelectedStartOrEnd ? 'white' : 'black'
           }
         >
           {day}

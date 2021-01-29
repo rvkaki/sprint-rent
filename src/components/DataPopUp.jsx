@@ -14,38 +14,26 @@ import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
-import Datepicker from './Datepicker/Datepicker';
+import Datepicker from './SingleDatepicker/Datepicker';
 import SearchBar from './SearchBar';
 
 const DataPopUp = props => {
   const [t] = useTranslation('common');
-  const [state, setState] = useState({
-    startDate: null,
-    endDate: null,
-    startLocation: null,
-    endLocation: null,
-  });
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [startLocation, setStartLocation] = useState(null);
+  const [endLocation, setEndLocation] = useState(null);
 
   const history = useHistory();
 
-  const {
-    setStartDate,
-    setEndDate,
-    setStartLocation,
-    setEndLocation,
-  } = useContext(AppContext);
+  const appContext = useContext(AppContext);
 
   const handleClick = () => {
-    if (
-      state.startDate &&
-      state.endDate &&
-      state.startLocation &&
-      state.endLocation
-    ) {
-      setStartDate(state.startDate);
-      setEndDate(state.endDate);
-      setStartLocation(state.startLocation);
-      setEndLocation(state.endLocation);
+    if (startDate && endDate && startLocation && endLocation) {
+      appContext.setStartDate(startDate);
+      appContext.setEndDate(endDate);
+      appContext.setStartLocation(startLocation);
+      appContext.setEndLocation(endLocation);
       history.push('/checkout');
     } else {
       alert(t('alerts.fill'));
@@ -53,7 +41,16 @@ const DataPopUp = props => {
   };
 
   return (
-    <Modal isOpen={props.isOpen} onClose={props.onClose}>
+    <Modal
+      isOpen={props.isOpen}
+      onClose={() => {
+        setStartLocation(null);
+        setEndLocation(null);
+        setEndDate(null);
+        setStartDate(null);
+        props.onClose();
+      }}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{t('popup.label')}</ModalHeader>
@@ -62,34 +59,40 @@ const DataPopUp = props => {
           <Stack spacing={2}>
             <SearchBar
               options={props.options}
-              value={state.startLocation}
-              onChange={e =>
-                setState({ ...state, startLocation: e, endLocation: e })
-              }
+              value={startLocation}
+              onChange={e => {
+                setStartLocation(e);
+                setEndLocation(e);
+              }}
               label={t('pickup')}
               color="black"
             />
             <SearchBar
               options={props.options}
-              value={state.endLocation}
-              onChange={e => setState({ ...state, endLocation: e })}
+              value={endLocation}
+              onChange={e => setEndLocation(e)}
               label={t('delivery')}
               color="black"
             />
             <Box>
               <Text color="black" fontWeight="medium">
-                {t('date')}
+                {t('pickupDate')}
               </Text>
               <Datepicker
-                startDate={state.startDate}
-                endDate={state.endDate}
-                onDateChange={newDate =>
-                  setState({
-                    ...state,
-                    startDate: newDate.startDate,
-                    endDate: newDate.endDate,
-                  })
-                }
+                date={startDate}
+                minBookingDate={new Date()}
+                onDateChange={newDate => setStartDate(newDate.startDate)}
+              />
+            </Box>
+            <Box>
+              <Text color="black" fontWeight="medium">
+                {t('deliveryDate')}
+              </Text>
+              <Datepicker
+                date={endDate}
+                minBookingDate={startDate}
+                isDisabled={startDate === null}
+                onDateChange={newDate => setEndDate(newDate.startDate)}
               />
             </Box>
           </Stack>

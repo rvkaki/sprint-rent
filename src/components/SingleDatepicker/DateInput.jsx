@@ -15,8 +15,10 @@ const DateInput = props => {
       />
       <Input
         bg="white"
+        borderColor="gray.500"
         placeholder={t('datepicker.placeholder')}
         isReadOnly
+        isDisabled={props.isDisabled}
         value={props.value}
         onClick={props.onClick}
       />

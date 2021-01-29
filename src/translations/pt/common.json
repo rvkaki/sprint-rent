@@ -42,6 +42,8 @@
   "pickup": "Local de Levantamento",
   "delivery": "Local de Entrega",
   "date": "Data",
+  "pickupDate": "Data de Levantamento",
+  "deliveryDate": "Data de Entrega",
   "filters": {
     "title": "Filtros",
     "gas": "Combustivel",

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Checkbox, Flex, Stack, Text } from '@chakra-ui/react';
-import Datepicker from './Datepicker/Datepicker.jsx';
+import Datepicker from './SingleDatepicker/Datepicker.jsx';
 import SearchBar from './SearchBar.jsx';
 import AppContext from '../context/AppContext.jsx';
 import { useHistory } from 'react-router-dom';
@@ -77,21 +77,42 @@ const MainSearch = props => {
             />
           ) : null}
         </Stack>
-        <Stack flex={1} w="100%" spacing={1} position="relative">
-          <Text color="white" fontWeight="medium">
-            {t('date')}
-          </Text>
-          <Datepicker
-            startDate={state.startDate}
-            endDate={state.endDate}
-            onDateChange={newDate =>
-              setState({
-                ...state,
-                startDate: newDate.startDate,
-                endDate: newDate.endDate,
-              })
-            }
-          />
+        <Stack
+          flex={2}
+          w="100%"
+          direction={{ base: 'column', md: checked ? 'row' : 'column' }}
+        >
+          <Stack spacing={1} position="relative">
+            <Text color="white" fontWeight="medium">
+              {t('pickupDate')}
+            </Text>
+            <Datepicker
+              date={state.startDate}
+              minBookingDate={new Date()}
+              onDateChange={newDate =>
+                setState({
+                  ...state,
+                  startDate: newDate.startDate,
+                })
+              }
+            />
+          </Stack>
+          <Stack spacing={1} position="relative">
+            <Text color="white" fontWeight="medium">
+              {t('deliveryDate')}
+            </Text>
+            <Datepicker
+              date={state.endDate}
+              minBookingDate={state.startDate}
+              isDisabled={state.startDate === null}
+              onDateChange={newDate =>
+                setState({
+                  ...state,
+                  endDate: newDate.startDate,
+                })
+              }
+            />
+          </Stack>
         </Stack>
       </Stack>
       <Flex direction="row" justify="space-between">

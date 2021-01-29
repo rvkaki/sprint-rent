@@ -42,6 +42,8 @@
   "pickup": "Pickup Location",
   "delivery": "Delivery Location",
   "date": "Date",
+  "pickupDate": "Pickup Date",
+  "deliveryDate": "Delivery Date",
   "filters": {
     "title": "Filters",
     "gas": "Fuel",

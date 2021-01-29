@@ -11,14 +11,13 @@ import { useTranslation } from 'react-i18next';
 
 const Datepicker = props => {
   const [state, setState] = useState({
-    minBookingDate: new Date(),
-    startDate: props.startDate,
-    endDate: props.endDate,
+    minBookingDate: props.minBookingDate,
+    date: props.date,
     focusedInput: null,
   });
 
   const ref = useRef(null);
-  
+
   const [t] = useTranslation('common');
 
   const {
@@ -36,8 +35,7 @@ const Datepicker = props => {
     goToPreviousMonths,
     goToNextMonths,
   } = useDatepicker({
-    startDate: state.startDate,
-    endDate: state.endDate,
+    startDate: state.date,
     focusedInput: state.focusedInput,
     onDatesChange: handleDateChange,
     numberOfMonths: 1,
@@ -46,7 +44,7 @@ const Datepicker = props => {
 
   function handleDateChange(data) {
     props.onDateChange(data);
-    setState({ ...state, ...data });
+    setState({ ...state, date: data.startDate });
   }
 
   function isBefore(date, month) {
@@ -83,6 +81,14 @@ const Datepicker = props => {
     };
   }, [state]);
 
+  useEffect(() => {
+    setState({
+      minBookingDate: props.minBookingDate,
+      date: props.date,
+      focusedInput: null,
+    });
+  }, [props]);
+
   return (
     <DatepickerContext.Provider
       value={{
@@ -95,17 +101,13 @@ const Datepicker = props => {
         onDateSelect,
         onDateFocus,
         onDateHover,
-        startDate: state.startDate,
-        endDate: state.endDate,
+        startDate: state.date,
       }}
     >
       <Box position="relative">
         <DateInput
-          value={
-            state.startDate
-              ? format(state.startDate) + ' - ' + format(state.endDate)
-              : ''
-          }
+          isDisabled={props.isDisabled}
+          value={state.date ? format(state.date) : ''}
           onClick={() => setState({ ...state, focusedInput: START_DATE })}
         />
         {state.focusedInput ? (
@@ -129,9 +131,7 @@ const Datepicker = props => {
                     color="gray.800"
                   />
                 }
-                onClick={() =>
-                  setState({ ...state, startDate: null, endDate: null })
-                }
+                onClick={() => setState({ ...state, date: null })}
                 variant="ghost"
                 size="sm"
                 _hover={{
