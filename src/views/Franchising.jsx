@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Stack, useDisclosure } from '@chakra-ui/react';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
@@ -6,123 +6,158 @@ import { useTranslation } from 'react-i18next';
 import Footer from '../components/Footer';
 import FranchiseForm from '../components/FranchiseForm';
 import Header from '../components/Header';
+import Loader from '../components/Loader';
 import { getFranchisingBook } from '../util/apiCalls';
+import ShareButtons from '../components/ShareButtons';
 
 const Franchising = props => {
   const [t] = useTranslation('common');
   const [book, setBook] = useState();
+  const [loading, setLoading] = useState(false);
+  const modal = global['modal'];
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const shareUrl = `${process.env.REACT_APP_SERVER_URL}/franchising`;
 
   const submit = (name, email, contact, area, subject, message) => {
     console.log(name, email, contact, area, subject, message);
+    setLoading(true);
+    const messageBody = `Nome: ${name}
+Email: ${email}
+Contacto: ${contact}
+Zona: ${area}
+${message}`;
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/email`, {
+      method: 'POST',
+      body: JSON.stringify({
+        options: {
+          to: 'main@ricardovieira.me',
+          from: 'main@ricardovieira.me',
+          subject: `Franchising: ${subject}`,
+          text: messageBody,
+        },
+      }),
+    }).then(res => {
+      console.log(res);
+      setLoading(false);
+      if (res.ok)
+        modal.open(t('checkout.order.requested'), t('checkout.order.text'));
+      else
+        modal.open(
+          t('checkout.order.error.label'),
+          t('checkout.order.error.text') + 'franchising@sprinttravelviagens.com'
+        );
+    });
   };
 
   useEffect(() => {
     getFranchisingBook().then(data => setBook(data.file.url));
   }, []);
 
+  const Button = () => {
+    return (
+      <Box
+        as="button"
+        onClick={isOpen ? onClose : onOpen}
+        bg="gray.800"
+        borderRadius="lg"
+        px={{ base: 2, md: 5 }}
+        py={{ base: 1, md: 3 }}
+        w={{ base: '50%', md: 'auto' }}
+        color="white"
+        fontSize={{ base: 'md', md: 'xl' }}
+        fontWeight="medium"
+        shadow="lg"
+        transition="ease-in-out 0.2s"
+        _hover={{
+          bg: 'gray.900',
+          transform: 'scale(1.03)',
+          shadow: '2xl',
+        }}
+      >
+        {t('franchise.info.label')}
+      </Box>
+    );
+  };
+
   return (
     <Box minH="100vh">
       <Header />
+      <Loader loading={loading} />
       <Flex direction="column" h="100%" w="100%">
-        <Flex
-          h={{ base: '30vh', md: '40vh' }}
-          w="100%"
-          position="relative"
-          align="center"
-          justify="center"
-        >
-          <Box
-            as="img"
-            src="assets/images/franchise_banner.jpg"
-            alt="banner"
-            w="100%"
-            h="100%"
-            objectFit="cover"
-          />
-          <Text
-            position="absolute"
-            fontSize={{ base: '4xl', md: '7xl' }}
-            fontWeight="bold"
-            color="gray.100"
-            textShadow="1px 0 0 #555, -1px 0 0 #555, 0 1px 0 #555, 0 -1px 0 #555, 1px 1px #555, -1px -1px 0 #555, 1px -1px 0 #555, -1px 1px 0 #555"
-          >
-            FRANCHISING
-          </Text>
-        </Flex>
         <Box position="relative" w="100%">
           <Box
             as="img"
             src="assets/images/franchise_background.jpg"
             objectFit="cover"
             alt="background"
-            h="90vh"
+            h={{ base: '110vh', md: '94vh' }}
             w="100%"
           />
-          <Box
-            position="absolute"
-            right={8}
-            top={8}
-            as="button"
-            onClick={isOpen ? onClose : onOpen}
-            bg="gray.800"
-            borderRadius="lg"
-            px={5}
-            py={3}
-            color="white"
-            fontSize="xl"
-            fontWeight="medium"
-            shadow="lg"
-            transition="ease-in-out 0.2s"
-            _hover={{
-              bg: 'gray.900',
-              transform: 'scale(1.03)',
-              shadow: '2xl',
-            }}
-          >
-            Entrar em contacto
-          </Box>
           <Flex
-            as="a"
             position="absolute"
-            right={8}
-            bottom={8}
-            w={20}
-            h={20}
-            align="center"
-            justify="center"
-            href={`${process.env.REACT_APP_SERVER_URL}${book}`}
-            target="_blank"
-            bg="gray.800"
-            borderRadius="50%"
-            color="white"
-            fontSize="xl"
-            fontWeight="medium"
-            shadow="lg"
-            transition="ease-in-out 0.2s"
-            _hover={{
-              bg: 'gray.900',
-              transform: 'scale(1.03)',
-              shadow: '2xl',
-            }}
+            top={0}
+            left={0}
+            p={{ base: 4, md: 8 }}
+            w="100%"
+            h="100%"
+            direction={{ base: 'column', md: 'row' }}
+            justify="space-between"
           >
-            <FontAwesomeIcon icon={faBook} size="2x" color="white" />
-          </Flex>
-          {isOpen ? (
+            <Flex
+              dir="row"
+              justify="space-between"
+              display={{ base: 'inherit', md: 'none' }}
+            >
+              <Button />
+              <ShareButtons label={`${t('share')}:`} shareUrl={shareUrl} />
+            </Flex>
             <Box
-              position="absolute"
-              top={0}
-              py={8}
-              px={{ base: 4, md: 8 }}
+              visibility={isOpen ? 'visible' : 'hidden'}
+              py={{ base: 4, md: 8 }}
+              px={{ base: 0, md: 8 }}
+              mx={{ base: 0, md: 16 }}
               w={{ base: '100%', md: '60%' }}
               alignSelf="center"
             >
-              {/* <Text fontSize="2xl" color="black" fontWeight="semibold" mb={4}>
-                {t('franchise.info.label')}
-              </Text> */}
               <FranchiseForm submit={submit} />
             </Box>
-          ) : null}
+            <Flex
+              direction="column"
+              h="100%"
+              justify="space-between"
+              align="flex-end"
+            >
+              <Stack align="flex-end" display={{ base: 'none', md: 'inherit' }}>
+                <Button />
+                <ShareButtons label={`${t('share')}:`} shareUrl={shareUrl} />
+              </Stack>
+              <Flex
+                as="a"
+                w={{ base: 16, md: 20 }}
+                h={{ base: 16, md: 20 }}
+                align="center"
+                justify="center"
+                href={`${process.env.REACT_APP_SERVER_URL}${book}`}
+                target="_blank"
+                bg="gray.800"
+                borderRadius="50%"
+                color="white"
+                fontSize={{ base: 'md', md: 'xl' }}
+                fontWeight="medium"
+                shadow="lg"
+                transition="ease-in-out 0.2s"
+                _hover={{
+                  bg: 'gray.900',
+                  transform: 'scale(1.03)',
+                  shadow: '2xl',
+                }}
+              >
+                <FontAwesomeIcon icon={faBook} size="2x" color="white" />
+              </Flex>
+            </Flex>
+          </Flex>
         </Box>
       </Flex>
       <Footer />

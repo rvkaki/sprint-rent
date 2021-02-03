@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/AppContext';
 import Footer from '../components/Footer';
@@ -7,25 +7,7 @@ import { getCar, getLocation, getTermsAndConditions } from '../util/apiCalls';
 import Order from '../components/Order';
 import UserForm from '../components/UserForm';
 import { useTranslation } from 'react-i18next';
-
-const Loader = props => {
-  if (!props.loading) return null;
-  return (
-    <Flex
-      position="absolute"
-      top={0}
-      left={0}
-      w="100%"
-      h="100%"
-      bg="rgba(0,0,0,0.7)"
-      zIndex={9999}
-      align="center"
-      justify="center"
-    >
-      <Spinner size="xl" thickness="4px" color="white" />
-    </Flex>
-  );
-};
+import Loader from '../components/Loader';
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
