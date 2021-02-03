@@ -164,12 +164,9 @@ const Header = props => {
           <Link to="/sale">
             <Text fontSize="md">{t('header.sale')}</Text>
           </Link>
-          <Text as="a" href="/admin" target="_blank" fontSize="md">
+          <Text as="a" href="https://beta.sprintsolucoesinformaticas.com/admin" target="_blank" fontSize="md">
             {t('header.login')}
           </Text>
-          {/* <Text as="button" fontSize="lg" onClick={() => {}}>
-            {t('header.contacts')}
-          </Text> */}
         </Flex>
         <Flex dir="row" justify="flex-end">
           <Text
