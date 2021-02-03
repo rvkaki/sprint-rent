@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import Loader from '../components/Loader';
 import { getFranchisingBook } from '../util/apiCalls';
 import ShareButtons from '../components/ShareButtons';
+import { sendFranchiseEmail } from '../util/email';
 
 const Franchising = props => {
   const [t] = useTranslation('common');
@@ -22,33 +23,20 @@ const Franchising = props => {
   const submit = (name, email, contact, area, subject, message) => {
     console.log(name, email, contact, area, subject, message);
     setLoading(true);
-    const messageBody = `Nome: ${name}
-Email: ${email}
-Contacto: ${contact}
-Zona: ${area}
-${message}`;
-
-    fetch(`${process.env.REACT_APP_SERVER_URL}/email`, {
-      method: 'POST',
-      body: JSON.stringify({
-        options: {
-          to: 'main@ricardovieira.me',
-          from: 'main@ricardovieira.me',
-          subject: `Franchising: ${subject}`,
-          text: messageBody,
-        },
-      }),
-    }).then(res => {
-      console.log(res);
-      setLoading(false);
-      if (res.ok)
-        modal.open(t('checkout.order.requested'), t('checkout.order.text'));
-      else
-        modal.open(
-          t('checkout.order.error.label'),
-          t('checkout.order.error.text') + 'franchising@sprinttravelviagens.com'
-        );
-    });
+    sendFranchiseEmail(name, email, contact, area, subject, message).then(
+      res => {
+        console.log(res);
+        setLoading(false);
+        if (res.ok)
+          modal.open(t('checkout.order.requested'), t('checkout.order.text'));
+        else
+          modal.open(
+            t('checkout.order.error.label'),
+            t('checkout.order.error.text') +
+              'franchising@sprinttravelviagens.com'
+          );
+      }
+    );
   };
 
   useEffect(() => {

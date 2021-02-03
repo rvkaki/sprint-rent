@@ -8,6 +8,7 @@ import Order from '../components/Order';
 import UserForm from '../components/UserForm';
 import { useTranslation } from 'react-i18next';
 import Loader from '../components/Loader';
+import { sendOrderEmail } from '../util/email';
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -55,28 +56,17 @@ const Checkout = props => {
 
   const submit = (name, email, contact) => {
     setLoading(true);
-    const messageBody = `Nome: ${name}
-Email: ${email}
-Contacto: ${contact}
-Carro: ${carInfo.brand} ${carInfo.model}
-Data: ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}
-Recolha: ${pickup.title}
-Entrega: ${delivery.title}
-Total: ${numDays} x ${carInfo.price}€ = ${numDays * carInfo.price}€`;
-
-    const emailTo = pickup.emails[0].email;
-
-    fetch(`${process.env.REACT_APP_SERVER_URL}/email`, {
-      method: 'POST',
-      body: JSON.stringify({
-        options: {
-          to: 'main@ricardovieira.me',
-          from: 'main@ricardovieira.me',
-          subject: 'Pedido de Reserva',
-          text: messageBody,
-        },
-      }),
-    }).then(res => {
+    sendOrderEmail(
+      name,
+      email,
+      contact,
+      carInfo,
+      startDate,
+      endDate,
+      pickup,
+      delivery,
+      numDays
+    ).then(res => {
       console.log(res);
       setLoading(false);
       if (res.ok)
