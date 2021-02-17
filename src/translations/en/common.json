@@ -116,7 +116,8 @@
       "subject": "Subject",
       "message": "Message",
       "request": "Submit"
-    }
+    },
+    "catalog": "Catalog"
   },
   "share": "Share"
 }

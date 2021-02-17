@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
@@ -121,28 +121,33 @@ const Franchising = props => {
                 <Button />
                 <ShareButtons label={`${t('share')}:`} shareUrl={shareUrl} />
               </Stack>
-              <Flex
-                as="a"
-                w={{ base: 16, md: 20 }}
-                h={{ base: 16, md: 20 }}
-                align="center"
-                justify="center"
-                href={`${process.env.REACT_APP_SERVER_URL}${book}`}
-                target="_blank"
-                bg="gray.800"
-                borderRadius="50%"
-                color="white"
-                fontSize={{ base: 'md', md: 'xl' }}
-                fontWeight="medium"
-                shadow="lg"
-                transition="ease-in-out 0.2s"
-                _hover={{
-                  bg: 'gray.900',
-                  transform: 'scale(1.03)',
-                  shadow: '2xl',
-                }}
-              >
-                <FontAwesomeIcon icon={faBook} size="2x" color="white" />
+              <Flex direction="column" align="center">
+                <Text fontSize="xl" fontWeight="semibold" color="yellow.500">
+                  {t('franchise.catalog')}:
+                </Text>
+                <Flex
+                  as="a"
+                  w={{ base: 16, md: 20 }}
+                  h={{ base: 16, md: 20 }}
+                  align="center"
+                  justify="center"
+                  href={`${process.env.REACT_APP_SERVER_URL}${book}`}
+                  target="_blank"
+                  bg="yellow.500"
+                  borderRadius="50%"
+                  color="white"
+                  fontSize={{ base: 'md', md: 'xl' }}
+                  fontWeight="medium"
+                  shadow="lg"
+                  transition="ease-in-out 0.2s"
+                  _hover={{
+                    bg: 'yellow.900',
+                    transform: 'scale(1.03)',
+                    shadow: '2xl',
+                  }}
+                >
+                  <FontAwesomeIcon icon={faBook} size="2x" color="white" />
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
