@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { getPrivacyPolicy, getTermsAndConditions } from '../util/apiCalls';
+import ReactMarkdown from 'react-markdown';
 
 const Footer = props => {
   const [privacy, setPrivacy] = useState('');
@@ -46,7 +47,12 @@ const Footer = props => {
         <Text
           fontSize="md"
           color="white"
-          onClick={() => modal.open(t('footer.info.privacy'), privacy)}
+          onClick={() =>
+            modal.open(
+              t('footer.info.privacy'),
+              <ReactMarkdown>{privacy}</ReactMarkdown>
+            )
+          }
           _hover={{
             cursor: 'pointer',
           }}
@@ -56,7 +62,12 @@ const Footer = props => {
         <Text
           fontSize="md"
           color="white"
-          onClick={() => modal.open(t('footer.info.terms'), terms)}
+          onClick={() =>
+            modal.open(
+              t('footer.info.terms'),
+              <ReactMarkdown>{terms}</ReactMarkdown>
+            )
+          }
           _hover={{
             cursor: 'pointer',
           }}

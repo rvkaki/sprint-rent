@@ -50,14 +50,6 @@ const CustomDrawer = props => {
                   >
                     {t('drawer.group.shop')}
                   </Text>
-                  <Text
-                    as="a"
-                    href="https://www.sprintsolucoesinformaticas.com/"
-                    target="_blank"
-                    fontSize="md"
-                  >
-                    {t('drawer.group.tech')}
-                  </Text>
                 </Stack>
               </Box>
               <Box>

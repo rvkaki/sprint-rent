@@ -18,7 +18,7 @@ const Franchising = props => {
   const modal = global['modal'];
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const shareUrl = `${process.env.REACT_APP_SERVER_URL}/franchising`;
+  const shareUrl = window.location.href;
 
   const submit = (name, email, contact, area, subject, message) => {
     console.log(name, email, contact, area, subject, message);
