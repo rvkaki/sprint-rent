@@ -119,5 +119,12 @@
     },
     "catalog": "Catálogo"
   },
-  "share": "Enviar a um amigo"
+  "share": "Enviar a um amigo",
+  "helpdesk": {
+    "call": "Liguem-me!",
+    "error": "Oops! Ocorreu um erro",
+    "retry": "Tentar Novamente",
+    "success": "Entraremos em contacto assim que possível",
+    "close": "Fechar"
+  }
 }

@@ -119,5 +119,12 @@
     },
     "catalog": "Catalog"
   },
-  "share": "Share"
+  "share": "Share",
+  "helpdesk": {
+    "call": "Call me!",
+    "error": "Oops! Something went wrong",
+    "retry": "Try again",
+    "success": "We'll reach you as soon as possible",
+    "close": "Close"
+  }
 }

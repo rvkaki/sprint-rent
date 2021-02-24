@@ -63,3 +63,21 @@ ${message}`;
 
   return res;
 };
+
+export const sendNumberEmail = async number => {
+  const messageBody = `Pedido de contacto de ${number}`;
+
+  const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/email`, {
+    method: 'POST',
+    body: JSON.stringify({
+      options: {
+        to: 'main@ricardovieira.me',
+        from: 'main@ricardovieira.me',
+        subject: `Pedido de contacto Rent a Car`,
+        text: messageBody,
+      },
+    }),
+  });
+
+  return res;
+};
