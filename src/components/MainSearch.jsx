@@ -56,8 +56,8 @@ const MainSearch = props => {
     >
       <Stack
         spacing={3}
-        direction={{ base: 'column', md: 'row' }}
-        alignItems={{ base: 'center', md: 'center' }}
+        direction={{ base: 'column', lg: 'row' }}
+        alignItems={{ base: 'center', lg: 'center' }}
       >
         <Stack flex={3} w="100%">
           <SearchBar

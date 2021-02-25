@@ -85,7 +85,8 @@
       "accept": "Aceito os",
       "terms": "Termos e Condições",
       "request": "Fazer o pedido",
-      "confirmation": "Sujeito a confirmação"
+      "confirmation": "Sujeito a confirmação",
+      "date": "Data"
     },
     "order": {
       "label": "A sua reserva",
@@ -126,5 +127,16 @@
     "retry": "Tentar Novamente",
     "success": "Entraremos em contacto assim que possível",
     "close": "Fechar"
-  }
+  },
+  "offer": {
+    "from": "Desde",
+    "images": "Imagens",
+    "price": "Preço",
+    "validUntil": "Validade",
+    "order": "Reservar",
+    "description": "Descrição",
+    "info": "Informação",
+    "destination": "Destino"
+  },
+  "highlights": "Destaques"
 }

@@ -34,7 +34,7 @@ const DataPopUp = props => {
       appContext.setEndDate(endDate);
       appContext.setStartLocation(startLocation);
       appContext.setEndLocation(endLocation);
-      history.push('/checkout');
+      history.push('/checkout/carro');
     } else {
       alert(t('alerts.fill'));
     }

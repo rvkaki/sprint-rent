@@ -85,7 +85,8 @@
       "accept": "I accept the",
       "terms": "Terms & Conditions",
       "request": "Request",
-      "confirmation": "Subject to confirmation"
+      "confirmation": "Subject to confirmation",
+      "date": "Date"
     },
     "order": {
       "label": "Your order",
@@ -126,5 +127,16 @@
     "retry": "Try again",
     "success": "We'll reach you as soon as possible",
     "close": "Close"
-  }
+  },
+  "offer": {
+    "from": "From",
+    "images": "Images",
+    "price": "Price",
+    "validUntil": "Validity",
+    "order": "Order",
+    "description": "Description",
+    "info": "Info",
+    "destination": "Destination"
+  },
+  "highlights": "Highlights"
 }

@@ -35,6 +35,35 @@ Total: ${numDays} x ${carInfo.price}€ = ${numDays * carInfo.price}€`;
   return res;
 };
 
+export const sendOrderOfferEmail = async (
+  name,
+  email,
+  contact,
+  date,
+  offer
+) => {
+  const messageBody = `Nome: ${name}
+Email: ${email}
+Contacto: ${contact}
+Data: ${date.toLocaleDateString()}
+Oferta: ${offer.title}
+Total: ${offer.price}€`;
+
+  const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/email`, {
+    method: 'POST',
+    body: JSON.stringify({
+      options: {
+        to: 'main@ricardovieira.me',
+        from: 'main@ricardovieira.me',
+        subject: 'Pedido de Reserva',
+        text: messageBody,
+      },
+    }),
+  });
+
+  return res;
+};
+
 export const sendFranchiseEmail = async (
   name,
   email,

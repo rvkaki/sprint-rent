@@ -30,7 +30,7 @@ const Carro = props => {
   const onSelect = id => {
     appState.setCar(id);
     if (appState.startLocation) {
-      history.push('/checkout');
+      history.push('/checkout/carro');
     } else onOpen();
   };
 

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "highlights",
+  "info": {
+    "name": "Destaques",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ofertas": {
+      "collection": "offers"
+    }
+  }
+}

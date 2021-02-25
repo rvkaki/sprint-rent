@@ -5,14 +5,17 @@ import SingleCarousel from '../components/SingleCarousel';
 import { Carousel } from '../components/Carousel3D';
 import MainSearch from '../components/MainSearch';
 import Footer from '../components/Footer';
-import { getLocations, getSlides } from '../util/apiCalls';
+import { getHighlights, getLocations, getSlides } from '../util/apiCalls';
+import Highlights from '../components/Highlights';
 
 const Home = props => {
   const [locations, setLocations] = useState([]);
   const [images, setImages] = useState();
+  const [highlights, setHighlights] = useState();
 
   useEffect(() => {
     getLocations().then(data => setLocations(data));
+    getHighlights().then(data => setHighlights(data));
     getSlides().then(data =>
       setImages(
         data.slides.map(i => {
@@ -29,13 +32,15 @@ const Home = props => {
         w="80%"
         zIndex="sticky"
         left="10%"
-        top={{ base: '45vh', md: '40vh', lg: '55vh', xl: '65vh' }}
+        top={{ base: '45vh', md: '45vh', lg: '55vh', xl: '70vh' }}
         position="absolute"
       >
         <MainSearch
-          options={locations.map(l => {
-            return { name: l.title, value: l.id };
-          }).sort((l1, l2) => l2.name < l1.name)}
+          options={locations
+            .map(l => {
+              return { name: l.title, value: l.id };
+            })
+            .sort((l1, l2) => l2.name < l1.name)}
         />
       </Box>
       <Flex
@@ -69,11 +74,13 @@ const Home = props => {
           as="img"
           h="100%"
           w="100%"
+          display={{ base: 'inherit', xl: 'none' }}
           objectFit={{ base: 'cover', md: 'contain' }}
           src="assets/images/background.jpg"
           alt="background"
         />
       </Flex>
+      {highlights ? <Highlights data={highlights.ofertas} /> : null}
       <Footer />
     </Box>
   );

@@ -6,6 +6,8 @@ import Contacts from '../views/Contacts';
 import Franchising from '../views/Franchising';
 import Frota from '../views/Frota';
 import Home from '../views/Home';
+import Offer from '../views/Offer';
+import OfferCheckout from '../views/OfferCheckout';
 import Sale from '../views/Sale';
 
 const Root = () => {
@@ -21,8 +23,11 @@ const Root = () => {
         <Route exact path="/frota/:id">
           <Carro />
         </Route>
-        <Route exact path="/checkout">
+        <Route exact path="/checkout/carro">
           <Checkout />
+        </Route>
+        <Route exact path="/checkout/oferta">
+          <OfferCheckout />
         </Route>
         <Route exact path="/sale">
           <Sale />
@@ -32,6 +37,9 @@ const Root = () => {
         </Route>
         <Route exact path="/contactos">
           <Contacts />
+        </Route>
+        <Route exact path="/ofertas/:id">
+          <Offer />
         </Route>
       </Switch>
     </Router>

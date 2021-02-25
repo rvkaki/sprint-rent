@@ -89,3 +89,23 @@ export const getFranchisingBook = async () => {
     console.log(error);
   }
 };
+
+export const getHighlights = async () => {
+  try {
+    const res = await fetch(`${serverURL}/highlights`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOffer = async id => {
+  try {
+    const res = await fetch(`${serverURL}/offers/${id}`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
