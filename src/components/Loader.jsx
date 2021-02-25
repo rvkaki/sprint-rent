@@ -9,12 +9,16 @@ const Loader = props => {
       left={0}
       w="100%"
       h="100%"
-      bg="rgba(0,0,0,0.7)"
-      zIndex={9999}
+      bg={props.bg ? props.bg : 'rgba(0,0,0,0.7)'}
+      zIndex="9999"
       align="center"
       justify="center"
     >
-      <Spinner size="xl" thickness="4px" color="white" />
+      <Spinner
+        size="xl"
+        thickness="4px"
+        color={props.color ? props.color : 'white'}
+      />
     </Flex>
   );
 };
