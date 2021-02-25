@@ -9,7 +9,7 @@ const Contacts = () => {
   const [locations, setLocations] = useState([]);
   useEffect(() => {
     getLocations().then(data => setLocations(data));
-  });
+  }, []);
 
   return (
     <Box>
