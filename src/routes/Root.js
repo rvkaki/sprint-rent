@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import Carro from '../views/Carro';
 import Checkout from '../views/Checkout';
 import Contacts from '../views/Contacts';
@@ -40,6 +45,9 @@ const Root = () => {
         </Route>
         <Route exact path="/ofertas/:id">
           <Offer />
+        </Route>
+        <Route>
+          <Redirect to="/" />
         </Route>
       </Switch>
     </Router>
