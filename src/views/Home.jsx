@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import SingleCarousel from '../components/SingleCarousel';
 import { Carousel } from '../components/Carousel3D';
 import MainSearch from '../components/MainSearch';
-import Locations from '../components/Locations';
 import Footer from '../components/Footer';
 import { getLocations, getSlides } from '../util/apiCalls';
 
@@ -36,7 +35,7 @@ const Home = props => {
         <MainSearch
           options={locations.map(l => {
             return { name: l.title, value: l.id };
-          })}
+          }).sort((l1, l2) => l2.name < l1.name)}
         />
       </Box>
       <Flex
@@ -75,7 +74,6 @@ const Home = props => {
           alt="background"
         />
       </Flex>
-      <Locations locations={locations} />
       <Footer />
     </Box>
   );

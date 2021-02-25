@@ -87,6 +87,11 @@ const CustomDrawer = props => {
               >
                 {t('drawer.login')}
               </Text>
+              <Link to="/contactos">
+                <Text fontSize="xl" fontWeight="semibold">
+                  {t('drawer.contacts')}
+                </Text>
+              </Link>
             </Stack>
           </DrawerBody>
           <DrawerFooter>

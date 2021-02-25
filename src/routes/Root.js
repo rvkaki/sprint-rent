@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Carro from '../views/Carro';
 import Checkout from '../views/Checkout';
+import Contacts from '../views/Contacts';
 import Franchising from '../views/Franchising';
 import Frota from '../views/Frota';
 import Home from '../views/Home';
@@ -28,6 +29,9 @@ const Root = () => {
         </Route>
         <Route exact path="/franchising">
           <Franchising />
+        </Route>
+        <Route exact path="/contactos">
+          <Contacts />
         </Route>
       </Switch>
     </Router>

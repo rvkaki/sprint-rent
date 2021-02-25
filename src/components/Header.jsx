@@ -146,7 +146,7 @@ const Header = props => {
           <Flex w="100%" dir="row" justify="space-evenly">
             <Menu
               label={
-                <Text as="button" fontSize="md">
+                <Text as="button" fontSize="sm">
                   {t('header.group')}
                 </Text>
               }
@@ -190,31 +190,42 @@ const Header = props => {
                 </Flex>
               }
             />
+            <Text
+              as="a"
+              href="https://www.sprinttravelviagens.com/"
+              target="_blank"
+              fontSize="sm"
+            >
+              {t('drawer.group.travel')}
+            </Text>
             <Link to="/frota">
-              <Text fontSize="md">{t('header.fleet.national')}</Text>
+              <Text fontSize="sm">{t('header.fleet.national')}</Text>
             </Link>
             <Text
               as="a"
               href="https://www.rentalcars.com/Home.do?affiliateCode=sprinttra667"
               target="_blank"
-              fontSize="md"
+              fontSize="sm"
             >
               {t('header.fleet.international')}
             </Text>
             <Link to="/franchising">
-              <Text fontSize="md">{t('header.franchise')}</Text>
+              <Text fontSize="sm">{t('header.franchise')}</Text>
             </Link>
             <Link to="/sale">
-              <Text fontSize="md">{t('header.sale')}</Text>
+              <Text fontSize="sm">{t('header.sale')}</Text>
             </Link>
             <Text
               as="a"
               href="https://beta.sprintsolucoesinformaticas.com/admin"
               target="_blank"
-              fontSize="md"
+              fontSize="sm"
             >
               {t('header.login')}
             </Text>
+            <Link to="/contactos">
+              <Text fontSize="sm">{t('header.contacts')}</Text>
+            </Link>
           </Flex>
           <Flex dir="row" justify="flex-end">
             <Text
