@@ -18,16 +18,14 @@ const Home = props => {
   useEffect(() => {
     getLocations().then(data => setLocations(data));
     getHighlights().then(data => setHighlights(data));
-    getSlides().then(data =>
+    getSlides().then(data => {
       setImages(
         data.slides.map(i => {
           return { src: process.env.REACT_APP_SERVER_URL + i.url, alt: i.name };
         })
-      )
-    );
-    setTimeout(() => {
+      );
       setLoading(false);
-    }, 3000);
+    });
   }, []);
 
   return (
@@ -60,7 +58,11 @@ const Home = props => {
               justify="center"
               align="center"
             >
-              <Box pos="relative" w="100%" h="auto">
+              <Box
+                pos="relative"
+                w="100%"
+                minH={{ base: '30vh', lg: '50vh' }}
+              >
                 <Box pos="absolute" bottom={0} w="100%" bg="#333" h="45%" />
                 {images ? (
                   <>

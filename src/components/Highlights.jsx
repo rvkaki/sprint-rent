@@ -7,7 +7,7 @@ const Highlights = props => {
   const history = useHistory();
   const [t] = useTranslation('common');
   return (
-    <Box w="90%" mx="auto" my={{ base: 16, md: 32 }}>
+    <Box w="90%" mx="auto" my={16}>
       <Text
         fontSize={{ base: '3xl', md: '5xl' }}
         fontWeight="semibold"
