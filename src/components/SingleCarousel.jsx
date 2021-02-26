@@ -65,7 +65,8 @@ const SingleCarousel = props => {
         <Box
           as="img"
           src={images[idx].src}
-          boxSize="3xs"
+          boxSize={props.w ? 'auto' : "3xs"}
+          w={props.w ? props.w : 'auto'}
           objectFit="cover"
           zIndex="2"
         />

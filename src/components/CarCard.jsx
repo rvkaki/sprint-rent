@@ -9,7 +9,7 @@ const CarCard = props => {
   const history = useHistory();
   const imgSrc =
     process.env.REACT_APP_SERVER_URL +
-    props.car.images.find(x => x.name === '0.png').url;
+    props.car.images.find(x => x.name.match(/0\.\w+/g)).url;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [t] = useTranslation('common');
 

@@ -49,7 +49,8 @@
       "type": "enumeration",
       "enum": [
         "ligeiro",
-        "comercial"
+        "comercial",
+        "minibus"
       ],
       "required": true
     },

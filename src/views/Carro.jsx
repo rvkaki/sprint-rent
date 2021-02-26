@@ -8,6 +8,7 @@ import InfoCard from '../components/InfoCard';
 import { getCar, getLocations } from '../util/apiCalls';
 import DataPopUp from '../components/DataPopUp';
 import AppContext from '../context/AppContext';
+import SingleCarousel from '../components/SingleCarousel';
 
 const Carro = props => {
   const history = useHistory();
@@ -75,6 +76,63 @@ const Carro = props => {
     handleMove(e.touches[0]);
   };
 
+  const Draggable = (
+    <Flex
+      w={{ base: '100%', lg: '60%' }}
+      direction="column"
+      zIndex={2}
+      align="center"
+      justify="center"
+      m="auto"
+      draggable={false}
+      onMouseDown={e => {
+        setPrevX(e.screenX);
+        setPressed(true);
+      }}
+      onMouseUp={() => setPressed(false)}
+      onMouseLeave={() => setPressed(false)}
+      onMouseMove={pressed ? onMouseMove : () => {}}
+      onTouchStart={e => setPrevX(e.touches[0].screenX)}
+      onTouchMove={onTouchMove}
+      _hover={{
+        cursor: pressed ? 'grabbing' : 'grab',
+      }}
+    >
+      {images ? (
+        <Box
+          mt={{ base: '-5%', lg: '-15%' }}
+          as="img"
+          draggable={false}
+          objectFit="contain"
+          src={`${process.env.REACT_APP_SERVER_URL}${images[idx].url}`}
+          _selection={{}}
+        />
+      ) : (
+        <Spinner size="xl" />
+      )}
+      <Box position="relative" w="100%" mt="-25%">
+        <Box
+          draggable={false}
+          mx="auto"
+          as="img"
+          src="/assets/360line.svg"
+          w="90%"
+        />
+        <Box
+          as="img"
+          draggable={false}
+          src="/assets/360number.svg"
+          pos="absolute"
+          w="32px"
+          left={0}
+          right={0}
+          bottom={-2}
+          mx="auto"
+        />
+      </Box>
+    </Flex>
+  );
+
   return (
     <Flex direction="column" h="100vh">
       <Header />
@@ -90,60 +148,28 @@ const Carro = props => {
           bg="#333"
           h={{ base: '80%', md: '70%', lg: '45%' }}
         />
-        <Flex
-          w={{ base: '100%', lg: '60%' }}
-          direction="column"
-          zIndex={2}
-          align="center"
-          justify="center"
-          m="auto"
-          draggable={false}
-          onMouseDown={e => {
-            setPrevX(e.screenX);
-            setPressed(true);
-          }}
-          onMouseUp={() => setPressed(false)}
-          onMouseLeave={() => setPressed(false)}
-          onMouseMove={pressed ? onMouseMove : () => {}}
-          onTouchStart={e => setPrevX(e.touches[0].screenX)}
-          onTouchMove={onTouchMove}
-          _hover={{
-            cursor: pressed ? 'grabbing' : 'grab',
-          }}
-        >
-          {images ? (
-            <Box
-              mt={{ base: '-5%', lg: '-15%' }}
-              as="img"
-              draggable={false}
-              objectFit="contain"
-              src={`${process.env.REACT_APP_SERVER_URL}${images[idx].url}`}
-              _selection={{}}
-            />
+        {images ? (
+          images.length === 18 ? (
+            Draggable
           ) : (
-            <Spinner size="xl" />
-          )}
-          <Box position="relative" w="100%" mt="-25%">
             <Box
-              draggable={false}
-              mx="auto"
-              as="img"
-              src="/assets/360line.svg"
-              w="90%"
-            />
-            <Box
-              as="img"
-              draggable={false}
-              src="/assets/360number.svg"
-              pos="absolute"
-              w="32px"
-              left={0}
-              right={0}
-              bottom={-2}
-              mx="auto"
-            />
-          </Box>
-        </Flex>
+              w={{ base: '100%', lg: '60%' }}
+              alignSelf="center"
+              m="auto"
+              my={{ base: 8, lg: 'auto' }}
+            >
+              <SingleCarousel
+                w={{ base: '90%', lg: '100%' }}
+                images={images.map(i => {
+                  return {
+                    src: `${process.env.REACT_APP_SERVER_URL}${i.url}`,
+                    alt: i.name,
+                  };
+                })}
+              />
+            </Box>
+          )
+        ) : null}
         <Box
           w={{ base: '80%', lg: '25%' }}
           h={{ base: '45%', md: '50%', lg: '75%' }}
