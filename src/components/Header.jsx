@@ -120,7 +120,7 @@ const Header = props => {
         <Image
           src="/assets/images/logo.png"
           alt="Logo"
-          maxH={{ base: '60%', lg: '80%' }}
+          h="100%"
           onClick={() => history.replace('/')}
           _hover={{
             cursor: 'pointer',

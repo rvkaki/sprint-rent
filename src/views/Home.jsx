@@ -44,11 +44,9 @@ const Home = props => {
               position="absolute"
             >
               <MainSearch
-                options={locations
-                  .map(l => {
-                    return { name: l.title, value: l.id };
-                  })
-                  .sort((l1, l2) => l2.name < l1.name)}
+                options={locations.map(l => {
+                  return { name: l.title, value: l.id };
+                })}
               />
             </Box>
             <Flex
@@ -58,11 +56,7 @@ const Home = props => {
               justify="center"
               align="center"
             >
-              <Box
-                pos="relative"
-                w="100%"
-                minH={{ base: '30vh', lg: '50vh' }}
-              >
+              <Box pos="relative" w="100%" minH={{ base: '30vh', lg: '50vh' }}>
                 <Box pos="absolute" bottom={0} w="100%" bg="#333" h="45%" />
                 {images ? (
                   <>

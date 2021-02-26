@@ -13,17 +13,24 @@ const Sale = props => {
       <Flex
         w="100%"
         h="100%"
+        px={4}
         direction="column"
         align="center"
         justify="center"
       >
-        <Text fontSize="4xl" fontWeight="medium" color="gray.800">
+        <Text
+          fontSize={{ base: '2xl', md: '4xl' }}
+          textAlign="center"
+          fontWeight="medium"
+          color="gray.800"
+        >
           {t('sale.unavailable')}
         </Text>
         <Box
           as="img"
-          src="https://img.icons8.com/ios-filled/500/000000/roadblock.png"
-          alt="roadblock"
+          src="/assets/images/usados.png"
+          alt="usados"
+          h="60%"
           objectFit="contain"
         />
       </Flex>

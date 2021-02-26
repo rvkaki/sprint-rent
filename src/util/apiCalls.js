@@ -34,7 +34,7 @@ export const getLocations = async () => {
   try {
     const res = await fetch(`${serverURL}/locations`);
     const data = await res.json();
-    return data;
+    return data.sort((a, b) => a.id > b.id);
   } catch (error) {
     console.log(error);
   }
