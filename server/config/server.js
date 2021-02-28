@@ -1,8 +1,8 @@
 module.exports = ({ env }) => ({
   host: env('HOST', '0.0.0.0'),
-  port: env.int('PORT', 1337),
+  port: env.int('PORT', 1338),
   emitErrors: false,
-  url: env('PUBLIC_URL', 'https://api.example.com'),
+  url: env('PUBLIC_URL', 'https://sprinttravelrentacar.com'),
   proxy: env.bool('IS_PROXIED', true),
   cron: {
     enabled: env.bool('CRON_ENABLED', false),

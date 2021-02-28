@@ -82,7 +82,7 @@ const CustomDrawer = props => {
                 fontSize="xl"
                 fontWeight="semibold"
                 as="a"
-                href="/admin"
+                href="https://rentacar.filipeamorim.com/admin/"
                 target="_blank"
               >
                 {t('drawer.login')}

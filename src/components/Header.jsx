@@ -217,7 +217,7 @@ const Header = props => {
             </Link>
             <Text
               as="a"
-              href="https://beta.sprintsolucoesinformaticas.com/admin"
+              href="https://rentacar.filipeamorim.com/admin/"
               target="_blank"
               fontSize="sm"
             >
