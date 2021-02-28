@@ -34,7 +34,7 @@ const CarouselButton = props => {
 };
 
 const SingleCarousel = props => {
-  const [idx, setIdx] = useState(1);
+  const [idx, setIdx] = useState(0);
   const [images, setImages] = useState();
 
   const handleClick = dir => {
