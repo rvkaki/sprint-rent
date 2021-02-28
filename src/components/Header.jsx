@@ -88,7 +88,7 @@ const Header = props => {
           <Box
             flex={1}
             as="a"
-            href="https://www.facebook.com/sprinttravelviagens/"
+            href="https://www.facebook.com/sprinttravelrentacar/"
             target="_blank"
           >
             <Box

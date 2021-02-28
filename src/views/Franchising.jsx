@@ -21,11 +21,9 @@ const Franchising = props => {
   const shareUrl = window.location.href;
 
   const submit = (name, email, contact, area, subject, message) => {
-    console.log(name, email, contact, area, subject, message);
     setLoading(true);
     sendFranchiseEmail(name, email, contact, area, subject, message).then(
       res => {
-        console.log(res);
         setLoading(false);
         if (res.ok)
           modal.open(t('checkout.order.requested'), t('checkout.order.text'));

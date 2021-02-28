@@ -67,7 +67,6 @@ const Checkout = props => {
       delivery,
       numDays
     ).then(res => {
-      console.log(res);
       setLoading(false);
       if (res.ok)
         modal.open(t('checkout.order.requested'), t('checkout.order.text'));

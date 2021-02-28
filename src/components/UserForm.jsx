@@ -10,6 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
 
 const emailRegex =
   "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
@@ -83,7 +84,7 @@ const UserForm = props => {
             fontWeight="semibold"
             onClick={e => {
               e.stopPropagation();
-              modal.open(t('footer.info.terms'), props.terms);
+              modal.open(t('footer.info.terms'), <ReactMarkdown>{props.terms}</ReactMarkdown>);
             }}
           >
             {t('checkout.info.terms')}

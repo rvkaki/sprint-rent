@@ -6,7 +6,7 @@ export const getCars = async query => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -16,7 +16,7 @@ export const getFilterParams = async param => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -26,7 +26,7 @@ export const getCar = async id => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -36,7 +36,7 @@ export const getLocations = async () => {
     const data = await res.json();
     return data.sort((a, b) => a.id > b.id);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -46,7 +46,7 @@ export const getLocation = async id => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -56,7 +56,7 @@ export const getSlides = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -66,7 +66,7 @@ export const getPrivacyPolicy = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -76,7 +76,7 @@ export const getTermsAndConditions = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -86,7 +86,7 @@ export const getFranchisingBook = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -96,7 +96,7 @@ export const getHighlights = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -106,6 +106,6 @@ export const getOffer = async id => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
