@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import Header from '../components/Header';
 import SingleCarousel from '../components/SingleCarousel';
 import { Carousel } from '../components/Carousel3D';
@@ -58,6 +58,22 @@ const Home = props => {
             >
               <Box pos="relative" w="100%" minH={{ base: '30vh', lg: '50vh' }}>
                 <Box pos="absolute" bottom={0} w="100%" bg="#333" h="45%" />
+                <Box
+                  pos="absolute"
+                  right={0}
+                  left={0}
+                  top={{ base: 8, lg: 10 }}
+                >
+                  <Text
+                    textAlign="center"
+                    fontFamily="Josefin Sans"
+                    fontWeight="light"
+                    fontSize={{base: "2xl", md: "3xl"}}
+                    color="gray.600"
+                  >
+                    ...take a ride with us
+                  </Text>
+                </Box>
                 {images ? (
                   <>
                     <Box display={{ base: 'none', md: 'inherit' }}>

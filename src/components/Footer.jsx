@@ -132,7 +132,7 @@ const Footer = props => {
         <HStack spacing={4}>
           <Box
             as="a"
-            href="https://www.facebook.com/sprinttravelviagens"
+            href="https://www.facebook.com/sprinttravelrentacar/"
             target="_blank"
           >
             <FontAwesomeIcon icon={faFacebookSquare} size="3x" color="white" />

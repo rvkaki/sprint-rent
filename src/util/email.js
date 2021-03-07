@@ -25,7 +25,7 @@ Total: ${numDays} x ${carInfo.price}€ = ${numDays * carInfo.price}€`;
     body: JSON.stringify({
       options: {
         to: emailTo,
-        from: 'geral@sprinttravelviagens.com',
+        from: 'reservas@sprinttravelrentacar.com',
         subject: 'Pedido de Reserva',
         text: messageBody,
       },
@@ -53,8 +53,8 @@ Total: ${offer.price}€`;
     method: 'POST',
     body: JSON.stringify({
       options: {
-        to: 'geral@sprinttravelviagens.com',
-        from: 'geral@sprinttravelviagens.com',
+        to: 'reservas@sprinttravelrentacar.com',
+        from: 'reservas@sprinttravelrentacar.com',
         subject: 'Pedido de Reserva',
         text: messageBody,
       },
@@ -82,7 +82,7 @@ ${message}`;
     method: 'POST',
     body: JSON.stringify({
       options: {
-        to: 'geral@sprinttravelviagens.com',
+        to: 'franchising@sprinttravelviagens.com',
         from: 'franchising@sprinttravelviagens.com',
         subject: `Franchising: ${subject}`,
         text: messageBody,
@@ -100,8 +100,8 @@ export const sendNumberEmail = async number => {
     method: 'POST',
     body: JSON.stringify({
       options: {
-        to: 'antoniocarvalho@sprinttravelviagens.com',
-        from: 'geral@sprinttravelviagens.com',
+        to: 'reservas@sprinttravelrentacar.com',
+        from: 'reservas@sprinttravelrentacar.com',
         subject: `Pedido de contacto Rent a Car`,
         text: messageBody,
       },

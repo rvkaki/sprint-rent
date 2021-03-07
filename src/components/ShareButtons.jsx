@@ -4,6 +4,8 @@ import {
   EmailShareButton,
   FacebookIcon,
   FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
 } from 'react-share';
 
 const ShareButtons = props => {
@@ -14,6 +16,9 @@ const ShareButtons = props => {
         <FacebookShareButton url={props.shareUrl}>
           <FacebookIcon size={32} round />
         </FacebookShareButton>
+        <WhatsappShareButton url={props.shareUrl}>
+          <WhatsappIcon size={32} round />
+        </WhatsappShareButton>
         <EmailShareButton url={props.shareUrl}>
           <EmailIcon size={32} round />
         </EmailShareButton>

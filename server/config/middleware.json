@@ -13,7 +13,8 @@
         "https://www.sprinttravelrentacar.com",
         "https://sprinttravelrentacar.com",
         "https://www.sprinttravelrentacar.pt",
-        "https://sprinttravelrentacar.pt"
+        "https://sprinttravelrentacar.pt",
+        "*"
       ],
       "enabled": true
     }

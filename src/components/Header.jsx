@@ -162,6 +162,7 @@ const Header = props => {
                   <Box
                     as="a"
                     href="https://www.sprinttravelviagens.com/"
+                    bg="white"
                     target="_blank"
                     fontSize="lg"
                     zIndex={2}
@@ -176,6 +177,7 @@ const Header = props => {
                   <Box
                     as="a"
                     href="https://www.sprinttravelshop.pt/"
+                    bg="white"
                     target="_blank"
                     fontSize="lg"
                     zIndex={2}
