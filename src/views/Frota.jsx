@@ -65,8 +65,7 @@ const Frota = props => {
       appState.setStartLocation(null);
     };
 
-    if (history.location.search !== '')
-      setStateFromQuery();
+    if (history.location.search !== '') setStateFromQuery();
     else clearState();
   }, [history.location.search]);
 
@@ -81,7 +80,9 @@ const Frota = props => {
       }
     }
     query = query.slice(0, -1);
-    getCars(query).then(data => setCars(data));
+    getCars(query).then(data =>
+      setCars(data.sort((c1, c2) => (c2.model > c1.model ? -1 : 1)))
+    );
   }, [appState.filters]);
 
   const selectCar = id => {

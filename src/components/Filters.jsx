@@ -68,7 +68,9 @@ const Filters = props => {
 
   useEffect(() => {
     getFilterParams('gas').then(data => setGas(data));
-    getFilterParams('model').then(data => setModels(data));
+    getFilterParams('model').then(data =>
+      setModels(data.sort((m1, m2) => (m2 > m1 ? -1 : 1)))
+    );
     getFilterParams('mode').then(data => setModes(data));
     getFilterParams('type').then(data => setTypes(data));
   }, []);
@@ -76,7 +78,7 @@ const Filters = props => {
   return (
     <Stack spacing={3}>
       <FilterGroup
-        label={(t('filters.gas'))}
+        label={t('filters.gas')}
         iconName={faGasPump}
         filters={gas}
         group="gas"
