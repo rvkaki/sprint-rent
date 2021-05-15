@@ -8,7 +8,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import CarCard from '../components/CarCard';
 import DataPopUp from '../components/DataPopUp';
 import Filters from '../components/Filters';
@@ -23,11 +23,13 @@ const Frota = props => {
   const [cars, setCars] = useState();
   const [locations, setLocations] = useState([]);
   const [grid, setGrid] = useState(false);
+  const [fleet, setFleet] = useState('');
   const appState = useContext(AppContext);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     getLocations().then(data => setLocations(data));
@@ -35,27 +37,35 @@ const Frota = props => {
 
   useEffect(() => {
     const setStateFromQuery = async () => {
-      const [pickup, delivery, date] = history.location.search
-        .slice(1)
-        .split('&');
-      appState.setStartLocation(parseInt(pickup.split('=')[1]));
-      appState.setEndLocation(parseInt(delivery.split('=')[1]));
-      const [startDate, endDate] = date.split('=')[1].split('-');
-      // convert from DD/MM/YYYY to MM/DD/YYYY to create date
-      appState.setStartDate(
-        new Date(
-          `${startDate.split('/')[1]}/${startDate.split('/')[0]}/${
-            startDate.split('/')[2]
-          }`
-        )
-      );
-      appState.setEndDate(
-        new Date(
-          `${endDate.split('/')[1]}/${endDate.split('/')[0]}/${
-            endDate.split('/')[2]
-          }`
-        )
-      );
+      const params = location.search.slice(1).split('&');
+      if (params.length === 1) {
+        setFleet(params[0].split('=')[1]);
+      } else {
+        const [pickup, delivery, date] = params;
+        appState.setStartLocation(parseInt(pickup.split('=')[1]));
+        appState.setEndLocation(parseInt(delivery.split('=')[1]));
+        if (locations.length > 0)
+          setFleet(
+            locations.find(l => l.id === parseInt(pickup.split('=')[1]))
+              .fleet || 'continente'
+          );
+        const [startDate, endDate] = date.split('=')[1].split('-');
+        // convert from DD/MM/YYYY to MM/DD/YYYY to create date
+        appState.setStartDate(
+          new Date(
+            `${startDate.split('/')[1]}/${startDate.split('/')[0]}/${
+              startDate.split('/')[2]
+            }`
+          )
+        );
+        appState.setEndDate(
+          new Date(
+            `${endDate.split('/')[1]}/${endDate.split('/')[0]}/${
+              endDate.split('/')[2]
+            }`
+          )
+        );
+      }
     };
 
     const clearState = async () => {
@@ -65,9 +75,9 @@ const Frota = props => {
       appState.setStartLocation(null);
     };
 
-    if (history.location.search !== '') setStateFromQuery();
+    if (location.search !== '') setStateFromQuery();
     else clearState();
-  }, [history.location.search]);
+  }, [location.search, locations]);
 
   useEffect(() => {
     let query = '?';
@@ -81,9 +91,17 @@ const Frota = props => {
     }
     query = query.slice(0, -1);
     getCars(query).then(data =>
-      setCars(data.sort((c1, c2) => (c2.model > c1.model ? -1 : 1)))
+      setCars(
+        data
+          .filter(c =>
+            fleet !== 'continente'
+              ? c.fleet === fleet
+              : c.fleet === fleet || c.fleet === null
+          )
+          .sort((c1, c2) => (c2.model > c1.model ? -1 : 1))
+      )
     );
-  }, [appState.filters]);
+  }, [appState.filters, fleet]);
 
   const selectCar = id => {
     appState.setCar(id);
@@ -107,7 +125,7 @@ const Frota = props => {
         pb={16}
         justify="space-between"
       >
-        <Filters />
+        <Filters fleet={fleet} />
 
         {cars ? (
           cars.length === 0 ? (

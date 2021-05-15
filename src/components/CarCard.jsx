@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import { getPrice } from '../util/functions';
 
 const CarCard = props => {
   const history = useHistory();
   const imgSrc =
     process.env.REACT_APP_SERVER_URL +
-    props.car.images.find(x => x.name.match(/0\.\w+/g)).url;
+    props.car.images.find(x => x.name.match(/0\.\w+/g))?.url;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [t] = useTranslation('common');
 
@@ -108,18 +109,32 @@ const CarCard = props => {
               </Flex>
               <Text textTransform="capitalize">{props.car.gas}</Text>
             </Flex>
-            <Flex dir="row">
-              <Flex w="30px" justify="center" align="center">
-                <Box
-                  as="img"
-                  w="24px"
-                  src="https://img.icons8.com/material/24/000000/car-door--v2.png"
-                />
+            {props.car.type !== 'mota' && (
+              <Flex dir="row">
+                <Flex w="30px" justify="center" align="center">
+                  <Box
+                    as="img"
+                    w="24px"
+                    src="https://img.icons8.com/material/24/000000/car-door--v2.png"
+                  />
+                </Flex>
+                <Text textTransform="capitalize">
+                  {props.car.doors} {t('car.doors')}
+                </Text>
               </Flex>
-              <Text textTransform="capitalize">
-                {props.car.doors} {t('car.doors')}
-              </Text>
-            </Flex>
+            )}
+            {props.car.type === 'mota' && (
+              <Flex dir="row">
+                <Flex w="30px" justify="center" align="center">
+                  <Box
+                    as="img"
+                    w="24px"
+                    src="https://img.icons8.com/metro/50/000000/motorcycle.png"
+                  />
+                </Flex>
+                <Text textTransform="capitalize">{props.car.cc}</Text>
+              </Flex>
+            )}
           </Stack>
         </Box>
         <Flex direction="column" justify="space-between" align="flex-end">
@@ -138,7 +153,7 @@ const CarCard = props => {
           </Box>
           <Flex dir="row" align="baseline">
             <Text fontSize="4xl" fontWeight="bold" color="black">
-              {props.car.price}€
+              {getPrice(props.car)}€
             </Text>
             <Text>/{t('day')}</Text>
           </Flex>

@@ -35,7 +35,9 @@
       "type": "enumeration",
       "enum": [
         "diesel",
-        "gasolina"
+        "gasolina",
+        "eletrico",
+        "hibrido"
       ]
     },
     "doors": {
@@ -48,6 +50,7 @@
     "type": {
       "type": "enumeration",
       "enum": [
+        "mota",
         "ligeiro",
         "comercial",
         "minibus"
@@ -64,6 +67,23 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "fleet": {
+      "type": "enumeration",
+      "enum": [
+        "continente",
+        "madeira",
+        "acores"
+      ],
+      "default": "continente"
+    },
+    "cc": {
+      "type": "string"
+    },
+    "seasonalPrice": {
+      "type": "component",
+      "repeatable": true,
+      "component": "season.season"
     }
   }
 }

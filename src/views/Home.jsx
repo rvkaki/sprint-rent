@@ -44,9 +44,11 @@ const Home = props => {
               position="absolute"
             >
               <MainSearch
-                options={locations.map(l => {
-                  return { name: l.title, value: l.id };
-                })}
+                options={locations
+                  .map(l => {
+                    return { name: l.title, value: l.id, fleet: l.fleet };
+                  })
+                  .sort((l1, l2) => (l2.name > l1.name ? -1 : 1))}
               />
             </Box>
             <Flex
@@ -68,7 +70,7 @@ const Home = props => {
                     textAlign="center"
                     fontFamily="Josefin Sans"
                     fontWeight="light"
-                    fontSize={{base: "2xl", md: "3xl"}}
+                    fontSize={{ base: '2xl', md: '3xl' }}
                     color="gray.600"
                   >
                     ...take a ride with us

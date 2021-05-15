@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_season_seasons",
+  "info": {
+    "name": "Season",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "start": {
+      "type": "date",
+      "required": true
+    },
+    "finish": {
+      "type": "date",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}

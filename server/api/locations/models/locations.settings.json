@@ -28,6 +28,15 @@
       "type": "component",
       "repeatable": true,
       "component": "contact.number"
+    },
+    "fleet": {
+      "type": "enumeration",
+      "enum": [
+        "continente",
+        "madeira",
+        "acores"
+      ],
+      "default": "continente"
     }
   }
 }

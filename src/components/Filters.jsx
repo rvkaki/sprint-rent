@@ -67,13 +67,13 @@ const Filters = props => {
   const t = props.t;
 
   useEffect(() => {
-    getFilterParams('gas').then(data => setGas(data));
-    getFilterParams('model').then(data =>
+    getFilterParams(props.fleet, 'gas').then(data => setGas(data));
+    getFilterParams(props.fleet, 'model').then(data =>
       setModels(data.sort((m1, m2) => (m2 > m1 ? -1 : 1)))
     );
-    getFilterParams('mode').then(data => setModes(data));
-    getFilterParams('type').then(data => setTypes(data));
-  }, []);
+    getFilterParams(props.fleet, 'mode').then(data => setModes(data));
+    getFilterParams(props.fleet, 'type').then(data => setTypes(data));
+  }, [props.fleet]);
 
   return (
     <Stack spacing={3}>
@@ -150,11 +150,11 @@ const FiltersContainer = props => {
           p={4}
           borderRadius="md"
         >
-          <Filters t={t} />
+          <Filters t={t} fleet={props.fleet} />
         </Box>
       </Box>
       <Box display={{ base: 'none', lg: 'inherit' }}>
-        <Filters t={t} />
+        <Filters t={t} fleet={props.fleet} />
       </Box>
     </Box>
   );

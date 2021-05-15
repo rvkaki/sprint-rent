@@ -7,16 +7,17 @@
 
 module.exports = {
   getParams: async ctx => {
-    const { t } = ctx.query;
+    const { fleet, t } = ctx.query;
     const attr = Object.keys(strapi.models.cars.attributes);
     if (attr.includes(t)) {
-      let entities = await strapi.services.cars.find();
+      // let entities = await strapi.services.cars.find({ fleet: fleet });
+      let entities = await strapi.query('cars').find({ fleet: fleet });
       entities = entities.map(e => e[t]);
       const res = new Set(entities);
       return Array.from(res);
     } else {
       ctx.response.status = 400;
-      ctx.response.message = "Couldn't fulfill your request";
+      ctx.response.message = 'Couldn\'t fulfill your request';
     }
   },
 };

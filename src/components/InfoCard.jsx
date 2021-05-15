@@ -3,6 +3,7 @@ import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { getPrice } from '../util/functions';
 
 const InfoCard = props => {
   const [t] = useTranslation('common');
@@ -90,21 +91,38 @@ const InfoCard = props => {
             {props.gas}
           </Text>
         </Flex>
-        <Flex dir="row" align="center">
-          <Flex
-            w={{ base: '32px', md: '50px' }}
-            justify="center"
-            align="center"
-          >
-            <Box
-              as="img"
-              src="https://img.icons8.com/material/48/000000/car-door--v2.png"
-            />
+        {props.type !== 'mota' && (
+          <Flex dir="row" align="center">
+            <Flex
+              w={{ base: '32px', md: '50px' }}
+              justify="center"
+              align="center"
+            >
+              <Box
+                as="img"
+                src="https://img.icons8.com/material/48/000000/car-door--v2.png"
+              />
+            </Flex>
+            <Text fontSize="lg">
+              {props.doors} {t('car.doors')}
+            </Text>
           </Flex>
-          <Text fontSize="lg">
-            {props.doors} {t('car.doors')}
-          </Text>
-        </Flex>
+        )}
+        {props.type === 'mota' && (
+          <Flex dir="row" align="center">
+            <Flex
+              w={{ base: '32px', md: '50px' }}
+              justify="center"
+              align="center"
+            >
+              <Box
+                as="img"
+                src="https://img.icons8.com/metro/50/000000/motorcycle.png"
+              />
+            </Flex>
+            <Text fontSize="lg">{props.cc}</Text>
+          </Flex>
+        )}
       </Stack>
       <Flex justify="space-between">
         <Flex align="baseline">
@@ -113,7 +131,7 @@ const InfoCard = props => {
             fontWeight="bold"
             color="black"
           >
-            {props.price}€
+            {getPrice(props)}€
           </Text>
           <Text fontSize={{ base: 'md', md: 'lg' }}>/{t('day')}</Text>
         </Flex>

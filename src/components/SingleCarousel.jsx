@@ -64,7 +64,7 @@ const SingleCarousel = props => {
       <Flex dir="row" justify="center" align="center" zIndex="1">
         <Box
           as="img"
-          src={images[idx].src}
+          src={images[idx]?.src}
           boxSize={props.w ? 'auto' : "3xs"}
           w={props.w ? props.w : 'auto'}
           objectFit="cover"

@@ -17,7 +17,11 @@ const getCoordinates = async address => {
 };
 
 const getStaticMap = (center, zoom, overlay) => {
-  return `https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/${overlay}/${center[0]},${center[1]},${zoom}/600x900?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`;
+  return `https://api.mapbox.com/styles/v1/mapbox/streets-v11/static${
+    overlay && `/${overlay}`
+  }/${center[0]},${center[1]},${zoom}/600x900?access_token=${
+    process.env.REACT_APP_MAPBOX_TOKEN
+  }`;
 };
 
 const LocationMap = props => {
@@ -29,7 +33,7 @@ const LocationMap = props => {
       for (let i = 0; i < props.locations.length; i++) {
         const l = props.locations[i];
         const data = await getCoordinates(l.address);
-        if (data.features) {
+        if (data.features && data.features.length > 0) {
           const marker = `pin-s+000(${data.features[0].center[0]},${data.features[0].center[1]})`;
           overlay.push(marker);
         }

@@ -10,9 +10,11 @@ export const getCars = async query => {
   }
 };
 
-export const getFilterParams = async param => {
+export const getFilterParams = async (fleet, param) => {
   try {
-    const res = await fetch(`${serverURL}/cars/params?t=${param}`);
+    const res = await fetch(
+      `${serverURL}/cars/params?fleet=${fleet}&t=${param}`
+    );
     const data = await res.json();
     return data;
   } catch (error) {

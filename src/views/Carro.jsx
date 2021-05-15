@@ -43,7 +43,7 @@ const Carro = props => {
   useEffect(() => {
     if (car.images)
       loadImages(
-        car.images.map(i => process.env.REACT_APP_SERVER_URL + i.url)
+        car.images.map(i => process.env.REACT_APP_SERVER_URL + i?.url)
       ).then(() => {
         const newImages = car.images.sort((a, b) => {
           const aName = parseInt(a.name.split('.')[0]);
@@ -104,7 +104,7 @@ const Carro = props => {
           as="img"
           draggable={false}
           objectFit="contain"
-          src={`${process.env.REACT_APP_SERVER_URL}${images[idx].url}`}
+          src={`${process.env.REACT_APP_SERVER_URL}${images[idx]?.url}`}
           _selection={{}}
         />
       ) : (
@@ -162,8 +162,8 @@ const Carro = props => {
                 w={{ base: '90%', lg: '100%' }}
                 images={images.map(i => {
                   return {
-                    src: `${process.env.REACT_APP_SERVER_URL}${i.url}`,
-                    alt: i.name,
+                    src: `${process.env.REACT_APP_SERVER_URL}${i?.url}`,
+                    alt: i?.name,
                   };
                 })}
               />

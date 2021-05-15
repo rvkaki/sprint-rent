@@ -1,3 +1,5 @@
+import { getPrice } from './functions';
+
 export const sendOrderEmail = async (
   name,
   email,
@@ -16,7 +18,7 @@ Carro: ${carInfo.brand} ${carInfo.model}
 Data: ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}
 Recolha: ${pickup.title}
 Entrega: ${delivery.title}
-Total: ${numDays} x ${carInfo.price}€ = ${numDays * carInfo.price}€`;
+Total: ${numDays} x ${getPrice(carInfo)}€ = ${numDays * getPrice(carInfo)}€`;
 
   const emailTo = pickup.emails[0].email;
 

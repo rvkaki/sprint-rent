@@ -3,6 +3,7 @@ import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
+import { getPrice } from '../util/functions';
 
 const Order = props => {
   const image = props.car.images.find(i => i.name === '0.png');
@@ -12,8 +13,8 @@ const Order = props => {
       <Box w="100%" position="relative">
         <Box
           as="img"
-          src={`${process.env.REACT_APP_SERVER_URL}${image.url}`}
-          alt={image.name}
+          src={`${process.env.REACT_APP_SERVER_URL}${image?.url}`}
+          alt={image?.name}
           w="100%"
           h="100%"
           objectFit="cover"
@@ -106,16 +107,16 @@ const Order = props => {
             <Flex mx={4} dir="row" justify="space-between">
               <Text>Base:</Text>
               <Text>
-                {props.numDays} x {props.car.price}€
+                {props.numDays} x {getPrice(props.car)}€
               </Text>
-              <Text>{props.car.price * props.numDays}€</Text>
+              <Text>{getPrice(props.car) * props.numDays}€</Text>
             </Flex>
           </Box>
         </Stack>
         <Flex mt={16} dir="row" align="baseline">
           <Text fontSize="lg">Total:</Text>
           <Text ml={2} fontSize="3xl" fontWeight="bold">
-            {props.car.price * props.numDays}€
+            {getPrice(props.car) * props.numDays}€
           </Text>
         </Flex>
       </Box>

@@ -200,9 +200,51 @@ const Header = props => {
             >
               {t('drawer.group.travel')}
             </Text>
-            <Link to="/frota">
-              <Text fontSize="sm">{t('header.fleet.national')}</Text>
-            </Link>
+            <Menu
+              label={
+                <Text as="button" fontSize="sm">
+                  {t('header.fleet.national')}
+                </Text>
+              }
+              menu={
+                <Flex
+                  direction="column"
+                  bg="white"
+                  w="200px"
+                  border="1px solid"
+                  borderColor="gray.300"
+                  shadow="lg"
+                  fontSize="lg"
+                >
+                  <Box
+                    as={Link}
+                    to="/frota?frota=continente"
+                    zIndex={2}
+                    px={2}
+                    py={1}
+                    bg="white"
+                    _hover={{
+                      bg: 'gray.300',
+                    }}
+                  >
+                    <Text>Continente</Text>
+                  </Box>
+                  <Box
+                    as={Link}
+                    to="/frota?frota=madeira"
+                    zIndex={2}
+                    px={2}
+                    py={1}
+                    bg="white"
+                    _hover={{
+                      bg: 'gray.300',
+                    }}
+                  >
+                    <Text>Madeira</Text>
+                  </Box>
+                </Flex>
+              }
+            />
             <Text
               as="a"
               href="https://www.rentalcars.com/Home.do?affiliateCode=sprinttra667"
