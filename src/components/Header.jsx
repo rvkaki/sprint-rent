@@ -242,6 +242,19 @@ const Header = props => {
                   >
                     <Text>Madeira</Text>
                   </Box>
+                  <Box
+                    as={Link}
+                    to="/frota?frota=acores"
+                    zIndex={2}
+                    px={2}
+                    py={1}
+                    bg="white"
+                    _hover={{
+                      bg: 'gray.300',
+                    }}
+                  >
+                    <Text>Açores</Text>
+                  </Box>
                 </Flex>
               }
             />
