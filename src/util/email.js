@@ -18,7 +18,9 @@ Carro: ${carInfo.brand} ${carInfo.model}
 Data: ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}
 Recolha: ${pickup.title}
 Entrega: ${delivery.title}
-Total: ${numDays} x ${getPrice(carInfo)}€ = ${numDays * getPrice(carInfo)}€`;
+Total: ${numDays} x ${getPrice(carInfo, { startDate })}€ = ${
+    numDays * getPrice(carInfo, { startDate })
+  }€`;
 
   const emailTo = pickup.emails[0].email;
 

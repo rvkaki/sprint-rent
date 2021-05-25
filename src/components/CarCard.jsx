@@ -1,9 +1,10 @@
 import { Box, Flex, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 import { getPrice } from '../util/functions';
 
 const CarCard = props => {
@@ -12,6 +13,7 @@ const CarCard = props => {
     process.env.REACT_APP_SERVER_URL +
     props.car.images.find(x => x.name.match(/0\.\w+/g))?.url;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const appContext = useContext(AppContext);
   const [t] = useTranslation('common');
 
   const handleSelect = e => {
@@ -153,7 +155,7 @@ const CarCard = props => {
           </Box>
           <Flex dir="row" align="baseline">
             <Text fontSize="4xl" fontWeight="bold" color="black">
-              {getPrice(props.car)}€
+              {getPrice(props.car, appContext)}€
             </Text>
             <Text>/{t('day')}</Text>
           </Flex>

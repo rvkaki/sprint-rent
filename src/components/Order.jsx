@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { getPrice } from '../util/functions';
+import AppContext from '../context/AppContext';
 
 const Order = props => {
   const image = props.car.images.find(i => i.name === '0.png');
+  const appContext = useContext(AppContext);
+
   const [t] = useTranslation('common');
   return (
     <Box w="100%">
@@ -107,16 +110,16 @@ const Order = props => {
             <Flex mx={4} dir="row" justify="space-between">
               <Text>Base:</Text>
               <Text>
-                {props.numDays} x {getPrice(props.car)}€
+                {props.numDays} x {getPrice(props.car, appContext)}€
               </Text>
-              <Text>{getPrice(props.car) * props.numDays}€</Text>
+              <Text>{getPrice(props.car, appContext) * props.numDays}€</Text>
             </Flex>
           </Box>
         </Stack>
         <Flex mt={16} dir="row" align="baseline">
           <Text fontSize="lg">Total:</Text>
           <Text ml={2} fontSize="3xl" fontWeight="bold">
-            {getPrice(props.car) * props.numDays}€
+            {getPrice(props.car, appContext) * props.numDays}€
           </Text>
         </Flex>
       </Box>

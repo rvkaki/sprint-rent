@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Flex, Stack, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGasPump, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { getPrice } from '../util/functions';
+import AppContext from '../context/AppContext';
 
 const InfoCard = props => {
   const [t] = useTranslation('common');
+  const appContext = useContext(AppContext);
+
   return (
     <Flex
       direction="column"
@@ -131,7 +134,7 @@ const InfoCard = props => {
             fontWeight="bold"
             color="black"
           >
-            {getPrice(props)}€
+            {getPrice(props, appContext)}€
           </Text>
           <Text fontSize={{ base: 'md', md: 'lg' }}>/{t('day')}</Text>
         </Flex>

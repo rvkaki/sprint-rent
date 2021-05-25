@@ -1,9 +1,10 @@
-export function getPrice(car) {
+export function getPrice(car, { startDate }) {
   let curPrice;
+  let date = new Date();
   if (car.seasonalPrice?.length > 0) {
-    const today = new Date();
+    if (startDate) date = startDate;
     curPrice = car.seasonalPrice.find(
-      item => new Date(item.start) < today && new Date(item.finish) > today
+      item => new Date(item.start) < date && new Date(item.finish) > date
     )?.price;
   }
 
