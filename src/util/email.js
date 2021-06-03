@@ -29,6 +29,7 @@ Total: ${numDays} x ${getPrice(carInfo, { startDate })}€ = ${
     body: JSON.stringify({
       options: {
         to: emailTo,
+        cc: 'reservas@sprinttravelrentacar.com',
         from: 'reservas@sprinttravelrentacar.com',
         subject: 'Pedido de Reserva',
         text: messageBody,

@@ -1,4 +1,8 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Drawer,
   DrawerBody,
@@ -7,9 +11,12 @@ import {
   DrawerFooter,
   DrawerOverlay,
   Flex,
+  HStack,
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -25,7 +32,7 @@ const CustomDrawer = props => {
       returnFocusOnClose
     >
       <DrawerOverlay>
-        <DrawerContent py="20%">
+        <DrawerContent py="12">
           <DrawerCloseButton _focus={{}} _active={{}} _hover={{}} />
           <DrawerBody display="flex">
             <Stack spacing={5}>
@@ -56,13 +63,131 @@ const CustomDrawer = props => {
                 <Text fontSize="xl" fontWeight="semibold">
                   {t('drawer.fleet.title')}
                 </Text>
-                <Stack ml={3} spacing={1}>
-                  <Link to="/frota">{t('drawer.fleet.national')}</Link>
+                <Stack ml={3} spacing={1} fontSize="lg">
+                  <Text>{t('drawer.fleet.national')}</Text>
+                  <Accordion ml={3} fontSize="md" allowToggle>
+                    <Stack spacing={0} w="100%">
+                      <AccordionItem
+                        border="0"
+                        as={Link}
+                        onClick={props.onClose}
+                        to="/frota?frota=continente"
+                        zIndex={2}
+                        px={2}
+                        py={1}
+                        bg="white"
+                        _hover={{
+                          bg: 'gray.300',
+                        }}
+                      >
+                        <Text>Continente</Text>
+                      </AccordionItem>
+                      <AccordionItem
+                        border="0"
+                        as={Link}
+                        onClick={props.onClose}
+                        to="/frota?frota=madeira"
+                        zIndex={2}
+                        px={2}
+                        py={1}
+                        bg="white"
+                        _hover={{
+                          bg: 'gray.300',
+                        }}
+                      >
+                        <Text>Madeira</Text>
+                      </AccordionItem>
+                      <AccordionItem border="0">
+                        {({ isExpanded }) => (
+                          <>
+                            <AccordionButton
+                              px={2}
+                              py={1}
+                              bg="white"
+                              _hover={{
+                                bg: 'gray.300',
+                              }}
+                              _active={{}}
+                              _focus={{}}
+                            >
+                              <HStack w="100%" justifyContent="space-between">
+                                <Text>Açores</Text>
+                                <FontAwesomeIcon
+                                  icon={
+                                    isExpanded ? faChevronUp : faChevronDown
+                                  }
+                                />
+                              </HStack>
+                            </AccordionButton>
+                            <AccordionPanel>
+                              <Stack>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=sao_miguel"
+                                >
+                                  Ilha de São Miguel
+                                </Text>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=terceira"
+                                >
+                                  Ilha Terceira
+                                </Text>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=faial"
+                                >
+                                  Ilha do Faial
+                                </Text>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=pico"
+                                >
+                                  Ilha do Pico
+                                </Text>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=santa_maria"
+                                >
+                                  Ilha de Santa Maria
+                                </Text>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=flores"
+                                >
+                                  Ilha das Flores
+                                </Text>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=graciosa"
+                                >
+                                  Ilha da Graciosa
+                                </Text>
+                                <Text
+                                  as={Link}
+                                  onClick={props.onClose}
+                                  to="/frota?frota=corvo"
+                                >
+                                  Ilha do Corvo
+                                </Text>
+                              </Stack>
+                            </AccordionPanel>
+                          </>
+                        )}
+                      </AccordionItem>
+                    </Stack>
+                  </Accordion>
                   <Text
                     as="a"
                     href="https://www.rentalcars.com/Home.do?affiliateCode=sprinttra667"
                     target="_blank"
-                    fontSize="md"
                   >
                     {t('drawer.fleet.international')}
                   </Text>

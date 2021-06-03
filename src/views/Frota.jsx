@@ -40,6 +40,7 @@ const Frota = props => {
       const params = location.search.slice(1).split('&');
       if (params.length === 1) {
         setFleet(params[0].split('=')[1]);
+        clearState();
       } else {
         const [pickup, delivery, date] = params;
         appState.setStartLocation(parseInt(pickup.split('=')[1]));
@@ -182,9 +183,11 @@ const Frota = props => {
       </Flex>
 
       <DataPopUp
-        options={locations.map(l => {
-          return { name: l.title, value: l.id };
-        })}
+        options={locations
+          .map(l => {
+            return { name: l.title, value: l.id };
+          })
+          .sort((l1, l2) => (l2.name > l1.name ? -1 : 1))}
         isOpen={isOpen}
         onClose={onClose}
       />

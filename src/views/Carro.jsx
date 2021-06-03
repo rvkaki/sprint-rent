@@ -180,9 +180,11 @@ const Carro = props => {
         </Box>
       </Flex>
       <DataPopUp
-        options={locations.map(l => {
-          return { name: l.title, value: l.id };
-        })}
+        options={locations
+          .map(l => {
+            return { name: l.title, value: l.id };
+          })
+          .sort((l1, l2) => (l2.name > l1.name ? -1 : 1))}
         isOpen={isOpen}
         onClose={onClose}
       />

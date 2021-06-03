@@ -114,8 +114,8 @@ const Datepicker = props => {
           <Box
             ref={ref}
             position="absolute"
-            bottom={10}
-            right={0}
+            bottom={0}
+            right={8}
             zIndex="sticky"
             bg="white"
             boxShadow="xl"
@@ -127,7 +127,6 @@ const Datepicker = props => {
                 leftIcon={
                   <FontAwesomeIcon
                     icon={faRedoAlt}
-                    size="lg"
                     color="gray.800"
                   />
                 }
@@ -157,7 +156,7 @@ const Datepicker = props => {
               />
             </Flex>
             <Grid
-              m="32px 0 0"
+              m="8px 0 0"
               templateColumns={`repeat(${activeMonths.length}, 300px)`}
               gap="0 64px"
             >

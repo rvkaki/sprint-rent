@@ -43,6 +43,7 @@ const DataPopUp = props => {
   return (
     <Modal
       isOpen={props.isOpen}
+      isCentered
       onClose={() => {
         setStartLocation(null);
         setEndLocation(null);

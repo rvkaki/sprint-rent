@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Flex, IconButton, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, IconButton, Image, Text } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faChevronRight,
+  faPhoneAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import CustomDrawer from './CustomDrawer';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import HelpDesk from './HelpDesk';
 
-const Menu = props => {
+const Menu = ({ label, menu, ...rest }) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -29,19 +33,16 @@ const Menu = props => {
   }, [wrapperRef]);
 
   return (
-    <Box
-      ref={wrapperRef}
-      position="relative"
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      {props.label}
+    <Box ref={wrapperRef} position="relative" onClick={() => setIsOpen(true)}>
+      {label}
       <Box
         ref={dropdownRef}
         position="absolute"
         top={8}
+        {...rest}
         display={isOpen ? 'inherit' : 'none'}
       >
-        {props.menu}
+        {menu}
       </Box>
     </Box>
   );
@@ -242,19 +243,157 @@ const Header = props => {
                   >
                     <Text>Madeira</Text>
                   </Box>
-                  <Box
-                    as={Link}
-                    to="/frota?frota=acores"
-                    zIndex={2}
-                    px={2}
-                    py={1}
-                    bg="white"
-                    _hover={{
-                      bg: 'gray.300',
-                    }}
-                  >
-                    <Text>Açores</Text>
-                  </Box>
+                  <Menu
+                    label={
+                      <HStack
+                        as="button"
+                        onClick={e => e.preventDefault()}
+                        w="100%"
+                        zIndex={2}
+                        px={2}
+                        py={1}
+                        justifyContent="space-between"
+                        bg="white"
+                        _hover={{
+                          bg: 'gray.300',
+                        }}
+                      >
+                        <Text>Açores</Text>
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </HStack>
+                    }
+                    menu={
+                      <Flex
+                        direction="column"
+                        bg="white"
+                        w="200px"
+                        border="1px solid"
+                        borderColor="gray.300"
+                        shadow="lg"
+                        fontSize="lg"
+                      >
+                        <Box
+                          as={Link}
+                          to="/frota?frota=sao_miguel"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha de São Miguel</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=terceira"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha Terceira</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=faial"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha do Faial</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=pico"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha do Pico</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=santa_maria"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha de Santa Maria</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=sao_jorge"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha de São Jorge</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=flores"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha das Flores</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=graciosa"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha da Graciosa</Text>
+                        </Box>
+                        <Box
+                          as={Link}
+                          to="/frota?frota=corvo"
+                          zIndex={2}
+                          px={2}
+                          py={1}
+                          bg="white"
+                          _hover={{
+                            bg: 'gray.300',
+                          }}
+                        >
+                          <Text>Ilha do Corvo</Text>
+                        </Box>
+                      </Flex>
+                    }
+                    top={0}
+                    right="-200px"
+                  />
                 </Flex>
               }
             />

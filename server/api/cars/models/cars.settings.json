@@ -25,20 +25,12 @@
     },
     "mode": {
       "type": "enumeration",
-      "enum": [
-        "manual",
-        "auto"
-      ],
+      "enum": ["manual", "auto"],
       "required": true
     },
     "gas": {
       "type": "enumeration",
-      "enum": [
-        "diesel",
-        "gasolina",
-        "eletrico",
-        "hibrido"
-      ]
+      "enum": ["diesel", "gasolina", "eletrico", "hibrido"]
     },
     "doors": {
       "type": "integer"
@@ -49,22 +41,13 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "mota",
-        "ligeiro",
-        "comercial",
-        "minibus"
-      ],
+      "enum": ["mota", "ligeiro", "comercial", "minibus"],
       "required": true
     },
     "images": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
+      "allowedTypes": ["images", "files", "videos"],
       "plugin": "upload",
       "required": false
     },
@@ -73,7 +56,15 @@
       "enum": [
         "continente",
         "madeira",
-        "acores"
+        "sao_miguel",
+        "terceira",
+        "faial",
+        "pico",
+        "santa_maria",
+        "sao_jorge",
+        "flores",
+        "corvo",
+        "graciosa"
       ],
       "default": "continente"
     },
