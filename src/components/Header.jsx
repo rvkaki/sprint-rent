@@ -33,7 +33,12 @@ const Menu = ({ label, menu, ...rest }) => {
   }, [wrapperRef]);
 
   return (
-    <Box ref={wrapperRef} position="relative" onClick={() => setIsOpen(true)}>
+    <Box
+      ref={wrapperRef}
+      position="relative"
+      zIndex="modal"
+      onClick={() => setIsOpen(true)}
+    >
       {label}
       <Box
         ref={dropdownRef}
@@ -249,7 +254,6 @@ const Header = props => {
                         as="button"
                         onClick={e => e.preventDefault()}
                         w="100%"
-                        zIndex={2}
                         px={2}
                         py={1}
                         justifyContent="space-between"
