@@ -417,7 +417,7 @@ const Header = props => {
             </Link>
             <Text
               as="a"
-              href="https://rentacar.filipeamorim.com/admin/"
+              href="https://login.anyrent.pt/?cid=sprint"
               target="_blank"
               fontSize="sm"
             >
