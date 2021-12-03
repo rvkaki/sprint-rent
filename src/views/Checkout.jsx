@@ -31,11 +31,11 @@ const Checkout = props => {
 
   const [t] = useTranslation('common');
 
-  const { startLocation, endLocation, startDate, endDate, car } = useContext(
-    AppContext
-  );
+  const { startLocation, endLocation, startDate, endDate, car } =
+    useContext(AppContext);
 
-  const numDays = dateDiffInDays(startDate, endDate) + 1;
+  const diffDays = dateDiffInDays(startDate, endDate);
+  const numDays = Math.max(diffDays, 1);
 
   useEffect(() => {
     getTermsAndConditions().then(data => setTerms(data.text));
