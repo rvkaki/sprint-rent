@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { Box, Flex, HStack, IconButton, Image, Text } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
   faChevronRight,
-  faPhoneAlt,
+  faPhoneAlt
 } from '@fortawesome/free-solid-svg-icons';
-import CustomDrawer from './CustomDrawer';
-import { Link, useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, useHistory } from 'react-router-dom';
+import CustomDrawer from './CustomDrawer';
 import HelpDesk from './HelpDesk';
 
 const Menu = ({ label, menu, ...rest }) => {
@@ -412,9 +412,14 @@ const Header = props => {
             <Link to="/franchising">
               <Text fontSize="sm">{t('header.franchise')}</Text>
             </Link>
-            <Link to="/sale">
-              <Text fontSize="sm">{t('header.sale')}</Text>
-            </Link>
+            <Text
+              fontSize="sm"
+              as="a"
+              href="https://www.sprintseminovos.pt"
+              target="_blank"
+            >
+              {t('header.sale')}
+            </Text>
             <Text
               as="a"
               href="https://login.anyrent.pt/?cid=sprint"
